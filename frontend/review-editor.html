@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء مراجعة جديدة - ريفيو قيم</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- TinyMCE -->
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"></script>
+
+    <style>
+        body { background: var(--dark); color: var(--text); padding: 20px; }
+        .editor-container {
+            max-width: 900px; margin: auto; background: var(--dark-light);
+            padding: 25px; border-radius: 12px;
+            display: none; /* لا يظهر إلا بعد التأكد أنه أدمن */
+        }
+        input, textarea {
+            width: 100%; background: var(--dark-lighter);
+            border: 1px solid #444; color: var(--text);
+            padding: 12px; border-radius: 8px; margin-bottom: 15px;
+        }
+        .submit-btn {
+            background: var(--primary); width: 100%;
+            color: white; padding: 15px; font-size: 1.1rem;
+            border-radius: 10px; cursor: pointer; border: none;
+        }
+        .not-allowed {
+            text-align: center;
+            color: #ff5555;
+            padding: 40px;
+            font-size: 1.3rem;
+            display: none;
+        }
+    </style>
+
+    <script>
+        // ======= التحقق من جلسة الأدمن =======
+        document.addEventListener("DOMContentLoaded", () => {
+            try {
+                const raw = localStorage.getItem("admin_session_reviewqeem");
+                const session = raw ? JSON.parse(raw) : null;
+
+                const isAdmin =
+                    session &&
+                    session.data &&
+                    session.expires &&
+                    Date.now() < session.expires;
+
+                if (!isAdmin) {
+                    // إخفاء المحرر وإظهار رسالة منع الدخول
+                    document.querySelector(".editor-container").style.display = "none";
+                    document.getElementById("notAdmin").style.display = "block";
+
+                    // إعادة توجيه تلقائي بعد 3 ثواني
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 3000);
+                } else {
+                    // السماح بالدخول
+                    document.querySelector(".editor-container").style.display = "block";
+                }
+            } catch (e) {
+                // في حالة خطأ — نمنع الدخول مثل باقي الصفحات
+                document.getElementById("notAdmin").style.display = "block";
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 3000);
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+
+<!-- رسالة المستخدم غير مسموح له -->
+<div id="notAdmin" class="not-allowed">
+    🚫 ليس لديك صلاحية الدخول إلى صفحة إنشاء مراجعة  
+    <br>سيتم تحويلك للرئيسية خلال لحظات...
+</div>
+
+<div class="editor-container">
+
+    <h1>✍️ إنشاء مراجعة جديدة</h1>
+
+    <input type="text" id="review-title" placeholder="عنوان المراجعة">
+    <input type="text" id="review-game" placeholder="اسم اللعبة">
+    <textarea id="review-summary" rows="4" placeholder="ملخص المراجعة / قصة اللعبة..."></textarea>
+
+    <input type="text" id="review-image" placeholder="رابط صورة الغلاف (اختياري)">
+    <input type="text" id="review-youtube" placeholder="رابط فيديو يوتيوب (اختياري)">
+
+    <input type="text" id="review-pros" placeholder="المميزات (افصل بينها بـ | )">
+    <input type="text" id="review-cons" placeholder="العيوب (افصل بينها بـ | )">
+
+    <input type="number" id="review-rating" min="1" max="10" placeholder="التقييم من 10">
+
+    <textarea id="review-content" placeholder="اكتب محتوى المراجعة الكاملة هنا..."></textarea>
+
+    <button class="submit-btn" id="submit-review">نشر المراجعة</button>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/review-editor.js"></script>
+
+</body>
+</html>

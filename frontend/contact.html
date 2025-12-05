@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - ReviewQeem</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --accent: #fd79a8;
+            --dark-bg: #0d0d11;
+            --darker-bg: #05050a;
+            --card-bg: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border-color: #2a2a3a;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #e74c3c;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: rgba(13, 13, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: radial-gradient(circle at 20% 20%, #ffeaa7 0%, #fd79a8 30%, #6c5ce7 70%, #241b52 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 0%, #dfe6e9 40%, #a29bfe 70%, #81ecec 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== PAGE HEADER ==================== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(0, 184, 148, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+
+        /* ==================== CONTACT LAYOUT ==================== */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== CONTACT INFO ==================== */
+        .contact-info {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .contact-info h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-info h2 i {
+            color: var(--accent);
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            background: rgba(108, 92, 231, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .contact-method i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: rgba(108, 92, 231, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .method-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .method-content p {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .method-content a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .method-content a:hover {
+            color: var(--accent);
+        }
+
+        /* ==================== CONTACT FORM ==================== */
+        .contact-form-container {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form-container h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-form-container h2 i {
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-help {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ==================== STATUS MESSAGES ==================== */
+        .form-status {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .form-status.success {
+            background: rgba(0, 184, 148, 0.1);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .form-status.error {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .form-status.info {
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        /* ==================== FAQ SECTION ==================== */
+        .faq-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+
+        .faq-section h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .contact-info,
+            .contact-form-container,
+            .faq-section {
+                padding: 25px;
+            }
+            
+            .contact-method {
+                padding: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header-icon {
+                font-size: 3rem;
+            }
+            
+            .contact-info,
+            .contact-form-container,
+            .faq-section {
+                padding: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-mark">RQ</div>
+                    <div class="logo-text">Reviewqeem</div>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="reviews-list.html">المراجعات</a></li>
+                        <li><a href="about.html">عن الموقع</a></li>
+                        <li><a href="contact.html" class="active">اتصل بنا</a></li>
+                        <li><a href="privacy.html">الخصوصية</a></li>
+                        <li><a href="terms.html">شروط الاستخدام</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="page-header">
+            <div class="page-header-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h1>اتصل بنا</h1>
+            <p>نحن هنا لمساعدتك! تواصل معنا لأي استفسار أو ملاحظة أو اقتراح</p>
+        </div>
+
+        <!-- Contact Layout -->
+        <div class="contact-layout">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h2><i class="fas fa-info-circle"></i> معلومات التواصل</h2>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <div class="method-content">
+                            <h3>البريد الإلكتروني</h3>
+                            <p>للاستفسارات العامة والدعم</p>
+                            <a href="mailto:info@reviewqeem.com">revwqeem@outlook.sa</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <i class="fas fa-headset"></i>
+                        <div class="method-content">
+                            <h3>الدعم الفني</h3>
+                            <p>لمساعدة فنية أو مشاكل تقنية</p>
+                            <a href="mailto:support@reviewqeem.com">revwqeem@outlook.sa</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <i class="fas fa-bullhorn"></i>
+                        <div class="method-content">
+                            <h3>التسويق والتعاون</h3>
+                            <p>للعروض والشراكات التجارية</p>
+                            <a href="mailto:partnership@reviewqeem.com">revwqeem@outlook.sa</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="method-content">
+                            <h3>الخصوصية</h3>
+                            <p>لطلبات الخصوصية وحماية البيانات</p>
+                            <a href="mailto:privacy@reviewqeem.com">revwqeem@outlook.sa</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-container">
+                <h2><i class="fas fa-paper-plane"></i> أرسل رسالة</h2>
+                
+                <form id="contact-form">
+                    <!-- Status Messages -->
+                    <div id="form-status" class="form-status"></div>
+
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i> الاسم الكامل</label>
+                        <input type="text" id="name" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                        <input type="email" id="email" class="form-control" placeholder="example@email.com" required>
+                        <span class="form-help">لن نشارك بريدك مع أي جهة خارجية</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject"><i class="fas fa-tag"></i> موضوع الرسالة</label>
+                        <select id="subject" class="form-control" required>
+                            <option value="">اختر موضوع الرسالة</option>
+                            <option value="support">دعم فني</option>
+                            <option value="general">استفسار عام</option>
+                            <option value="partnership">شراكة وتعاون</option>
+                            <option value="suggestion">اقتراح أو فكرة</option>
+                            <option value="bug">تبليغ عن مشكلة</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message"><i class="fas fa-comment"></i> الرسالة</label>
+                        <textarea id="message" class="form-control" placeholder="اكتب رسالتك هنا..." rows="6" required></textarea>
+                        <span class="form-help">يرجى وصف طلبك أو استفسارك بشكل مفصل</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال الرسالة
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2><i class="fas fa-question-circle"></i> الأسئلة الشائعة</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>كم تستغرق مدة الرد على الرسائل؟</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>نحن نرد على جميع الرسائل خلال 24-48 ساعة عمل. قد تستغرق رسائل الدعم الفني وقتاً أطول قليلاً حسب تعقيد المشكلة.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>هل يمكنني اقتراح لعبة للمراجعة؟</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>نعم! نحن نرحب باقتراحاتكم للألعاب التي ترغبون في رؤية مراجعات لها. يمكنكم إرسال اقتراحاتكم عبر نموذج الاتصال باختيار "اقتراح أو فكرة".</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>كيف يمكنني التعاون مع ReviewQeem؟</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>نحن نرحب بالشراكات والتعاون مع مطوري الألعاب والناشرين. يرجى التواصل عبر البريد المخصص للشراكات أو اختيار "شراكة وتعاون" في نموذج الاتصال.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>هل تقدمون خدمات كتابة مراجعات مدفوعة؟</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>جميع مراجعاتنا تتم بشفافية وموضوعية. نحن لا نقدم مراجعات مدفوعة، لكننا نرحب بتوفير نسخ من الألعاب للمراجعة مع الحفاظ على استقلاليتنا التحريرية.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== FORM HANDLING ====================
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+            const statusElement = document.getElementById('form-status');
+            
+            // Validation
+            if (!name || !email || !subject || !message) {
+                showStatus('يرجى ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showStatus('يرجى إدخال بريد إلكتروني صحيح', 'error');
+                return;
+            }
+            
+            // Simulate sending
+            showStatus('جاري إرسال رسالتك...', 'info');
+            
+            setTimeout(() => {
+                // Simulate successful submission
+                showStatus('✅ تم إرسال رسالتك بنجاح! سنرد عليك في أقرب وقت ممكن.', 'success');
+                
+                // Reset form
+                document.getElementById('contact-form').reset();
+            }, 2000);
+        });
+
+        // ==================== FAQ TOGGLE ====================
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('form-status');
+            statusElement.textContent = message;
+            statusElement.className = `form-status ${type}`;
+            statusElement.style.display = 'block';
+
+            // Hide after 5 seconds for success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusElement.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Auto-hide success messages after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessage = document.querySelector('.form-status.success');
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

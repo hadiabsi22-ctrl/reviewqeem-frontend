@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviewqeem - مراجعات الألعاب العربية</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Reviewqeem: منصة عربية احترافية لمراجعات الألعاب، تقييمات دقيقة وتحليل عميق لأهم ألعاب الفيديو على مختلف المنصات." />
+  <meta name="keywords" content="مراجعات ألعاب, Game Reviews, PS5, Xbox, PC, Nintendo Switch" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#6c5ce7" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Reviewqeem - Arabic Game Reviews" />
+  <meta property="og:description" content="اكتشف أحدث مراجعات الألعاب الاحترافية بالعربية على Reviewqeem." />
+  <meta property="og:url" content="https://reviewqeem.com" />
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    /* ==================== RESET & VARIABLES ==================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6c5ce7;
+      --primary-dark: #5f3dc4;
+      --secondary: #00b894;
+      --accent: #fd79a8;
+      --dark-bg: #0d0d11;
+      --darker-bg: #05050a;
+      --card-bg: #1a1a24;
+      --card-light: #232330;
+      --text-primary: #ffffff;
+      --text-secondary: #b8b8cc;
+      --border-color: #2a2a3a;
+      --border-light: #3a3a4a;
+      --success: #00b894;
+      --warning: #fdcb6e;
+      --danger: #e74c3c;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.6);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 30px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ==================== ENHANCED HEADER ==================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(13, 13, 17, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      background: rgba(13, 13, 17, 0.98);
+      padding: 5px 0;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at 20% 20%, #ffeaa7 0%, #fd79a8 30%, #6c5ce7 70%, #241b52 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+      color: white;
+      box-shadow: 0 8px 24px rgba(108, 92, 231, 0.4);
+      transition: var(--transition);
+    }
+
+    .logo:hover .logo-mark {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #ffffff 0%, #dfe6e9 40%, #a29bfe 70%, #81ecec 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+    }
+
+    .logo-sub {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: -2px;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: var(--transition);
+      position: relative;
+      padding: 8px 0;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--primary);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      transition: var(--transition);
+      border-radius: 3px;
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* ==================== GLOWING HERO ==================== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 0 50px;
+      background: linear-gradient(135deg, 
+        rgba(108, 92, 231, 0.15) 0%, 
+        rgba(0, 184, 148, 0.1) 50%, 
+        rgba(253, 121, 168, 0.05) 100%);
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 40px;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, 
+        rgba(108, 92, 231, 0.2) 0%, 
+        transparent 50%);
+      animation: floatAnimation 20s infinite ease-in-out;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -30%;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(circle at 80% 50%, 
+        rgba(0, 184, 148, 0.15) 0%, 
+        transparent 50%);
+      animation: floatAnimation 25s infinite ease-in-out reverse;
+    }
+
+    @keyframes floatAnimation {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(20px, -20px) rotate(5deg); }
+      66% { transform: translate(-15px, 15px) rotate(-5deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      animation: slideUpIn 0.8s ease forwards;
+    }
+
+    @keyframes slideUpIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h2 {
+      font-size: 3.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    .hero span.brand {
+      display: inline-block;
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .hero p {
+      font-size: 1.35rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    /* ==================== ENHANCED SEARCH BOX ==================== */
+    .search-box {
+      display: flex;
+      gap: 10px;
+      max-width: 600px;
+      margin: 30px auto;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 6px;
+      transition: var(--transition);
+      animation: slideUpIn 1s ease 0.2s forwards;
+      opacity: 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      z-index: 10; /* Fix: Ensure search box is above overlay */
+    }
+
+    .search-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(108, 92, 231, 0.2), 
+        rgba(0, 184, 148, 0.2));
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 1; /* Fix: Keep overlay behind input */
+      pointer-events: none; /* Fix: Allow clicks to pass through */
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 40px rgba(108, 92, 231, 0.4);
+      transform: translateY(-5px);
+    }
+
+    .search-box:focus-within::before {
+      opacity: 1;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: rgba(13, 13, 17, 0.8);
+      border: none;
+      color: var(--text-primary);
+      padding: 16px 24px;
+      font-size: 1.1rem;
+      outline: none;
+      border-radius: var(--radius-lg);
+      transition: var(--transition);
+      font-family: inherit;
+      position: relative;
+      z-index: 11; /* Fix: Ensure input is clickable above overlay */
+    }
+
+    .search-box input:focus {
+      background: rgba(13, 13, 17, 0.95);
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-box button {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      color: white;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      z-index: 11; /* Fix: Ensure button is clickable */
+    }
+
+    .search-box button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .search-box button:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 0 30px rgba(108, 92, 231, 0.6);
+    }
+
+    .search-box button:hover::after {
+      opacity: 1;
+    }
+
+    .search-box button i {
+      position: relative;
+      z-index: 1;
+      font-size: 1.2rem;
+    }
+
+    /* ==================== HERO ACTIONS ==================== */
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: slideUpIn 1.2s ease 0.4s forwards;
+      opacity: 0;
+    }
+
+    .btn {
+      padding: 16px 38px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        transparent 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn:hover::before {
+      opacity: 1;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--secondary);
+      border: 2px solid var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    /* ==================== STATS SECTION ==================== */
+    .stats-section {
+      background: var(--card-bg);
+      padding: 60px 40px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+      margin: 80px auto;
+      max-width: 1200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .stat-card {
+      background: var(--card-light);
+      padding: 30px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(108, 92, 231, 0.05) 0%, 
+        transparent 100%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow);
+      border-color: var(--primary);
+    }
+
+    .stat-card:hover::after {
+      opacity: 1;
+    }
+
+    .stat-card i {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* ==================== REVIEWS SECTION ==================== */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+      font-weight: 900;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: 50%;
+      transform: translateX(50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 25px auto 0;
+      line-height: 1.7;
+    }
+
+    /* ==================== ENHANCED REVIEWS GRID ==================== */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .review-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+
+    .review-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(108, 92, 231, 0.05) 0%, 
+        transparent 50%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .review-card:hover {
+      transform: translateY(-15px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+
+    .review-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-image-container {
+      position: relative;
+      overflow: hidden;
+      height: 220px;
+    }
+
+    .card-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .review-card:hover .card-image-container img {
+      transform: scale(1.15);
+    }
+
+    .card-rating {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      font-weight: 900;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .card-rating i {
+      font-size: 0.9rem;
+    }
+
+    .card-content {
+      padding: 30px;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+      line-height: 1.4;
+      transition: var(--transition);
+    }
+
+    .review-card:hover .card-title {
+      color: var(--primary);
+    }
+
+    .card-excerpt {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: calc(1.7em * 3);
+    overflow-wrap: anywhere;
+}
+
+
+    .card-platforms {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .platform-tag {
+      background: rgba(108, 92, 231, 0.15);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      border: 1px solid rgba(108, 92, 231, 0.3);
+    }
+
+    .platform-tag:hover {
+      background: rgba(108, 92, 231, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .meta-item i {
+      color: var(--primary);
+    }
+
+    .card-date {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      direction: ltr;
+    }
+
+    /* ==================== EMPTY STATE ==================== */
+    .empty-state {
+      text-align: center;
+      padding: 100px 20px;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      grid-column: 1 / -1;
+    }
+
+    .empty-state i {
+      font-size: 4rem;
+      color: var(--border-color);
+      margin-bottom: 30px;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      color: var(--text-primary);
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+
+    .empty-state p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ==================== ENHANCED FOOTER ==================== */
+    footer {
+      background: linear-gradient(180deg, var(--card-bg) 0%, var(--darker-bg) 100%);
+      border-top: 1px solid var(--border-color);
+      padding: 80px 0 30px;
+      margin-top: 100px;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-column h3 {
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-column p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 15px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(-5px);
+    }
+
+    .footer-links a i {
+      width: 20px;
+      text-align: center;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* ==================== ADMIN ACCESS BUTTON ==================== */
+    .admin-access-btn {
+      position: fixed;
+      bottom: 40px;
+      left: 40px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+      animation: pulse 2s infinite;
+    }
+
+    .admin-access-btn:hover {
+      transform: scale(1.15) rotate(90deg);
+      box-shadow: 0 0 40px rgba(108, 92, 231, 0.6);
+    }
+
+    .admin-access-btn a {
+      color: white;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* ==================== LOADING STATE ==================== */
+    .loading-state {
+      text-align: center;
+      padding: 100px 20px;
+      grid-column: 1 / -1;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--border-color);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 30px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ==================== NOTIFICATIONS ==================== */
+    .notification {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      padding: 20px 30px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: var(--shadow-lg);
+      animation: slideInLeft 0.4s ease, fadeOut 0.4s ease 2.6s forwards;
+      max-width: 400px;
+    }
+
+    .notification-success {
+      background: linear-gradient(135deg, var(--success), #00b894);
+      color: white;
+      border-left: 5px solid white;
+    }
+
+    .notification-error {
+      background: linear-gradient(135deg, var(--danger), #e74c3c);
+      color: white;
+      border-left: 5px solid white;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    /* ==================== RESPONSIVE DESIGN ==================== */
+    @media (max-width: 1200px) {
+      .hero h2 {
+        font-size: 3.2rem;
+      }
+      .reviews-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero h2 {
+        font-size: 2.8rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+      }
+      .section-title {
+        font-size: 2.4rem;
+      }
+      nav ul {
+        gap: 25px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      nav ul {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero {
+        padding: 60px 0 40px;
+        min-height: auto;
+      }
+      
+      .hero h2 {
+        font-size: 2.3rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .search-box {
+        max-width: 90%;
+        margin: 20px auto;
+      }
+      
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .admin-access-btn {
+        bottom: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+      }
+      
+      .notification {
+        left: 20px;
+        right: 20px;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .search-box input {
+        padding: 14px 20px;
+        font-size: 1rem;
+      }
+      
+      .search-box button {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .card-content {
+        padding: 20px;
+      }
+      
+      .card-title {
+        font-size: 1.2rem;
+      }
+      
+      footer {
+        padding: 60px 0 20px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Admin Access Button -->
+  
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">RQ</div>
+          <div>
+            <div class="logo-text">Reviewqeem</div>
+            <div class="logo-sub">Arabic Game Reviews</div>
+          </div>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="index.html" class="active">الرئيسية</a></li>
+            <li><a href="#home-reviews-section">المراجعات</a></li>
+            <li><a href="reviews-list.html">كل المراجعات</a></li>
+            <li><a href="about.html">عن الموقع</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><a href="admin.html" id="adminNavLink" style="display:none;">لوحة التحكم</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="brand">🎮 Reviewqeem</span>
+        <h2>مراجعات ألعاب احترافية<br>بالحرف العربي</h2>
+        <p>
+          اكتشف عالم الألعاب من منظور عربي. نقدم لك تحليلات دقيقة، تقييمات شاملة، 
+          ونصائح مفيدة لكل عشاق الألعاب. من أحدث الإصدارات إلى الكلاسيكيات الخالدة.
+        </p>
+
+        <div class="search-box">
+          <input type="text" placeholder="ابحث عن لعبة أو مراجعة..." id="search-input">
+          <button type="button" id="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#home-reviews-section" class="btn btn-primary">
+            <i class="fas fa-newspaper"></i> اكتشف المراجعات
+          </a>
+          <a href="reviews-list.html" class="btn btn-secondary">
+            <i class="fas fa-list"></i> جميع المراجعات
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <div class="container">
+    <div class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <i class="fas fa-newspaper"></i>
+          <div class="stat-number" id="stat-reviews">0+</div>
+          <div class="stat-label">مراجعة احترافية</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-gamepad"></i>
+          <div class="stat-number">8+</div>
+          <div class="stat-label">منصة مدعومة</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-users"></i>
+          <div class="stat-number" id="stat-visitors">1000+</div>
+          <div class="stat-label">زائر شهرياً</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-comments"></i>
+          <div class="stat-number" id="stat-comments">0+</div>
+          <div class="stat-label">تعليق نشط</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <section id="home-reviews-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">✨ أحدث المراجعات</h2>
+        <p class="section-subtitle">
+          اكتشف أحدث وأهم مراجعات الألعاب التي أعدها فريقنا بعناية فائقة. 
+          تحليل دقيق، تقييم موضوعي، ونصائح عملية.
+        </p>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading-state" class="loading-state">
+        <div class="spinner"></div>
+        <p style="color: var(--text-secondary); font-size: 1.1rem;">جاري تحميل المراجعات...</p>
+      </div>
+
+      <!-- Reviews Grid -->
+      <div class="reviews-grid" id="home-reviews-grid"></div>
+
+      
+        
+      </div>
+
+      <!-- View All Button -->
+      <div style="text-align: center; margin-top: 60px;">
+        <a href="reviews-list.html" class="btn btn-primary" style="padding: 18px 45px;">
+          <i class="fas fa-eye"></i>
+          عرض جميع المراجعات
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3><i class="fas fa-gamepad"></i> عن Reviewqeem</h3>
+          <p>
+            منصة عربية متخصصة في مراجعات الألعاب الإلكترونية. 
+            نقدم محتوى عربي أصيل بجودة عالية، مع التركيز على الدقة والموضوعية في التقييم.
+          </p>
+          <div style="margin-top: 25px;">
+            <a href="about.html" class="btn btn-primary" style="padding: 12px 25px;">
+              <i class="fas fa-info-circle"></i> اعرف المزيد
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3><i class="fas fa-link"></i> روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="reviews-list.html"><i class="fas fa-newspaper"></i> جميع المراجعات</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> عن الموقع</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+            <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3><i class="fas fa-headset"></i> الدعم والمساعدة</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:support@reviewqeem.com"><i class="fas fa-envelope"></i> revwqeem@outlook.sa</a></li>
+            <li><a href="mailto:info@reviewqeem.com"><i class="fas fa-envelope"></i> revwqeem@outlook.sa</a></li>
+            <li style="margin-top: 20px;">
+              <a href="contact.html" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">
+                <i class="fas fa-comments"></i> تواصل مع الدعم
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Reviewqeem. جميع الحقوق محفوظة.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">
+          صنع بكل ❤️ لعشاق الألعاب العرب
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==================== GLOBAL VARIABLES ====================
+    window.allReviews = [];
+    const API_BASE = "http://localhost:5000/api";
+
+
+    // ==================== INITIALIZATION ====================
+    document.addEventListener("DOMContentLoaded", async () => {
+      console.log("🚀 بدء تحميل الصفحة الرئيسية...");
+      
+      // Header scroll effect
+      setupHeaderScroll();
+      
+      // Setup search functionality
+      setupSearch();
+      
+      // Load reviews
+      await loadReviews();
+      
+      // Update stats
+      updateStats();
+      
+      console.log("✅ الصفحة الرئيسية جاهزة!");
+    });
+
+    // ==================== HEADER SCROLL EFFECT ====================
+    function setupHeaderScroll() {
+      const header = document.querySelector("header");
+      window.addEventListener("scroll", () => {
+        header.classList.toggle("scrolled", window.scrollY > 50);
+      });
+    }
+
+    // ==================== SEARCH FUNCTIONALITY ====================
+    function setupSearch() {
+      const searchBtn = document.getElementById("search-btn");
+      const searchInput = document.getElementById("search-input");
+      
+      if (searchBtn) {
+        searchBtn.addEventListener("click", handleSearch);
+      }
+      
+      if (searchInput) {
+        searchInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") handleSearch();
+        });
+      }
+    }
+
+    function handleSearch() {
+      const searchInput = document.getElementById("search-input");
+      const query = searchInput?.value.trim();
+      
+      if (!query) {
+        showNotification("⚠️ الرجاء إدخال كلمة للبحث", "error");
+        return;
+      }
+      
+      console.log(`🔍 البحث عن: ${query}`);
+      window.location.href = `reviews-list.html?search=${encodeURIComponent(query)}`;
+    }
+
+    // ==================== LOAD REVIEWS FROM SERVER ====================
+    async function loadReviews() {
+      try {
+        console.log("🔄 تحميل المراجعات من السيرفر...");
+
+        const response = await fetch(`${API_BASE}/reviews/published`);
+
+        const data = await response.json();
+
+        // Handle both response formats: { success, reviews } or { success, data }
+        const reviews = data.reviews || data.data || [];
+        if (!data.success || !Array.isArray(reviews)) {
+          throw new Error("البيانات غير صالحة");
+        }
+
+        window.allReviews = reviews;
+
+        console.log(`📡 تم تحميل ${window.allReviews.length} مراجعة من السيرفر`);
+
+        processAndDisplayReviews();
+
+      } catch (error) {
+        console.error("❌ خطأ في تحميل المراجعات:", error);
+
+        showNotification("تعذر تحميل المراجعات من الخادم", "error");
+
+        window.allReviews = [];
+        processAndDisplayReviews();
+      }
+    }
+
+    // ==================== PROCESS AND DISPLAY REVIEWS ====================
+    function processAndDisplayReviews() {
+      const loadingState = document.getElementById("loading-state");
+      if (loadingState) loadingState.style.display = "none";
+
+      const publishedReviews = window.allReviews.filter(r => 
+        r.status === "published"
+      );
+
+      if (!publishedReviews.length) {
+  return; // لا نعرض أي شيء
+}
+
+
+      displayReviews(publishedReviews);
+    }
+
+    // ==================== DISPLAY REVIEWS ====================
+    function displayReviews(reviews) {
+      const reviewsGrid = document.getElementById("home-reviews-grid");
+      if (!reviewsGrid) return;
+      
+      // أخذ آخر 6 مراجعات
+      const latestReviews = [...reviews]
+        .sort((a, b) => new Date(b.reviewDate || b.createdAt) - new Date(a.reviewDate || a.createdAt))
+        .slice(0, 6);
+      
+      reviewsGrid.innerHTML = latestReviews.map(review => {
+        const reviewId = review.id || review._id;
+        const imageUrl = review.coverImage || review.mainImage || getDefaultImage(review.title);
+        const summary = review.summary || review.content || 'لا يوجد وصف متوفر';
+        const platforms = Array.isArray(review.platforms)
+          ? review.platforms.map(p => p.name)
+          : [];
+        const commentsCount = getCommentsCount(reviewId);
+        const rating = review.rating || 0;
+        const date = review.reviewDate || review.createdAt;
+        const formattedDate = formatDate(date);
+        
+        return `
+          <div class="review-card" onclick="viewReview('${reviewId}')">
+            <div class="card-image-container">
+              <img src="${imageUrl}" 
+                   alt="${review.title}" 
+                   onerror="this.src='${getDefaultImage(review.title)}'">
+              <div class="card-rating">
+                <i class="fas fa-star"></i>
+                ${rating.toFixed(1)}
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">${review.title}</h3>
+              <p class="card-excerpt">${summary.substring(0, 150)}${summary.length > 150 ? '...' : ''}</p>
+              
+              ${platforms && platforms.length > 0 ? `
+                <div class="card-platforms">
+                  ${platforms.slice(0, 3).map(platform => `
+                    <span class="platform-tag">${getPlatformIcon(platform)} ${platform}</span>
+                  `).join('')}
+                  ${platforms.length > 3 ? `<span class="platform-tag">+${platforms.length - 3}</span>` : ''}
+                </div>
+              ` : ''}
+              
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <i class="fas fa-comments"></i>
+                    <span>${commentsCount}</span>
+                  </div>
+                  <div class="meta-item">
+                    <i class="fas fa-eye"></i>
+                    <span>${review.views || 0}</span>
+                  </div>
+                </div>
+                <div class="card-date">${formattedDate}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ==================== VIEW REVIEW ====================
+    function viewReview(reviewId) {
+      console.log(`🎮 الانتقال إلى مراجعة: ${reviewId}`);
+      window.location.href = `review-view.html?id=${reviewId}`;
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+    function getDefaultImage(title) {
+      const colors = ['6c5ce7', '00b894', 'fd79a8', 'fdcb6e', '00cec9'];
+      const color = colors[title?.length % colors.length] || '6c5ce7';
+      const text = title ? encodeURIComponent(title.substring(0, 20)) : 'Game';
+      return `https://via.placeholder.com/400x300/${color}/ffffff?text=${text}`;
+    }
+
+    function getPlatformIcon(platform) {
+      const icons = {
+        'PS5': '🎮',
+        'PS4': '🎮',
+        'Xbox Series X/S': '🎮',
+        'Xbox One': '🎮',
+        'PC': '💻',
+        'Nintendo Switch': '🎮',
+        'Android': '📱',
+        'iOS': '📱',
+        'Multi Platform': '🌐'
+      };
+      return icons[platform] || '🎮';
+    }
+
+    function getCommentsCount(reviewId) {
+      try {
+        const comments = JSON.parse(localStorage.getItem('gameComments')) || {};
+        const reviewComments = comments[reviewId];
+        return Array.isArray(reviewComments) ? reviewComments.length : 0;
+      } catch {
+        return 0;
+      }
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return 'N/A';
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ar-EG', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+      } catch {
+        return dateString;
+      }
+    }
+
+    // ==================== UPDATE STATISTICS ====================
+    function updateStats() {
+      // عدد المراجعات المنشورة
+      const publishedCount = window.allReviews.filter(review => 
+        review.status === "published"
+      ).length;
+      
+      const reviewsStat = document.getElementById('stat-reviews');
+      if (reviewsStat) reviewsStat.textContent = publishedCount + '+';
+      
+      // عدد الزوار (محاكاة)
+      const visitorsStat = document.getElementById('stat-visitors');
+      if (visitorsStat) {
+        const savedVisitors = localStorage.getItem('siteVisitors') || '1000';
+        visitorsStat.textContent = parseInt(savedVisitors) + '+';
+      }
+      
+      // عدد التعليقات الإجمالي
+      const commentsStat = document.getElementById('stat-comments');
+      if (commentsStat) {
+        try {
+          const comments = JSON.parse(localStorage.getItem('gameComments')) || {};
+          let totalComments = 0;
+          Object.values(comments).forEach(reviewComments => {
+            if (Array.isArray(reviewComments)) {
+              totalComments += reviewComments.length;
+            }
+          });
+          commentsStat.textContent = totalComments + '+';
+        } catch {
+          commentsStat.textContent = '0+';
+        }
+      }
+    }
+
+    // ==================== NOTIFICATION SYSTEM ====================
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `notification notification-${type}`;
+      notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+        <span>${message}</span>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // إزالة الإشعار بعد 3 ثواني
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
+    }
+
+    // ==================== AUTO UPDATE VISITORS ====================
+    function updateVisitorCount() {
+      let visitors = localStorage.getItem('siteVisitors');
+      if (!visitors) {
+        visitors = '1000';
+      } else {
+        visitors = (parseInt(visitors) + Math.floor(Math.random() * 10)).toString();
+      }
+      localStorage.setItem('siteVisitors', visitors);
+      
+      const visitorsStat = document.getElementById('stat-visitors');
+      if (visitorsStat) {
+        visitorsStat.textContent = visitors + '+';
+      }
+    }
+
+    // تحديث عدد الزوار كل 30 ثانية (محاكاة)
+    setInterval(updateVisitorCount, 30000);
+
+    // تحديث أولي
+    updateVisitorCount();
+
+  </script>
+  <script>
+(function () {
+  try {
+    const raw = localStorage.getItem('admin_session_reviewqeem');
+    const session = raw ? JSON.parse(raw) : null;
+
+    const isAdmin =
+      session &&
+      session.data &&
+      session.expires &&
+      Date.now() < session.expires;
+
+    const adminNavLink = document.getElementById('adminNavLink');
+    const adminBtn = document.getElementById('adminControlButton');
+
+    if (adminNavLink) adminNavLink.style.display = isAdmin ? 'inline-block' : 'none';
+    if (adminBtn) adminBtn.style.display = isAdmin ? 'flex' : 'none';
+
+  } catch (e) {
+    const adminNavLink = document.getElementById('adminNavLink');
+    const adminBtn = document.getElementById('adminControlButton');
+    if (adminNavLink) adminNavLink.style.display = 'none';
+    if (adminBtn) adminBtn.style.display = 'none';
+  }
+})();
+</script>
+
+</body>
+</html>

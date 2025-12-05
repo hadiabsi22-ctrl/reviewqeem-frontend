@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شروط الاستخدام - ReviewQeem</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --accent: #fd79a8;
+            --dark-bg: #0d0d11;
+            --darker-bg: #05050a;
+            --card-bg: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border-color: #2a2a3a;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #e74c3c;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: rgba(13, 13, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: radial-gradient(circle at 20% 20%, #ffeaa7 0%, #fd79a8 30%, #6c5ce7 70%, #241b52 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 0%, #dfe6e9 40%, #a29bfe 70%, #81ecec 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== PAGE HEADER ==================== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(0, 184, 148, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+
+        /* ==================== CONTENT STYLES ==================== */
+        .content-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .terms-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .terms-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .terms-section h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .terms-section h2 i {
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+
+        .terms-section p {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+        }
+
+        .terms-section ul {
+            margin: 15px 0 20px 30px;
+        }
+
+        .terms-section li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .terms-section li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+
+        .highlight-box {
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .contact-email:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== NAVIGATION INDICATOR ==================== */
+        .nav-indicator {
+            position: sticky;
+            top: 80px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .nav-indicator h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-indicator ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-indicator li {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .nav-indicator a {
+            display: block;
+            padding: 10px 15px;
+            background: var(--darker-bg);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-indicator a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+            
+            .terms-section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .nav-indicator ul {
+                flex-direction: column;
+            }
+            
+            .nav-indicator li {
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header-icon {
+                font-size: 3rem;
+            }
+            
+            .content-card {
+                padding: 20px;
+            }
+            
+            .terms-section h2 {
+                font-size: 1.2rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-mark">RQ</div>
+                <div class="logo-text">Reviewqeem</div>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="reviews-list.html">المراجعات</a></li>
+                    <li><a href="about.html">عن الموقع</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    <li><a href="privacy.html">الخصوصية</a></li>
+                    <li><a href="terms.html" class="active">شروط الاستخدام</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="page-header">
+            <div class="page-header-icon">
+                <i class="fas fa-file-contract"></i>
+            </div>
+            <h1>شروط الاستخدام</h1>
+            <p>نرحب بك في منصة ReviewQeem. يرجى قراءة هذه الشروط بعناية قبل استخدام الموقع</p>
+        </div>
+
+        <!-- Navigation Indicator -->
+        <div class="nav-indicator">
+            <h3><i class="fas fa-bookmark"></i> التنقل السريع</h3>
+            <ul>
+                <li><a href="#acceptance">قبول الشروط</a></li>
+                <li><a href="#content">استخدام المحتوى</a></li>
+                <li><a href="#comments">التعليقات</a></li>
+                <li><a href="#reviews">المراجعات</a></li>
+                <li><a href="#links">الروابط الخارجية</a></li>
+                <li><a href="#modifications">التعديلات</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-card">
+            <p class="intro-text">
+                مرحبًا بك في موقع <strong>ReviewQeem</strong>. يوضح هذا النص القواعد الأساسية لاستخدام الموقع بطريقة آمنة ومناسبة للجميع.
+            </p>
+
+            <div class="terms-section" id="acceptance">
+                <h2><i class="fas fa-check-circle"></i> 1. قبول الشروط</h2>
+                <p>باستخدامك للموقع فأنت توافق على الشروط المذكورة هنا. هدفنا هو تقديم تجربة ممتعة وواضحة لجميع المستخدمين.</p>
+                <p>إذا كنت لا توافق على أي من هذه الشروط، يرجى التوقف عن استخدام الموقع فوراً.</p>
+            </div>
+
+            <div class="terms-section" id="content">
+                <h2><i class="fas fa-copy"></i> 2. استخدام المحتوى</h2>
+                <p>يُسمح لك بقراءة ومشاركة الروابط، لكن لا يُسمح بنسخ المراجعات أو إعادة نشرها بصفة كاملة دون إذن مسبق.</p>
+                <p>جميع المحتويات المنشورة على الموقع محمية بحقوق الطبع والنشر وتُعد ملكاً لـ <strong>ReviewQeem</strong> ما لم يُذكر خلاف ذلك.</p>
+                
+                <div class="highlight-box">
+                    <p><i class="fas fa-info-circle"></i> يُسمح بمشاركة أجزاء محدودة من المحتوى مع الإشارة إلى المصدر.</p>
+                </div>
+            </div>
+
+            <div class="terms-section" id="comments">
+                <h2><i class="fas fa-comments"></i> 3. التعليقات</h2>
+                <p>يُرحّب بالمستخدمين لكتابة آرائهم. نرجو فقط الالتزام بالآتي:</p>
+                <ul>
+                    <li>الاحترام وعدم الإساءة للمستخدمين الآخرين أو الفريق</li>
+                    <li>عدم نشر محتوى مخالف للشريعة أو الأنظمة</li>
+                    <li>عدم إرسال روابط ضارة أو محتوى غير مرغوب فيه (Spam)</li>
+                    <li>تجنب نشر معلومات شخصية خاصة بك أو بالآخرين</li>
+                    <li>الالتزام بالموضوعية في النقاشات والمراجعات</li>
+                </ul>
+                <p>يحق لإدارة الموقع حذف أي تعليق يخالف هذه الشروط دون إشعار مسبق.</p>
+            </div>
+
+            <div class="terms-section" id="reviews">
+                <h2><i class="fas fa-gamepad"></i> 4. مراجعات الألعاب</h2>
+                <p>جميع المراجعات المكتوبة على الموقع يتم إعدادها من قبل فريق <strong>ReviewQeem</strong>. وقد تحتوي على رأي شخصي مبني على تجربة واقعية.</p>
+                <p>نحرص على تقديم مراجعات موضوعية قدر الإمكان، لكن وجهات النظر تظل شخصية وقد تختلف من مستخدم لآخر.</p>
+                <p>نتائج التقييم تعتمد على معايير محددة تشمل الجرافيكس، القصة، التجربة العامة، وغيرها من العوامل.</p>
+            </div>
+
+            <div class="terms-section" id="links">
+                <h2><i class="fas fa-external-link-alt"></i> 5. الروابط الخارجية</h2>
+                <p>بعض صفحات المراجعات قد تحتوي على روابط شراء لمواقع خارجية. نحن غير مسؤولين عن محتوى أو سياسة تلك المواقع.</p>
+                <p>يجب عليك مراجعة شروط الاستخدام وسياسة الخصوصية لأي موقع تزوره من خلال روابطنا.</p>
+                <p>لا نتحمل أي مسؤولية عن أي خسائر أو أضرار قد تنتج عن استخدامك للمواقع الخارجية.</p>
+            </div>
+
+            <div class="terms-section" id="modifications">
+                <h2><i class="fas fa-edit"></i> 6. التعديلات</h2>
+                <p>قد يتم تحديث الشروط من وقت لآخر وسيتم الإعلان عنها في هذه الصفحة.</p>
+                <p>ننصح بمراجعة هذه الصفحة بشكل دوري للاطلاع على أي تحديثات.</p>
+                <p>استمرار استخدامك للموقع بعد نشر التعديلات يعني موافقتك على هذه التغييرات.</p>
+            </div>
+
+            <div class="contact-info">
+                <p>للاستفسارات أو لتبليغنا عن أي مخالفات للشروط:</p>
+                <a href="mailto:revwqeem@outlook.sa" class="contact-email">
+                    <i class="fas fa-envelope"></i>
+                    revwqeem@outlook.sa
+                </a>
+            </div>
+
+            <div class="last-updated">
+                <p>آخر تحديث: 1 يناير 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-indicator a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight current section in navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.terms-section');
+            const navLinks = document.querySelectorAll('.nav-indicator a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = '#' + section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                    link.style.background = 'var(--primary)';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = '';
+                    link.style.color = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

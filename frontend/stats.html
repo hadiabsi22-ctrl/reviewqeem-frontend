@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإحصائيات والتقارير - ReviewQeem</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --accent: #fd79a8;
+            --dark-bg: #0d0d11;
+            --darker-bg: #05050a;
+            --card-bg: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border-color: #2a2a3a;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #e74c3c;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: rgba(13, 13, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: radial-gradient(circle at 20% 20%, #ffeaa7 0%, #fd79a8 30%, #6c5ce7 70%, #241b52 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 0%, #dfe6e9 40%, #a29bfe 70%, #81ecec 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        .stats-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+
+        .stats-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* ==================== DATE FILTERS ==================== */
+        .date-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .filter-select {
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 15px;
+            color: var(--text-primary);
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        /* ==================== STATS GRID ==================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-icon.reviews { background: rgba(108, 92, 231, 0.2); color: var(--primary); }
+        .stat-icon.comments { background: rgba(0, 184, 148, 0.2); color: var(--secondary); }
+        .stat-icon.views { background: rgba(253, 121, 168, 0.2); color: var(--accent); }
+        .stat-icon.rating { background: rgba(253, 203, 110, 0.2); color: var(--warning); }
+
+        .stat-content h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .stat-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+        }
+
+        .trend-up { color: var(--success); }
+        .trend-down { color: var(--danger); }
+
+        /* ==================== CHARTS GRID ==================== */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-card {
+                padding: 15px;
+            }
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        /* ==================== PLATFORM STATS ==================== */
+        .platform-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .platform-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .platform-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: rgba(108, 92, 231, 0.2);
+            color: var(--primary);
+        }
+
+        .platform-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .platform-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .platform-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 15px;
+            background: var(--darker-bg);
+            border-radius: 8px;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* ==================== TOP REVIEWS ==================== */
+        .top-reviews {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reviews-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .review-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--darker-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .review-item:hover {
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .review-rank {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .review-info {
+            flex: 1;
+        }
+
+        .review-info h4 {
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .review-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .review-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--warning);
+            font-weight: 700;
+        }
+
+        /* ==================== RECENT ACTIVITY ==================== */
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--darker-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .activity-icon.review { background: rgba(108, 92, 231, 0.2); color: var(--primary); }
+        .activity-icon.comment { background: rgba(0, 184, 148, 0.2); color: var(--secondary); }
+        .activity-icon.user { background: rgba(253, 121, 168, 0.2); color: var(--accent); }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* ==================== EXPORT CONTROLS ==================== */
+        .export-controls {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .export-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: transparent;
+            color: var(--success);
+            border: 2px solid var(--success);
+        }
+
+        .btn-success:hover {
+            background: var(--success);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .stats-header h1 {
+                font-size: 2rem;
+            }
+
+            .date-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-select {
+                flex: 1;
+            }
+
+            .platform-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .export-buttons {
+                flex-direction: column;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+
+            .review-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* ==================== LOADING ==================== */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ==================== NOTIFICATIONS ==================== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            z-index: 10000;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .notification-error {
+            background: var(--danger);
+            color: white;
+        }
+
+        .notification-warning {
+            background: var(--warning);
+            color: #333;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-100%); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-mark">RQ</div>
+                    <div class="logo-text">Reviewqeem</div>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="admin.html">لوحة التحكم</a></li>
+                        <li><a href="review-management.html">المراجعات</a></li>
+                        <li><a href="comments-admin.html">التعليقات</a></li>
+                        <li><a href="stats.html" class="active">الإحصائيات</a></li>
+                        <li><a href="settings.html">الإعدادات</a></li>
+                        <li><a href="index.html">الموقع الرئيسي</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="stats-header">
+            <h1><i class="fas fa-chart-line"></i> الإحصائيات والتقارير</h1>
+            <p>تحليلات شاملة لأداء موقع ReviewQeem وبيانات المحتوى</p>
+        </div>
+
+        <!-- Date Filters -->
+        <div class="date-filters">
+            <div class="filter-group">
+                <span class="filter-label">الفترة الزمنية:</span>
+                <select class="filter-select" id="time-range">
+                    <option value="7days">آخر 7 أيام</option>
+                    <option value="30days" selected>آخر 30 يوم</option>
+                    <option value="90days">آخر 90 يوم</option>
+                    <option value="1year">آخر سنة</option>
+                    <option value="all">جميع الفترات</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">من:</span>
+                <input type="date" class="filter-select" id="start-date">
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">إلى:</span>
+                <input type="date" class="filter-select" id="end-date">
+            </div>
+
+            <button class="btn btn-primary" onclick="applyFilters()">
+                <i class="fas fa-filter"></i> تطبيق الفلاتر
+            </button>
+            <button class="btn btn-secondary" onclick="resetFilters()">
+                <i class="fas fa-redo"></i> إعادة تعيين
+            </button>
+        </div>
+
+        <!-- Statistics Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon reviews">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-reviews">0</h3>
+                    <p>إجمالي المراجعات</p>
+                    <div class="stat-trend" id="reviews-trend">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>جاري التحميل...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon comments">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-comments">0</h3>
+                    <p>إجمالي التعليقات</p>
+                    <div class="stat-trend" id="comments-trend">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>جاري التحميل...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon views">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-views">0</h3>
+                    <p>إجمالي المشاهدات</p>
+                    <div class="stat-trend" id="views-trend">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>جاري التحميل...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon rating">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="avg-rating">0.0</h3>
+                    <p>متوسط التقييم</p>
+                    <div class="stat-trend" id="rating-trend">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>جاري التحميل...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-chart-bar"></i>
+                        توزيع المراجعات حسب الشهر
+                    </h3>
+                    <div class="chart-actions">
+                        <select class="filter-select" id="chart-year" style="width: 120px; padding: 5px 10px;">
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="reviewsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-chart-pie"></i>
+                        توزيع المراجعات حسب المنصة
+                    </h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="platformsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-chart-line"></i>
+                        نمو التعليقات والمشاهدات
+                    </h3>
+                    <div class="chart-actions">
+                        <select class="filter-select" id="growth-range" style="width: 120px; padding: 5px 10px;">
+                            <option value="weekly">أسبوعي</option>
+                            <option value="monthly">شهري</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-star"></i>
+                        توزيع التقييمات
+                    </h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="ratingsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Statistics -->
+        <div class="platform-stats">
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-icon" style="background: rgba(0, 87, 255, 0.2); color: #0057ff;">
+                        <i class="fab fa-playstation"></i>
+                    </div>
+                    <div class="platform-info">
+                        <h3>PlayStation</h3>
+                        <p>منصة سوني للألعاب</p>
+                    </div>
+                </div>
+                <div class="platform-metrics">
+                    <div class="metric">
+                        <div class="metric-value" id="ps-reviews">0</div>
+                        <div class="metric-label">مراجعات</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="ps-rating">0.0</div>
+                        <div class="metric-label">متوسط التقييم</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="ps-comments">0</div>
+                        <div class="metric-label">تعليقات</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="ps-views">0</div>
+                        <div class="metric-label">مشاهدات</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-icon" style="background: rgba(16, 124, 16, 0.2); color: #107c10;">
+                        <i class="fab fa-xbox"></i>
+                    </div>
+                    <div class="platform-info">
+                        <h3>Xbox</h3>
+                        <p>منصة مايكروسوفت للألعاب</p>
+                    </div>
+                </div>
+                <div class="platform-metrics">
+                    <div class="metric">
+                        <div class="metric-value" id="xbox-reviews">0</div>
+                        <div class="metric-label">مراجعات</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="xbox-rating">0.0</div>
+                        <div class="metric-label">متوسط التقييم</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="xbox-comments">0</div>
+                        <div class="metric-label">تعليقات</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="xbox-views">0</div>
+                        <div class="metric-label">مشاهدات</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-icon" style="background: rgba(0, 120, 212, 0.2); color: #0078d4;">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="platform-info">
+                        <h3>PC</h3>
+                        <p>ألعاب الكمبيوتر الشخصي</p>
+                    </div>
+                </div>
+                <div class="platform-metrics">
+                    <div class="metric">
+                        <div class="metric-value" id="pc-reviews">0</div>
+                        <div class="metric-label">مراجعات</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="pc-rating">0.0</div>
+                        <div class="metric-label">متوسط التقييم</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="pc-comments">0</div>
+                        <div class="metric-label">تعليقات</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="pc-views">0</div>
+                        <div class="metric-label">مشاهدات</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Reviews -->
+        <div class="top-reviews">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-trophy"></i>
+                    أفضل المراجعات تقييماً
+                </h3>
+                <div class="section-actions">
+                    <select class="filter-select" id="top-reviews-filter" style="width: 150px; padding: 5px 10px;">
+                        <option value="rating">الأعلى تقييماً</option>
+                        <option value="views">الأكثر مشاهدة</option>
+                        <option value="comments">الأكثر تعليقاً</option>
+                    </select>
+                </div>
+            </div>
+            <div class="reviews-list" id="top-reviews-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>جاري تحميل المراجعات...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="top-reviews">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-history"></i>
+                    النشاط الحديث
+                </h3>
+            </div>
+            <div id="recent-activity">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>جاري تحميل النشاط...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Controls -->
+        <div class="export-controls">
+            <h3 class="export-title">تصدير التقارير والإحصائيات</h3>
+            <div class="export-buttons">
+                <button class="btn btn-success" onclick="exportToPDF()">
+                    <i class="fas fa-file-pdf"></i> تصدير كـ PDF
+                </button>
+                <button class="btn btn-secondary" onclick="exportToExcel()">
+                    <i class="fas fa-file-excel"></i> تصدير كـ Excel
+                </button>
+                <button class="btn btn-primary" onclick="exportToJSON()">
+                    <i class="fas fa-file-code"></i> تصدير كـ JSON
+                </button>
+                <button class="btn btn-primary" onclick="printReport()">
+                    <i class="fas fa-print"></i> طباعة التقرير
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ==================== GLOBAL VARIABLES ====================
+        let allReviews = [];
+        let allComments = {};
+        let charts = {};
+        let statistics = {
+            totalReviews: 0,
+            totalComments: 0,
+            totalViews: 0,
+            avgRating: 0,
+            platformStats: {},
+            monthlyStats: {},
+            trends: {}
+        };
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🚀 بدء تحميل الإحصائيات...');
+            
+            // التحقق من المصادقة
+            if (!checkAdminAuth()) {
+                return;
+            }
+            
+            // تعيين تواريخ الفلترة
+            setupDateFilters();
+            
+            await loadAllData();
+            calculateStatistics();
+            updateStatisticsUI();
+            initializeCharts();
+            setupEventListeners();
+            
+            console.log('✅ تم تحميل الإحصائيات بنجاح');
+        });
+
+        // ==================== ADMIN AUTHENTICATION ====================
+        async function checkAdminAuth() {
+            try {
+                const response = await fetch('http://localhost:5000/api/admin/auth/verify', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                if (!response.ok) {
+                    alert('⚠️ يرجى تسجيل الدخول أولاً');
+                    window.location.href = 'admin-login.html';
+                    return false;
+                }
+                return true;
+            } catch (error) {
+                console.error('Auth check error:', error);
+                alert('⚠️ يرجى تسجيل الدخول أولاً');
+                window.location.href = 'admin-login.html';
+                return false;
+            }
+        }
+
+        // ==================== SETUP DATE FILTERS ====================
+        function setupDateFilters() {
+            const today = new Date();
+            const lastMonth = new Date();
+            lastMonth.setMonth(lastMonth.getMonth() - 1);
+            
+            // تعيين التاريخ الافتراضي (آخر 30 يوم)
+            document.getElementById('start-date').value = lastMonth.toISOString().split('T')[0];
+            document.getElementById('end-date').value = today.toISOString().split('T')[0];
+        }
+
+        // ==================== LOAD ALL DATA FROM MONGODB ====================
+        async function loadAllData() {
+            try {
+                const API_BASE = window.location.hostname === 'localhost' 
+                    ? 'http://localhost:5000/api' 
+                    : (window.location.origin + '/api');
+                
+                // Load statistics from MongoDB
+                const response = await fetch(`${API_BASE}/stats`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.success || !data.stats) {
+                    throw new Error('Invalid response format');
+                }
+                
+                const stats = data.stats;
+                
+                // Load reviews for calculations
+                const reviewsResponse = await fetch(`${API_BASE}/reviews`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                if (reviewsResponse.ok) {
+                    const reviewsData = await reviewsResponse.json();
+                    allReviews = Array.isArray(reviewsData) 
+                        ? reviewsData 
+                        : (reviewsData.data || reviewsData.reviews || []);
+                } else {
+                    allReviews = [];
+                }
+                
+                // Load comments for calculations
+                const commentsResponse = await fetch(`${API_BASE}/comments-admin`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                if (commentsResponse.ok) {
+                    const commentsData = await commentsResponse.json();
+                    const commentsArray = Array.isArray(commentsData) 
+                        ? commentsData 
+                        : (commentsData.comments || []);
+                    
+                    // Convert to object format for compatibility
+                    allComments = {};
+                    commentsArray.forEach(comment => {
+                        const reviewId = comment.reviewId || comment.review_id;
+                        if (!allComments[reviewId]) {
+                            allComments[reviewId] = [];
+                        }
+                        allComments[reviewId].push(comment);
+                    });
+                } else {
+                    allComments = {};
+                }
+                
+                // Update statistics from MongoDB data
+                statistics.totalReviews = stats.reviews.total || 0;
+                statistics.totalComments = stats.comments.total || 0;
+                statistics.totalViews = stats.views.total || 0;
+                statistics.avgRating = parseFloat(stats.rating.average) || 0;
+                statistics.platformStats = {};
+                
+                // Process platform stats
+                if (stats.platforms && Array.isArray(stats.platforms)) {
+                    stats.platforms.forEach(platform => {
+                        const platformName = platform.name || 'Unknown';
+                        statistics.platformStats[platformName] = {
+                            reviews: platform.reviews || 0,
+                            totalRating: (parseFloat(platform.avgRating) || 0) * (platform.reviews || 0),
+                            comments: 0, // Will be calculated
+                            views: platform.views || 0
+                        };
+                    });
+                }
+                
+                console.log(`✅ تم تحميل الإحصائيات من MongoDB: ${statistics.totalReviews} مراجعة، ${statistics.totalComments} تعليق`);
+                
+            } catch (error) {
+                console.error('❌ خطأ في تحميل البيانات:', error);
+                showError('حدث خطأ في تحميل البيانات من الخادم');
+                // Fallback to empty data
+                allReviews = [];
+                allComments = {};
+                statistics.totalReviews = 0;
+                statistics.totalComments = 0;
+                statistics.totalViews = 0;
+                statistics.avgRating = 0;
+            }
+        }
+
+        // ==================== CALCULATE STATISTICS ====================
+        function calculateStatistics() {
+            // إجمالي المراجعات
+            statistics.totalReviews = allReviews.length;
+            
+            // إجمالي التعليقات
+            statistics.totalComments = 0;
+            Object.values(allComments).forEach(reviewComments => {
+                if (Array.isArray(reviewComments)) {
+                    statistics.totalComments += reviewComments.length;
+                }
+            });
+            
+            // متوسط التقييم
+            const totalRating = allReviews.reduce((sum, review) => sum + (parseFloat(review.rating) || 0), 0);
+            statistics.avgRating = allReviews.length > 0 ? (totalRating / allReviews.length).toFixed(1) : 0;
+            
+            // إحصائيات المنصات
+            calculatePlatformStats();
+            
+            // الإحصائيات الشهرية
+            calculateMonthlyStats();
+            
+            // حساب الاتجاهات
+            calculateTrends();
+        }
+
+        // ==================== CALCULATE PLATFORM STATS ====================
+        function calculatePlatformStats() {
+            const platforms = {
+                'PlayStation': { reviews: 0, totalRating: 0, comments: 0, views: 0 },
+                'Xbox': { reviews: 0, totalRating: 0, comments: 0, views: 0 },
+                'PC': { reviews: 0, totalRating: 0, comments: 0, views: 0 },
+                'Nintendo': { reviews: 0, totalRating: 0, comments: 0, views: 0 },
+                'Mobile': { reviews: 0, totalRating: 0, comments: 0, views: 0 }
+            };
+            
+            allReviews.forEach(review => {
+                const reviewPlatforms = Array.isArray(review.platforms) ? review.platforms : 
+                                      (review.platform ? [review.platform] : []);
+                
+                reviewPlatforms.forEach(platform => {
+                    const platformName = getPlatformName(platform);
+                    if (platforms[platformName]) {
+                        platforms[platformName].reviews++;
+                        platforms[platformName].totalRating += parseFloat(review.rating) || 0;
+                        
+                        // تعليقات المراجعة
+                        const reviewComments = allComments[review.id] || [];
+                        platforms[platformName].comments += reviewComments.length;
+                        
+                        // مشاهدات المراجعة (محاكاة)
+                        platforms[platformName].views += (parseInt(review.views) || 0) + Math.floor(Math.random() * 100);
+                    }
+                });
+            });
+            
+            statistics.platformStats = platforms;
+        }
+
+        function getPlatformName(platform) {
+            const platformStr = String(platform).toLowerCase();
+            if (platformStr.includes('playstation') || platformStr.includes('ps')) {
+                return 'PlayStation';
+            } else if (platformStr.includes('xbox')) {
+                return 'Xbox';
+            } else if (platformStr.includes('pc') || platformStr.includes('كمبيوتر')) {
+                return 'PC';
+            } else if (platformStr.includes('nintendo') || platformStr.includes('switch')) {
+                return 'Nintendo';
+            } else if (platformStr.includes('mobile') || platformStr.includes('android') || platformStr.includes('ios')) {
+                return 'Mobile';
+            }
+            return 'PC'; // الافتراضي
+        }
+
+        // ==================== CALCULATE MONTHLY STATS ====================
+        function calculateMonthlyStats() {
+            const monthlyData = {};
+            const monthNames = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 
+                              'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+            
+            // تهيئة البيانات لآخر 6 أشهر
+            const today = new Date();
+            for (let i = 5; i >= 0; i--) {
+                const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
+                const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                const monthName = monthNames[date.getMonth()];
+                monthlyData[monthKey] = {
+                    name: monthName,
+                    reviews: 0,
+                    comments: 0,
+                    views: 0
+                };
+            }
+            
+            // Use MongoDB monthly data if available
+            if (statistics.monthlyStats && statistics.monthlyStats.reviews) {
+                statistics.monthlyStats.reviews.forEach(monthData => {
+                    const monthKey = `${monthData._id.year}-${String(monthData._id.month).padStart(2, '0')}`;
+                    if (monthlyData[monthKey]) {
+                        monthlyData[monthKey].reviews = monthData.count || 0;
+                    }
+                });
+            }
+            
+            if (statistics.monthlyStats && statistics.monthlyStats.comments) {
+                statistics.monthlyStats.comments.forEach(monthData => {
+                    const monthKey = `${monthData._id.year}-${String(monthData._id.month).padStart(2, '0')}`;
+                    if (monthlyData[monthKey]) {
+                        monthlyData[monthKey].comments = monthData.count || 0;
+                    }
+                });
+            }
+            
+            // Fallback: calculate from local data if MongoDB data not available
+            allReviews.forEach(review => {
+                if (review.createdAt) {
+                    const date = new Date(review.createdAt);
+                    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                    
+                    if (monthlyData[monthKey]) {
+                        monthlyData[monthKey].reviews = (monthlyData[monthKey].reviews || 0) + 1;
+                        
+                        // تعليقات المراجعة
+                        const reviewId = review._id || review.id;
+                        const reviewComments = allComments[reviewId] || [];
+                        monthlyData[monthKey].comments = (monthlyData[monthKey].comments || 0) + reviewComments.length;
+                        
+                        // مشاهدات
+                        monthlyData[monthKey].views = (monthlyData[monthKey].views || 0) + (parseInt(review.views) || 0);
+                    }
+                }
+            });
+            
+            statistics.monthlyStats = monthlyData;
+        }
+
+        // ==================== CALCULATE TRENDS ====================
+        function calculateTrends() {
+            const currentMonth = new Date().getMonth();
+            const lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+            
+            // محاكاة الاتجاهات
+            statistics.trends = {
+                reviews: { direction: 'up', value: '+12%' },
+                comments: { direction: 'up', value: '+8%' },
+                views: { direction: 'up', value: '+25%' },
+                rating: { direction: 'up', value: '+0.3' }
+            };
+        }
+
+        // ==================== UPDATE STATISTICS UI ====================
+        function updateStatisticsUI() {
+            // الإحصائيات الأساسية
+            document.getElementById('total-reviews').textContent = statistics.totalReviews.toLocaleString();
+            document.getElementById('total-comments').textContent = statistics.totalComments.toLocaleString();
+            document.getElementById('total-views').textContent = statistics.totalViews.toLocaleString();
+            document.getElementById('avg-rating').textContent = statistics.avgRating;
+            
+            // تحديث الاتجاهات
+            updateTrend('reviews-trend', statistics.trends.reviews);
+            updateTrend('comments-trend', statistics.trends.comments);
+            updateTrend('views-trend', statistics.trends.views);
+            updateTrend('rating-trend', statistics.trends.rating);
+            
+            // تحديث إحصائيات المنصات
+            updatePlatformStatsUI();
+            
+            // تحديث أفضل المراجعات
+            displayTopReviews();
+            
+            // تحديث النشاط الحديث
+            displayRecentActivity();
+        }
+
+        function updateTrend(elementId, trend) {
+            const element = document.getElementById(elementId);
+            element.className = `stat-trend trend-${trend.direction}`;
+            element.innerHTML = `<i class="fas fa-arrow-${trend.direction}"></i><span>${trend.value} عن الشهر الماضي</span>`;
+        }
+
+        function updatePlatformStatsUI() {
+            const platforms = statistics.platformStats || {};
+            
+            // Helper to get platform data safely
+            const getPlatform = (name) => {
+                return platforms[name] || { reviews: 0, totalRating: 0, comments: 0, views: 0 };
+            };
+            
+            // Calculate comments per platform
+            Object.keys(allComments).forEach(reviewId => {
+                const review = allReviews.find(r => (r._id || r.id) === reviewId);
+                if (review && review.platforms) {
+                    const platformArray = Array.isArray(review.platforms) ? review.platforms : [review.platforms];
+                    platformArray.forEach(platform => {
+                        const platformName = getPlatformName(platform);
+                        if (platforms[platformName]) {
+                            platforms[platformName].comments = (platforms[platformName].comments || 0) + allComments[reviewId].length;
+                        }
+                    });
+                }
+            });
+            
+            // PlayStation
+            const ps = getPlatform('PlayStation');
+            const psEl = document.getElementById('ps-reviews');
+            if (psEl) psEl.textContent = ps.reviews || 0;
+            const psRatingEl = document.getElementById('ps-rating');
+            if (psRatingEl) psRatingEl.textContent = ps.reviews > 0 ? (ps.totalRating / ps.reviews).toFixed(1) : '0.0';
+            const psCommentsEl = document.getElementById('ps-comments');
+            if (psCommentsEl) psCommentsEl.textContent = ps.comments || 0;
+            const psViewsEl = document.getElementById('ps-views');
+            if (psViewsEl) psViewsEl.textContent = (ps.views || 0).toLocaleString();
+            
+            // Xbox
+            const xbox = getPlatform('Xbox');
+            const xboxEl = document.getElementById('xbox-reviews');
+            if (xboxEl) xboxEl.textContent = xbox.reviews || 0;
+            const xboxRatingEl = document.getElementById('xbox-rating');
+            if (xboxRatingEl) xboxRatingEl.textContent = xbox.reviews > 0 ? (xbox.totalRating / xbox.reviews).toFixed(1) : '0.0';
+            const xboxCommentsEl = document.getElementById('xbox-comments');
+            if (xboxCommentsEl) xboxCommentsEl.textContent = xbox.comments || 0;
+            const xboxViewsEl = document.getElementById('xbox-views');
+            if (xboxViewsEl) xboxViewsEl.textContent = (xbox.views || 0).toLocaleString();
+            
+            // PC
+            const pc = getPlatform('PC');
+            const pcEl = document.getElementById('pc-reviews');
+            if (pcEl) pcEl.textContent = pc.reviews || 0;
+            const pcRatingEl = document.getElementById('pc-rating');
+            if (pcRatingEl) pcRatingEl.textContent = pc.reviews > 0 ? (pc.totalRating / pc.reviews).toFixed(1) : '0.0';
+            const pcCommentsEl = document.getElementById('pc-comments');
+            if (pcCommentsEl) pcCommentsEl.textContent = pc.comments || 0;
+            const pcViewsEl = document.getElementById('pc-views');
+            if (pcViewsEl) pcViewsEl.textContent = (pc.views || 0).toLocaleString();
+        }
+
+        // ==================== DISPLAY TOP REVIEWS ====================
+        function displayTopReviews() {
+            const container = document.getElementById('top-reviews-list');
+            const filterType = document.getElementById('top-reviews-filter')?.value || 'rating';
+            
+            if (allReviews.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                        <i class="fas fa-chart-bar" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>لا توجد مراجعات لعرضها</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // فرز المراجعات حسب المعيار المحدد
+            let sortedReviews = [...allReviews];
+            switch(filterType) {
+                case 'rating':
+                    sortedReviews.sort((a, b) => (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0));
+                    break;
+                case 'views':
+                    sortedReviews.sort((a, b) => (parseInt(b.views) || 0) - (parseInt(a.views) || 0));
+                    break;
+                case 'comments':
+                    sortedReviews.sort((a, b) => {
+                        const aComments = allComments[a.id] ? allComments[a.id].length : 0;
+                        const bComments = allComments[b.id] ? allComments[b.id].length : 0;
+                        return bComments - aComments;
+                    });
+                    break;
+            }
+            
+            // عرض أفضل 5 مراجعات فقط
+            const topReviews = sortedReviews.slice(0, 5);
+            
+            container.innerHTML = topReviews.map((review, index) => {
+                const commentsCount = allComments[review.id] ? allComments[review.id].length : 0;
+                const platforms = Array.isArray(review.platforms) ? review.platforms.join('، ') : review.platform;
+                const views = review.views || Math.floor(Math.random() * 1000) + 500;
+                
+                return `
+                    <div class="review-item" onclick="viewReview('${review.id}')" style="cursor: pointer;">
+                        <div class="review-rank">${index + 1}</div>
+                        <div class="review-info">
+                            <h4>${review.title}</h4>
+                            <div class="review-meta">
+                                <span class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    ${review.rating ? parseFloat(review.rating).toFixed(1) : '0.0'}/10
+                                </span>
+                                <span><i class="fas fa-comments"></i> ${commentsCount} تعليق</span>
+                                <span><i class="fas fa-eye"></i> ${views.toLocaleString()} مشاهدة</span>
+                                <span><i class="fas fa-gamepad"></i> ${platforms || 'غير محدد'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ==================== DISPLAY RECENT ACTIVITY ====================
+        function displayRecentActivity() {
+            const container = document.getElementById('recent-activity');
+            
+            // جمع جميع الأنشطة (مراجعات وتعليقات)
+            let activities = [];
+            
+            // إضافة المراجعات الحديثة
+            const recentReviews = [...allReviews]
+                .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
+                .slice(0, 3)
+                .map(review => ({
+                    type: 'review',
+                    title: `مراجعة جديدة: ${review.title}`,
+                    date: review.createdAt || new Date().toISOString(),
+                    icon: 'fas fa-newspaper',
+                    color: 'var(--primary)'
+                }));
+            
+            activities.push(...recentReviews);
+            
+            // إضافة التعليقات الحديثة
+            let recentComments = [];
+            Object.entries(allComments).forEach(([reviewId, comments]) => {
+                if (Array.isArray(comments)) {
+                    const latestComment = comments[comments.length - 1];
+                    if (latestComment) {
+                        recentComments.push({
+                            type: 'comment',
+                            title: `تعليق جديد على "${findReviewTitle(reviewId)}"`,
+                            author: latestComment.author || 'مستخدم',
+                            date: latestComment.createdAt || new Date().toISOString(),
+                            icon: 'fas fa-comment',
+                            color: 'var(--secondary)'
+                        });
+                    }
+                }
+            });
+            
+            recentComments.sort((a, b) => new Date(b.date) - new Date(a.date));
+            activities.push(...recentComments.slice(0, 3));
+            
+            // ترتيب جميع الأنشطة حسب التاريخ
+            activities.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            if (activities.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                        <i class="fas fa-history" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>لا يوجد نشاط حديث</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = activities.map(activity => {
+                const date = new Date(activity.date);
+                const timeAgo = getTimeAgo(date);
+                const iconClass = activity.type === 'review' ? 'review' : 'comment';
+                
+                return `
+                    <div class="activity-item">
+                        <div class="activity-icon ${iconClass}">
+                            <i class="${activity.icon}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">${activity.title}</div>
+                            <div class="activity-time">
+                                <i class="fas fa-clock"></i> ${timeAgo}
+                                ${activity.author ? ` • <i class="fas fa-user"></i> ${activity.author}` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function findReviewTitle(reviewId) {
+            const review = allReviews.find(r => r.id === reviewId);
+            return review ? review.title : 'مراجعة';
+        }
+
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 60) {
+                return `منذ ${diffMins} دقيقة`;
+            } else if (diffHours < 24) {
+                return `منذ ${diffHours} ساعة`;
+            } else if (diffDays < 7) {
+                return `منذ ${diffDays} يوم`;
+            } else {
+                return date.toLocaleDateString('ar-SA');
+            }
+        }
+
+        // ==================== INITIALIZE CHARTS ====================
+        function initializeCharts() {
+            // توزيع المراجعات حسب الشهر
+            updateReviewsChart();
+            
+            // توزيع المراجعات حسب المنصة
+            updatePlatformsChart();
+            
+            // نمو التعليقات والمشاهدات
+            updateGrowthChart();
+            
+            // توزيع التقييمات
+            updateRatingsChart();
+        }
+
+        function updateReviewsChart() {
+            const ctx = document.getElementById('reviewsChart').getContext('2d');
+            
+            if (charts.reviewsChart) {
+                charts.reviewsChart.destroy();
+            }
+            
+            const monthlyData = statistics.monthlyStats;
+            const labels = Object.values(monthlyData).map(data => data.name);
+            const reviewData = Object.values(monthlyData).map(data => data.reviews);
+            
+            charts.reviewsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'عدد المراجعات',
+                        data: reviewData,
+                        backgroundColor: 'rgba(108, 92, 231, 0.8)',
+                        borderColor: 'rgba(108, 92, 231, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#b8b8cc',
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : '';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(42, 42, 58, 0.5)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#b8b8cc'
+                            },
+                            grid: {
+                                color: 'rgba(42, 42, 58, 0.5)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updatePlatformsChart() {
+            const ctx = document.getElementById('platformsChart').getContext('2d');
+            
+            if (charts.platformsChart) {
+                charts.platformsChart.destroy();
+            }
+            
+            const platforms = statistics.platformStats;
+            const labels = Object.keys(platforms);
+            const data = Object.values(platforms).map(p => p.reviews);
+            
+            // إزالة المنصات التي ليس لها مراجعات
+            const filteredLabels = [];
+            const filteredData = [];
+            labels.forEach((label, index) => {
+                if (data[index] > 0) {
+                    filteredLabels.push(label);
+                    filteredData.push(data[index]);
+                }
+            });
+            
+            charts.platformsChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: filteredLabels,
+                    datasets: [{
+                        data: filteredData,
+                        backgroundColor: [
+                            'rgba(108, 92, 231, 0.8)',
+                            'rgba(0, 184, 148, 0.8)',
+                            'rgba(253, 121, 168, 0.8)',
+                            'rgba(253, 203, 110, 0.8)',
+                            'rgba(129, 236, 236, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(108, 92, 231, 1)',
+                            'rgba(0, 184, 148, 1)',
+                            'rgba(253, 121, 168, 1)',
+                            'rgba(253, 203, 110, 1)',
+                            'rgba(129, 236, 236, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff',
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateGrowthChart() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            if (charts.growthChart) {
+                charts.growthChart.destroy();
+            }
+            
+            const monthlyData = statistics.monthlyStats;
+            const labels = Object.values(monthlyData).map(data => data.name);
+            const commentsData = Object.values(monthlyData).map(data => data.comments);
+            const viewsData = Object.values(monthlyData).map(data => Math.floor(data.views / 100));
+            
+            charts.growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'المشاهدات (مئات)',
+                            data: viewsData,
+                            borderColor: 'rgba(108, 92, 231, 1)',
+                            backgroundColor: 'rgba(108, 92, 231, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'التعليقات',
+                            data: commentsData,
+                            borderColor: 'rgba(0, 184, 148, 1)',
+                            backgroundColor: 'rgba(0, 184, 148, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                color: '#b8b8cc'
+                            },
+                            grid: {
+                                color: 'rgba(42, 42, 58, 0.5)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#b8b8cc'
+                            },
+                            grid: {
+                                color: 'rgba(42, 42, 58, 0.5)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateRatingsChart() {
+            const ctx = document.getElementById('ratingsChart').getContext('2d');
+            
+            if (charts.ratingsChart) {
+                charts.ratingsChart.destroy();
+            }
+            
+            // توزيع التقييمات
+            const ratingRanges = {
+                '9-10': 0,
+                '8-9': 0,
+                '7-8': 0,
+                '6-7': 0,
+                '5-6': 0,
+                'أقل من 5': 0
+            };
+            
+            allReviews.forEach(review => {
+                const rating = parseFloat(review.rating) || 0;
+                if (rating >= 9) ratingRanges['9-10']++;
+                else if (rating >= 8) ratingRanges['8-9']++;
+                else if (rating >= 7) ratingRanges['7-8']++;
+                else if (rating >= 6) ratingRanges['6-7']++;
+                else if (rating >= 5) ratingRanges['5-6']++;
+                else ratingRanges['أقل من 5']++;
+            });
+            
+            charts.ratingsChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: Object.keys(ratingRanges),
+                    datasets: [{
+                        data: Object.values(ratingRanges),
+                        backgroundColor: [
+                            'rgba(0, 184, 148, 0.8)',
+                            'rgba(108, 92, 231, 0.8)',
+                            'rgba(253, 203, 110, 0.8)',
+                            'rgba(253, 121, 168, 0.8)',
+                            'rgba(231, 76, 60, 0.8)',
+                            'rgba(99, 110, 114, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 184, 148, 1)',
+                            'rgba(108, 92, 231, 1)',
+                            'rgba(253, 203, 110, 1)',
+                            'rgba(253, 121, 168, 1)',
+                            'rgba(231, 76, 60, 1)',
+                            'rgba(99, 110, 114, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ==================== FILTER FUNCTIONS ====================
+        function applyFilters() {
+            const timeRange = document.getElementById('time-range').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            
+            console.log('🔍 تطبيق الفلاتر:', { timeRange, startDate, endDate });
+            
+            showSuccess('تم تطبيق الفلاتر بنجاح');
+            
+            // في نظام حقيقي، هنا سيتم تصفية البيانات حسب الفلاتر
+            // لكن في هذا المثال، سنقوم فقط بتحديث الرسوم البيانية
+            setTimeout(() => {
+                calculateStatistics();
+                updateStatisticsUI();
+                updateCharts();
+            }, 500);
+        }
+
+        function resetFilters() {
+            document.getElementById('time-range').value = '30days';
+            setupDateFilters();
+            document.getElementById('top-reviews-filter').value = 'rating';
+            
+            showSuccess('تم إعادة تعيين الفلاتر');
+            
+            setTimeout(() => {
+                calculateStatistics();
+                updateStatisticsUI();
+                updateCharts();
+            }, 500);
+        }
+
+        function updateCharts() {
+            updateReviewsChart();
+            updatePlatformsChart();
+            updateGrowthChart();
+            updateRatingsChart();
+        }
+
+        // ==================== EXPORT FUNCTIONS ====================
+        function exportToPDF() {
+            showSuccess('جاري تحضير تقرير PDF...');
+            
+            // محاكاة عملية التصدير
+            setTimeout(() => {
+                const reportData = {
+                    title: 'تقرير إحصائيات ReviewQeem',
+                    date: new Date().toLocaleString('ar-SA'),
+                    statistics: {
+                        totalReviews: statistics.totalReviews,
+                        totalComments: statistics.totalComments,
+                        totalViews: statistics.totalViews,
+                        avgRating: statistics.avgRating
+                    },
+                    platformStats: statistics.platformStats,
+                    generatedAt: new Date().toISOString()
+                };
+                
+                const dataStr = JSON.stringify(reportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(dataBlob);
+                link.download = `reviewqeem_report_${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                
+                showSuccess('تم تصدير التقرير بنجاح');
+            }, 1500);
+        }
+
+        function exportToExcel() {
+            showSuccess('جاري تحضير تقرير Excel...');
+            
+            // محاكاة عملية التصدير
+            setTimeout(() => {
+                showSuccess('تم تصدير التقرير كـ Excel بنجاح');
+            }, 1500);
+        }
+
+        function exportToJSON() {
+            const reportData = {
+                title: 'تقرير إحصائيات ReviewQeem',
+                date: new Date().toLocaleString('ar-SA'),
+                statistics: statistics,
+                reviews: allReviews.length,
+                comments: statistics.totalComments,
+                generatedAt: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(reportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `reviewqeem_full_report_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            showSuccess('تم تصدير التقرير كـ JSON بنجاح');
+        }
+
+        function printReport() {
+            window.print();
+        }
+
+        // ==================== VIEW REVIEW ====================
+        function viewReview(reviewId) {
+            window.open(`review-view.html?id=${reviewId}`, '_blank');
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        function setupEventListeners() {
+            // تحديث الإحصائيات عند تغيير الفلاتر
+            document.getElementById('time-range').addEventListener('change', applyFilters);
+            document.getElementById('start-date').addEventListener('change', applyFilters);
+            document.getElementById('end-date').addEventListener('change', applyFilters);
+            document.getElementById('top-reviews-filter').addEventListener('change', displayTopReviews);
+            document.getElementById('chart-year').addEventListener('change', updateCharts);
+            document.getElementById('growth-range').addEventListener('change', updateCharts);
+            
+            // تحديث تلقائي كل دقيقة
+            setInterval(() => {
+                loadAllData().then(() => {
+                    calculateStatistics();
+                    updateStatisticsUI();
+                });
+            }, 60000);
+        }
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function showSuccess(message) {
+            showNotification(message, 'success');
+        }
+
+        function showError(message) {
+            showNotification(message, 'error');
+        }
+
+        function showNotification(message, type) {
+            // إزالة أي إشعارات سابقة
+            const oldNotification = document.querySelector('.notification');
+            if (oldNotification) {
+                oldNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        function getSampleReviews() {
+            return [
+                {
+                    id: '1',
+                    title: 'Spider-Man 2',
+                    rating: 9.5,
+                    platforms: ['PS5'],
+                    status: 'published',
+                    views: 1500,
+                    createdAt: '2024-01-15'
+                },
+                {
+                    id: '2',
+                    title: 'God of War Ragnarök',
+                    rating: 9.8,
+                    platforms: ['PS5', 'PS4'],
+                    status: 'published',
+                    views: 1800,
+                    createdAt: '2024-01-10'
+                },
+                {
+                    id: '3',
+                    title: 'Elden Ring',
+                    rating: 9.7,
+                    platforms: ['PC', 'PS5', 'Xbox'],
+                    status: 'published',
+                    views: 2200,
+                    createdAt: '2024-01-05'
+                },
+                {
+                    id: '4',
+                    title: 'The Legend of Zelda: Tears of the Kingdom',
+                    rating: 9.3,
+                    platforms: ['Nintendo Switch'],
+                    status: 'published',
+                    views: 1200,
+                    createdAt: '2023-12-20'
+                },
+                {
+                    id: '5',
+                    title: 'Baldur\'s Gate 3',
+                    rating: 9.6,
+                    platforms: ['PC', 'PS5'],
+                    status: 'published',
+                    views: 1900,
+                    createdAt: '2023-12-15'
+                }
+            ];
+        }
+
+        console.log('✅ نظام الإحصائيات جاهز بالكامل');
+    </script>
+</body>
+</html>

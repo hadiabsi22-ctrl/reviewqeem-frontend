@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية - ReviewQeem</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --accent: #fd79a8;
+            --dark-bg: #0d0d11;
+            --darker-bg: #05050a;
+            --card-bg: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border-color: #2a2a3a;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #e74c3c;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: rgba(13, 13, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: radial-gradient(circle at 20% 20%, #ffeaa7 0%, #fd79a8 30%, #6c5ce7 70%, #241b52 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 0%, #dfe6e9 40%, #a29bfe 70%, #81ecec 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== PAGE HEADER ==================== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(0, 184, 148, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+
+        /* ==================== CONTENT STYLES ==================== */
+        .content-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .privacy-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .privacy-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .privacy-section h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .privacy-section h2 i {
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+
+        .privacy-section p {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+        }
+
+        .privacy-section ul {
+            margin: 15px 0 20px 30px;
+        }
+
+        .privacy-section li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .privacy-section li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+
+        .highlight-box {
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .contact-email:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== NAVIGATION INDICATOR ==================== */
+        .nav-indicator {
+            position: sticky;
+            top: 80px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .nav-indicator h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-indicator ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-indicator li {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .nav-indicator a {
+            display: block;
+            padding: 10px 15px;
+            background: var(--darker-bg);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-indicator a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--darker-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+            
+            .privacy-section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .nav-indicator ul {
+                flex-direction: column;
+            }
+            
+            .nav-indicator li {
+                min-width: auto;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header-icon {
+                font-size: 3rem;
+            }
+            
+            .content-card {
+                padding: 20px;
+            }
+            
+            .privacy-section h2 {
+                font-size: 1.2rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-mark">RQ</div>
+                <div class="logo-text">Reviewqeem</div>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="reviews-list.html">المراجعات</a></li>
+                    <li><a href="about.html">عن الموقع</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    <li><a href="privacy.html" class="active">الخصوصية</a></li>
+                    <li><a href="terms.html">شروط الاستخدام</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="page-header">
+            <div class="page-header-icon">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <h1>سياسة الخصوصية</h1>
+            <p>في ReviewQeem نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية</p>
+        </div>
+
+        <!-- Navigation Indicator -->
+        <div class="nav-indicator">
+            <h3><i class="fas fa-bookmark"></i> التنقل السريع</h3>
+            <ul>
+                <li><a href="#information">المعلومات المجمعة</a></li>
+                <li><a href="#usage">كيفية الاستخدام</a></li>
+                <li><a href="#sharing">مشاركة البيانات</a></li>
+                <li><a href="#cookies">ملفات التعريف</a></li>
+                <li><a href="#protection">حماية البيانات</a></li>
+                <li><a href="#rights">حقوق المستخدم</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-card">
+            <p class="intro-text">
+                في <strong>ReviewQeem</strong> نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية. توضح هذه السياسة
+                كيفية جمعنا للبيانات وكيفية استخدامها وحمايتها.
+            </p>
+
+            <div class="privacy-section" id="information">
+                <h2><i class="fas fa-database"></i> ١. المعلومات التي نقوم بجمعها</h2>
+                <p>قد نقوم بجمع الأنواع التالية من المعلومات عند استخدامك لموقعنا:</p>
+                <ul>
+                    <li>الاسم أو اللقب إذا قمت بإدخاله في التعليقات أو النماذج</li>
+                    <li>البريد الإلكتروني عند استخدام نماذج التواصل أو الاشتراك</li>
+                    <li>عنوان الـ IP والمعلومات التقنية الخاصة بالمتصفح والجهاز</li>
+                    <li>محتوى التعليقات التي تقوم بكتابتها على المراجعات أو الألعاب</li>
+                    <li>بيانات استخدام عامة مثل الصفحات التي تزورها ومدة بقائك في الموقع</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section" id="usage">
+                <h2><i class="fas fa-cogs"></i> ٢. كيفية استخدامنا لمعلوماتك</h2>
+                <p>نستخدم البيانات التي نجمعها للأغراض التالية:</p>
+                <ul>
+                    <li>تحسين تجربة المستخدم وتطوير محتوى الموقع</li>
+                    <li>إدارة نظام التعليقات ومنع الإساءات أو النشاطات غير المصرّح بها</li>
+                    <li>منع التقييمات المكررة عبر استخدام عنوان الـ IP أو وسائل تقنية أخرى</li>
+                    <li>الرد على استفسارات المستخدمين عبر البريد الإلكتروني</li>
+                    <li>تحليل أداء الموقع وإحصائيات الزيارات بشكل مجمّع وغير شخصي</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section" id="sharing">
+                <h2><i class="fas fa-share-alt"></i> ٣. مشاركة البيانات مع أطراف ثالثة</h2>
+                <p>بشكل عام، لا نقوم ببيع أو تأجير أو مشاركة بياناتك الشخصية مع أي جهة خارجية، باستثناء:</p>
+                <ul>
+                    <li>مزودي الخدمات التقنية (الاستضافة، الحماية، التحليلات) بالحد الأدنى اللازم للتشغيل</li>
+                    <li>الجهات الرسمية أو القانونية عند الطلب وفقًا للقانون المعمول به</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <p><i class="fas fa-info-circle"></i> قد نستخدم أدوات تحليلات (مثل Google Analytics) لجمع بيانات استخدام عامة بشكل مجهول الهوية لتحسين الموقع.</p>
+                </div>
+            </div>
+
+            <div class="privacy-section" id="cookies">
+                <h2><i class="fas fa-cookie"></i> ٤. ملفات تعريف الارتباط (الكوكيز)</h2>
+                <p>
+                    نستخدم ملفات تعريف الارتباط لتحسين تجربة الاستخدام، وتذكر بعض تفضيلاتك، وتحليل أداء الموقع.
+                    يمكنك إدارة أو تعطيل الكوكيز من إعدادات متصفحك في أي وقت، لكن قد يؤثر ذلك على بعض وظائف الموقع.
+                </p>
+                <p>أنواع الكوكيز التي نستخدمها:</p>
+                <ul>
+                    <li>كوكيز أساسية: ضرورية لتشغيل الموقع</li>
+                    <li>كوكيز وظيفية: لتذكر تفضيلاتك وإعداداتك</li>
+                    <li>كوكيز تحليلية: لفهم كيفية استخدامك للموقع</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section" id="protection">
+                <h2><i class="fas fa-shield-alt"></i> ٥. حماية بياناتك</h2>
+                <p>
+                    نستخدم إجراءات أمنية تقنية وتنظيمية لحماية بياناتك من الوصول غير المصرّح به أو التعديل أو
+                    التلف أو الفقدان. ومع ذلك، لا يمكن ضمان أمان كامل بنسبة ١٠٠٪ لأي نقل بيانات عبر الإنترنت.
+                </p>
+                <p>إجراءات الحماية التي نطبقها:</p>
+                <ul>
+                    <li>تشفير البيانات الحساسة</li>
+                    <li>مراجعة دورية لأنظمة الأمان</li>
+                    <li>تدريب فريق العمل على أفضل ممارسات حماية البيانات</li>
+                    <li>تحديثات أمنية منتظمة للأنظمة والبرمجيات</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section" id="rights">
+                <h2><i class="fas fa-user-check"></i> ٦. حقوقك كمستخدم</h2>
+                <p>يحق لك:</p>
+                <ul>
+                    <li>طلب معرفة البيانات التي نحتفظ بها عنك (إن وجدت)</li>
+                    <li>طلب تصحيح أو تحديث بياناتك الشخصية</li>
+                    <li>طلب حذف بياناتك من قواعد بياناتنا عند الرغبة</li>
+                    <li>معارضة معالجة بياناتك في حالات معينة</li>
+                    <li>طلب نقل بياناتك إلى جهة أخرى (حق التنقل)</li>
+                </ul>
+                
+                <div class="contact-info">
+                    <p>يمكنك التواصل معنا عبر البريد الإلكتروني لتقديم أي طلب متعلق ببياناتك:</p>
+                    <a href="mailto:privacy@reviewqeem.com" class="contact-email">
+                        <i class="fas fa-envelope"></i>
+                        privacy@reviewqeem.com
+                    </a>
+                </div>
+            </div>
+
+            <div class="privacy-section">
+                <h2><i class="fas fa-sync-alt"></i> ٧. تحديثات سياسة الخصوصية</h2>
+                <p>
+                    قد نقوم بتحديث سياسة الخصوصية من وقت لآخر. سيتم نشر أي تعديل جديد في هذه الصفحة مع تحديث
+                    تاريخ المراجعة الأخيرة.
+                </p>
+                <p>ننصح بمراجعة هذه الصفحة بشكل دوري للاطلاع على أي تحديثات.</p>
+                
+                <div class="last-updated">
+                    <p><strong>تاريخ آخر تحديث:</strong> 1 يناير 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>عن ReviewQeem</h3>
+                <p>
+                    منصة عربية تجمع بين متجر الألعاب والمراجعات الاحترافية. نساعدك على اختيار لعبتك القادمة
+                    بناءً على تقييمات دقيقة وروابط شراء موثوقة.
+                </p>
+            </div>
+            <div class="footer-column">
+                <h3>روابط مهمة</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> عن الموقع</a></li>
+                    <li><a href="privacy.html"><i class="fas fa-user-shield"></i> سياسة الخصوصية</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> شروط الاستخدام</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>تواصل معنا</h3>
+                <ul class="footer-links">
+                    <li><a href="revwqeem@outlook.sa"><i class="fas fa-envelope"></i> revwqeem@outlook.sa</a></li>
+                    <li><a href="tel:+966592815365"><i class="fas fa-phone"></i> +966 592815365</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة © 2026 <strong>ReviewQeem</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-indicator a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight current section in navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.privacy-section');
+            const navLinks = document.querySelectorAll('.nav-indicator a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = '#' + section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                    link.style.background = 'var(--primary)';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = '';
+                    link.style.color = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

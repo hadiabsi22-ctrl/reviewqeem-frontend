@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة ملفات تعريف الارتباط - ReviewQeem</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --accent: #fd79a8;
+            --dark-bg: #0d0d11;
+            --darker-bg: #05050a;
+            --card-bg: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border-color: #2a2a3a;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #e74c3c;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: rgba(13, 13, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: radial-gradient(circle at 20% 20%, #ffeaa7 0%, #fd79a8 30%, #6c5ce7 70%, #241b52 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 0%, #dfe6e9 40%, #a29bfe 70%, #81ecec 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== PAGE HEADER ==================== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(0, 184, 148, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-header-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+
+        /* ==================== CONTENT STYLES ==================== */
+        .content-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .cookies-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cookies-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .cookies-section h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cookies-section h2 i {
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+
+        .cookies-section p {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+        }
+
+        .cookies-section ul {
+            margin: 15px 0 20px 30px;
+        }
+
+        .cookies-section li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .cookies-section li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+
+        .cookies-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .cookie-type {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .cookie-type h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cookie-type p {
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .highlight-box {
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+
+        .browser-guide {
+            background: rgba(0, 184, 148, 0.1);
+            border: 1px solid var(--secondary);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .browser-guide h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .browser-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .browser-step {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .browser-step i {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .browser-step p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== NAVIGATION INDICATOR ==================== */
+        .nav-indicator {
+            position: sticky;
+            top: 80px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .nav-indicator h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-indicator ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-indicator li {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .nav-indicator a {
+            display: block;
+            padding: 10px 15px;
+            background: var(--darker-bg);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-indicator a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--darker-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+            
+            .cookies-section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .nav-indicator ul {
+                flex-direction: column;
+            }
+            
+            .nav-indicator li {
+                min-width: auto;
+            }
+            
+            .cookies-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .browser-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header-icon {
+                font-size: 3rem;
+            }
+            
+            .content-card {
+                padding: 20px;
+            }
+            
+            .cookies-section h2 {
+                font-size: 1.2rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-mark">RQ</div>
+                <div class="logo-text">Reviewqeem</div>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="reviews-list.html">المراجعات</a></li>
+                    <li><a href="about.html">عن الموقع</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    <li><a href="privacy.html">الخصوصية</a></li>
+                    <li><a href="terms.html">شروط الاستخدام</a></li>
+                    <li><a href="cookies.html" class="active">الكوكيز</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="page-header">
+            <div class="page-header-icon">
+                <i class="fas fa-cookie-bite"></i>
+            </div>
+            <h1>سياسة ملفات تعريف الارتباط</h1>
+            <p>نوضح كيفية استخدامنا لملفات الكوكيز لتحسين تجربتك على موقع ReviewQeem</p>
+        </div>
+
+        <!-- Navigation Indicator -->
+        <div class="nav-indicator">
+            <h3><i class="fas fa-bookmark"></i> التنقل السريع</h3>
+            <ul>
+                <li><a href="#what-are-cookies">ما هي الكوكيز؟</a></li>
+                <li><a href="#types">أنواع الكوكيز</a></li>
+                <li><a href="#third-party">كوكيز الطرف الثالث</a></li>
+                <li><a href="#management">إدارة الكوكيز</a></li>
+                <li><a href="#consent">الموافقة</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-card">
+            <p class="intro-text">
+                تستخدم <strong>ReviewQeem</strong> ملفات تعريف الارتباط (Cookies) لتحسين تجربة التصفح،
+                وتحليل الأداء، وتقديم محتوى يتناسب مع اهتماماتك.
+            </p>
+
+            <div class="cookies-section" id="what-are-cookies">
+                <h2><i class="fas fa-info-circle"></i> ١. ما هي ملفات تعريف الارتباط (الكوكيز)؟</h2>
+                <p>
+                    الكوكيز عبارة عن ملفات نصية صغيرة يتم تخزينها على جهازك عند زيارة مواقع الويب.
+                    تساعد هذه الملفات في تذكّر تفضيلاتك وإعداداتك وتحسين تجربة استخدامك للموقع.
+                </p>
+                <p>
+                    هذه الملفات آمنة ولا تحتوي على برمجيات خبيثة، ولا يمكنها الوصول إلى معلوماتك الشخصية
+                    المخزنة على جهازك.
+                </p>
+            </div>
+
+            <div class="cookies-section" id="types">
+                <h2><i class="fas fa-cookie"></i> ٢. أنواع الكوكيز التي نستخدمها</h2>
+                
+                <div class="cookies-types">
+                    <div class="cookie-type">
+                        <h3><i class="fas fa-cog"></i> كوكيز أساسية</h3>
+                        <p>ضرورية لعمل الموقع بشكل سليم، مثل تذكر تفضيلات اللغة أو بعض الإعدادات الأساسية. لا يمكن تعطيل هذه الكوكيز دون التأثير على وظائف الموقع.</p>
+                    </div>
+
+                    <div class="cookie-type">
+                        <h3><i class="fas fa-chart-line"></i> كوكيز الأداء والتحليلات</h3>
+                        <p>تساعدنا على فهم كيفية استخدام الزوار للموقع، مثل الصفحات الأكثر زيارة ومدة الجلسات. نستخدم هذه البيانات لتحسين تجربة المستخدم.</p>
+                    </div>
+
+                    <div class="cookie-type">
+                        <h3><i class="fas fa-user-cog"></i> كوكيز التخصيص</h3>
+                        <p>تُستخدم لتخصيص بعض الأقسام أو التوصيات بناءً على تفضيلاتك السابقة (إن وجدت). تساعد في جعل تجربتك أكثر شخصية.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p><i class="fas fa-info-circle"></i> نحن لا نستخدم كوكيز للتتبع السلوكي أو الإعلانات المستهدفة. هدفنا تحسين تجربة المستخدم فقط.</p>
+                </div>
+            </div>
+
+            <div class="cookies-section" id="third-party">
+                <h2><i class="fas fa-external-link-alt"></i> ٣. الكوكيز الخاصة بأطراف ثالثة</h2>
+                <p>
+                    قد نستخدم خدمات خارجية (مثل أدوات التحليل أو مشغلات الفيديو) والتي قد تضع كوكيز خاصة بها
+                    على جهازك. تخضع هذه الكوكيز لسياسات الخصوصية الخاصة بتلك الخدمات.
+                </p>
+                <p>الخدمات التي قد نستخدمها تشمل:</p>
+                <ul>
+                    <li>Google Analytics - لتحليل حركة الزوار وتحسين الموقع</li>
+                    <li>مشغلات الفيديو - لعرض محتوى الفيديو في المراجعات</li>
+                    <li>خدمات الاستضافة السحابية - لتحسين أداء الموقع</li>
+                </ul>
+            </div>
+
+            <div class="cookies-section" id="management">
+                <h2><i class="fas fa-sliders-h"></i> ٤. إدارة الكوكيز والتحكم فيها</h2>
+                <p>
+                    يمكنك التحكم في الكوكيز أو حذفها في أي وقت من خلال إعدادات المتصفح الذي تستخدمه.
+                    يمكنك أيضًا تفعيل خيار رفض جميع الكوكيز أو التنبيه عند إرسال كوكي جديد.
+                </p>
+
+                <div class="browser-guide">
+                    <h3><i class="fas fa-desktop"></i> كيفية إدارة الكوكيز في المتصفحات الشائعة</h3>
+                    <div class="browser-steps">
+                        <div class="browser-step">
+                            <i class="fab fa-chrome"></i>
+                            <p>Google Chrome: الإعدادات → الخصوصية والأمان → الكوكيز</p>
+                        </div>
+                        <div class="browser-step">
+                            <i class="fab fa-firefox"></i>
+                            <p>Firefox: الخيارات → الخصوصية والأمان → الكوكيز</p>
+                        </div>
+                        <div class="browser-step">
+                            <i class="fab fa-safari"></i>
+                            <p>Safari: التفضيلات → الخصوصية → الكوكيز</p>
+                        </div>
+                        <div class="browser-step">
+                            <i class="fab fa-edge"></i>
+                            <p>Edge: الإعدادات → الخصوصية والخدمات → الكوكيز</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p><i class="fas fa-exclamation-triangle"></i> يرجى ملاحظة أن تعطيل بعض أنواع الكوكيز قد يؤثر على أداء بعض وظائف الموقع أو على تجربة التصفح العامة.</p>
+                </div>
+            </div>
+
+            <div class="cookies-section" id="consent">
+                <h2><i class="fas fa-check-circle"></i> ٥. موافقتك على استخدام الكوكيز</h2>
+                <p>
+                    باستخدامك لموقع <strong>ReviewQeem</strong> وتصفحك لصفحاتنا، فإنك توافق على استخدامنا
+                    للكوكيز كما هو موضح في هذه السياسة، ما لم تقم بتعديل إعدادات المتصفح لتعطيلها.
+                </p>
+                <p>
+                    نوفر لك خيار إدارة تفضيلات الكوكيز من خلال نافذة الإعدادات التي تظهر عند زيارتك الأولى
+                    للموقع.
+                </p>
+            </div>
+
+            <div class="cookies-section">
+                <h2><i class="fas fa-sync-alt"></i> ٦. تحديث سياسة الكوكيز</h2>
+                <p>
+                    قد نقوم بتحديث هذه السياسة من وقت لآخر بما يتوافق مع أي تغييرات في تقنيات التتبع أو
+                    اللوائح القانونية. سنقوم بنشر أي تعديل في هذه الصفحة مع تحديث تاريخ المراجعة.
+                </p>
+                <p>ننصح بمراجعة هذه الصفحة بشكل دوري للاطلاع على أي تحديثات.</p>
+                
+                <div class="last-updated">
+                    <p><strong>تاريخ آخر تحديث:</strong> 1 يناير 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>عن ReviewQeem</h3>
+                <p>
+                    منصة عربية متخصصة في مراجعات وتقييمات الألعاب، مع روابط شراء موثوقة لكل منصة.
+                </p>
+            </div>
+            <div class="footer-column">
+                <h3>روابط مهمة</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> عن الموقع</a></li>
+                    <li><a href="privacy.html"><i class="fas fa-user-shield"></i> سياسة الخصوصية</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> شروط الاستخدام</a></li>
+                    <li><a href="cookies.html"><i class="fas fa-cookie-bite"></i> سياسة الكوكيز</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>تواصل معنا</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@reviewqeem.com"><i class="fas fa-envelope"></i> revwqeem@outlook.sa</a></li>
+                    <li><a href="mailto:privacy@reviewqeem.com"><i class="fas fa-shield-alt"></i> revwqeem@outlook.sa</a></li>
+                    <li><a href="mailto:support@reviewqeem.com"><i class="fas fa-headset"></i> revwqeem@outlook.sa</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة © 2026 <strong>ReviewQeem</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-indicator a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight current section in navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.cookies-section');
+            const navLinks = document.querySelectorAll('.nav-indicator a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = '#' + section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                    link.style.background = 'var(--primary)';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = '';
+                    link.style.color = '';
+                }
+            });
+        });
+
+        // Simple cookie consent simulation (for demo purposes)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user has already made a choice
+            if (!localStorage.getItem('cookieConsent')) {
+                setTimeout(() => {
+                    showCookieConsent();
+                }, 2000);
+            }
+        });
+
+        function showCookieConsent() {
+            const consentDiv = document.createElement('div');
+            consentDiv.innerHTML = `
+                <div style="position: fixed; bottom: 20px; left: 20px; right: 20px; background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); z-index: 1000;">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">إعدادات ملفات تعريف الارتباط</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
+                        نستخدم ملفات تعريف الارتباط لتحسين تجربتك على موقعنا. يمكنك إدارة تفضيلاتك من خلال الإعدادات أدناه.
+                    </p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="acceptAllCookies()" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">قبول الكل</button>
+                        <button onclick="manageCookies()" style="background: transparent; color: var(--primary); border: 1px solid var(--primary); padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">إدارة التفضيلات</button>
+                        <button onclick="rejectCookies()" style="background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">رفض الكل</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(consentDiv);
+        }
+
+        function acceptAllCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.querySelector('div[style*="position: fixed; bottom: 20px"]').remove();
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            document.querySelector('div[style*="position: fixed; bottom: 20px"]').remove();
+        }
+
+        function manageCookies() {
+            alert('سيتم توجيهك إلى صفحة إدارة تفضيلات الكوكيز في الإصدار الكامل من الموقع.');
+        }
+    </script>
+</body>
+</html>

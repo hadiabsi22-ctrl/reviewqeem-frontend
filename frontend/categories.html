@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تصنيفات الألعاب - ريفيو قيم</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <style>
+    body { background:#0e0e12; color:#fff; }
+    .categories-container { max-width:1100px; margin:40px auto; padding:20px; }
+    .page-title { color:#4eaaff; margin-bottom:25px; font-size:2rem; }
+
+    .category-block {
+      margin-bottom:45px;
+      background:#16161d;
+      padding:20px;
+      border-radius:14px;
+      border:1px solid #1f1f27;
+    }
+
+    .category-title {
+      font-size:1.6rem;
+      color:#4eaaff;
+      margin-bottom:15px;
+    }
+
+    .games-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+      gap:20px;
+    }
+
+    .game-card {
+      background:#1a1a22;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid #1f1f27;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .game-card:hover { transform:translateY(-4px); }
+
+    .game-card img {
+      width:100%; height:150px; object-fit:cover;
+      border-radius:8px;
+    }
+
+    .game-card-title {
+      margin-top:10px;
+      color:#4eaaff;
+      font-size:1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="categories-container">
+
+    <h1 class="page-title">تصنيفات الألعاب</h1>
+
+    <!-- سيتم ملء التصنيفات بواسطة JS -->
+    <div id="categoriesList"></div>
+
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/categories.js"></script>
+
+</body>
+</html>
