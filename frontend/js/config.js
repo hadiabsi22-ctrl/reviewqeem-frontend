@@ -1,7 +1,8 @@
 // الإعدادات العامة
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:5000/api',
+    BASE_URL: "https://reviewqeem-backend.onrender.com/api",
     REVIEWS: '/reviews',
     GAMES: '/games'
 };
+
 
