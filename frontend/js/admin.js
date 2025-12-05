@@ -20,7 +20,8 @@ class AdminAuth {
     // تسجيل الدخول
     async login(email, password) {
         try {
-            const response = await fetch(`${API_BASE}/admin/auth/login`, {
+            const response = await fetch(`${API_CONFIG.BASE_URL}/admin/auth/login`, {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -212,3 +213,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("✅ Admin system loaded successfully");
+
