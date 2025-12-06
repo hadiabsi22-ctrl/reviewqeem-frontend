@@ -20,7 +20,8 @@ const emptyBox = document.getElementById("empty-box");
 // ============================================================
 async function loadAllReviews() {
     try {
-        const res = await fetch(`${API_BASE}/api/reviews/published`);
+        const res = await fetch(`${API_BASE}/reviews/published`);
+
         if (!res.ok) {
             throw new Error("فشل في جلب المراجعات من الخادم");
         }
@@ -142,4 +143,5 @@ function openReview(id) {
 // 📌 بدأ التشغيل
 // ============================================================
 document.addEventListener("DOMContentLoaded", loadAllReviews);
+
 
