@@ -3,7 +3,8 @@
    =============================================================== */
 
 // API Base URL
-const API_BASE = window.location.hostname === 'localhost'
+const API_BASE = "https://reviewqeem-backend.onrender.com/api";
+
     ? 'http://localhost:5000/api'
     : (window.location.origin + '/api');
 
@@ -214,5 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("✅ Admin system loaded successfully");
+
 
 
