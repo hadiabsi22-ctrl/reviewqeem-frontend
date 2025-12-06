@@ -4,3 +4,5 @@ const API_CONFIG = {
     GAMES: "/games",
     ADMIN_LOGIN: "/admin/auth/login"
 };
+
+// test
