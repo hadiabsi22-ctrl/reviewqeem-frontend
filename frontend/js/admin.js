@@ -1,12 +1,11 @@
 /* ===============================================================
-   admin.js - نظام الإدارة (الإصدار النهائي)
+   admin.js - نظام الإدارة (النسخة النهائية)
    =============================================================== */
 
-// API Base URL
+// =============================
+// إعداد عنوان API
+// =============================
 const API_BASE = "https://reviewqeem-backend.onrender.com/api";
-
-    ? 'http://localhost:5000/api'
-    : (window.location.origin + '/api');
 
 /* ===============================================================
    نظام المصادقة
@@ -22,15 +21,13 @@ class AdminAuth {
     async login(email, password) {
         try {
             const response = await fetch(
-    `${API_BASE}/admin/auth/login`,
-    {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-    }
-);
-
-
+                `${API_BASE}/admin/auth/login`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                }
+            );
 
             const data = await response.json();
 
@@ -49,11 +46,11 @@ class AdminAuth {
 
                 return { success: true, admin: data.admin };
             } else {
-                return { success: false, message: data.message || 'فشل تسجيل الدخول' };
+                return { success: false, message: data.message || "فشل تسجيل الدخول" };
             }
         } catch (error) {
             console.error("Login error:", error);
-            return { success: false, message: "خطأ بالاتصال" };
+            return { success: false, message: "خطأ بالاتصال بالسيرفر" };
         }
     }
 
@@ -71,10 +68,11 @@ class AdminAuth {
 
             this.currentUser = session.data;
             this.isAuthenticated = true;
+
             return { success: true, admin: session.data };
 
-        } catch (e) {
-            console.error("Session check error:", e);
+        } catch (err) {
+            console.error("Session check error:", err);
             return { success: false };
         }
     }
@@ -134,7 +132,7 @@ class AdminUI {
 const adminUI = new AdminUI();
 
 /* ===============================================================
-   أحداث الواجهة
+   التحكم بالواجهة
    =============================================================== */
 
 class AdminEvents {
@@ -198,6 +196,7 @@ class AdminApp {
         const events = new AdminEvents();
         events.init();
 
+        // إذا كنت داخل admin.html → تحقق الجلسة
         if (window.location.pathname.includes("admin.html")) {
             const check = await adminAuth.checkSession();
             if (check.success) {
@@ -215,7 +214,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("✅ Admin system loaded successfully");
-
-
-
-
