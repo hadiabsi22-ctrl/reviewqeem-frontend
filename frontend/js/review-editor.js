@@ -1,5 +1,6 @@
 // frontend/js/review-editor.js
-const API = window.API_BASE || "http://localhost:5000/api";
+const API = "https://reviewqeem-backend.onrender.com/api";
+
 
 /* ======================================================
    1) TinyMCE + رفع الصور إلى Firebase
@@ -98,3 +99,4 @@ document.getElementById("submit-review").addEventListener("click", async () => {
         alert("خطأ في الاتصال بالسيرفر");
     }
 });
+
