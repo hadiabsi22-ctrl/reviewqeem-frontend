@@ -2,7 +2,8 @@
 // قائمة المراجعات - متكامل مع API + متوافق مع review-view و review-management
 
 (function () {
-  const API_BASE = window.API_BASE || "http://localhost:5000/api";
+  const API_BASE = "https://reviewqeem-backend.onrender.com/api";
+
 
   // نخزن المراجعات هنا عشان تقدر تستخدمها صفحات ثانية
   window.allReviews = window.allReviews || [];
@@ -353,3 +354,4 @@
     fetchReviews();
   });
 })();
+
