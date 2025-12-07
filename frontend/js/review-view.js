@@ -2,7 +2,7 @@
 // قائمة المراجعات - متكامل مع API + متوافق مع review-view و review-management
 
 (function () {
-  const API_BASE = "https://reviewqeem-backend.onrender.com/api";
+  BASE_URL: "https://reviewqeem-backend-1.onrender.com/api",
 
 
   // نخزن المراجعات هنا عشان تقدر تستخدمها صفحات ثانية
@@ -354,4 +354,5 @@
     fetchReviews();
   });
 })();
+
 
