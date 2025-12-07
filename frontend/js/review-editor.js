@@ -1,7 +1,5 @@
 // frontend/js/review-editor.js
-BASE_URL: "https://reviewqeem-backend-1.onrender.com/api",
-
-
+const API = window.API_BASE || "http://localhost:5000/api";
 
 /* ======================================================
    1) TinyMCE + رفع الصور إلى Firebase
@@ -17,16 +15,29 @@ tinymce.init({
     language: "ar",
     content_style: "body { background:#222; color:#ddd; font-size:16px; }",
 
-    // رفع الصور داخل محتوى المراجعة إلى Firebase Storage
+    // رفع الصور داخل محتوى المراجعة إلى Upload Server
     images_upload_handler: async (blobInfo, success, failure) => {
         try {
             const file = blobInfo.blob();
-            const name = `reviews/${Date.now()}_${file.name}`;
-            const ref = storage.ref().child(name);
-
-            await ref.put(file);
-            const url = await ref.getDownloadURL();
-            success(url);
+            const filename = `${Date.now()}_${blobInfo.filename()}`;
+            
+            // إنشاء FormData
+            const formData = new FormData();
+            formData.append('file', file, filename);
+            
+            // رفع الملف لـ Upload Server
+            const response = await fetch('http://84.247.170.23:3001/upload', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success && result.url) {
+                success(result.url); // http://84.247.170.23/uploads/filename.jpg
+            } else {
+                failure(result.message || 'فشل رفع الصورة');
+            }
         } catch (err) {
             console.error(err);
             failure("فشل رفع الصورة");
@@ -100,5 +111,3 @@ document.getElementById("submit-review").addEventListener("click", async () => {
         alert("خطأ في الاتصال بالسيرفر");
     }
 });
-
-
