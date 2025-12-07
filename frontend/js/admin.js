@@ -1,13 +1,12 @@
 /* ===============================================================
-   admin.js - Final Version (FIXED FOR MASTER + NEW BACKEND)
+   admin.js - Original Full Version (Working)
    =============================================================== */
 
 const API_BASE = "https://reviewqeem-backend-1.onrender.com/api";
 
 /* ===============================================================
-   Auth System
+   AUTH SYSTEM
    =============================================================== */
-
 class AdminAuth {
     constructor() {
         this.currentUser = null;
@@ -20,200 +19,152 @@ class AdminAuth {
             const response = await fetch(`${API_BASE}/admin/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: "include", // مهم جدًا للكوكيز
                 body: JSON.stringify({ email, password })
             });
 
             const data = await response.json();
 
-            console.log("LOGIN RESPONSE:", data);
-
             if (response.ok && data.success) {
-                // السيرفر يرجّع user وليس admin
-                const user = data.user;
+                this.currentUser = data.admin;
 
-                this.currentUser = user;
-                this.isAuthenticated = true;
-
-                // حفظ الجلسة
+                // حفظ الجلسة 24 ساعة
                 localStorage.setItem(
                     "admin_session_reviewqeem",
                     JSON.stringify({
-                        data: user,
+                        data: data.admin,
+                        token: data.token,
                         expires: Date.now() + 24 * 60 * 60 * 1000
                     })
                 );
 
-                return { success: true, admin: user };
-            } else {
-                return { success: false, message: data.message || "فشل تسجيل الدخول" };
+                return { success: true };
             }
 
-        } catch (error) {
-            console.error("Login error:", error);
-            return { success: false, message: "خطأ بالاتصال بالسيرفر" };
+            return { success: false, message: data.message };
+
+        } catch (err) {
+            console.error("Login error:", err);
+            return { success: false, message: "خطأ في الاتصال بالسيرفر" };
         }
     }
 
     // التحقق من الجلسة
     async checkSession() {
-        try {
-            // 1) تحقق من وجود جلسة محليًا
-            const sessionRaw = localStorage.getItem("admin_session_reviewqeem");
-            if (!sessionRaw) return { success: false };
+        const raw = localStorage.getItem("admin_session_reviewqeem");
+        if (!raw) return { success: false };
 
-            const session = JSON.parse(sessionRaw);
-            if (!session.data || Date.now() > session.expires) {
-                localStorage.removeItem("admin_session_reviewqeem");
-                return { success: false };
-            }
+        const session = JSON.parse(raw);
 
-            // 2) تحقق من الجلسة عبر السيرفر
-            const verifyReq = await fetch(`${API_BASE}/admin/auth/verify`, {
-                method: "GET",
-                credentials: "include"
-            });
-
-            const verifyData = await verifyReq.json();
-
-            if (!verifyReq.ok || !verifyData.success) {
-                localStorage.removeItem("admin_session_reviewqeem");
-                return { success: false };
-            }
-
-            // السيرفر يرجّع user
-            this.currentUser = verifyData.user;
-            this.isAuthenticated = true;
-
-            return { success: true, admin: verifyData.user };
-
-        } catch (error) {
-            console.error("Session verify error:", error);
+        if (!session.data || Date.now() > session.expires) {
+            localStorage.removeItem("admin_session_reviewqeem");
             return { success: false };
         }
+
+        this.currentUser = session.data;
+        this.isAuthenticated = true;
+
+        return { success: true, admin: session.data };
     }
 
-    // تسجيل الخروج
     logout() {
         localStorage.removeItem("admin_session_reviewqeem");
-        fetch(`${API_BASE}/admin/auth/logout`, { method: "POST", credentials: "include" });
         this.currentUser = null;
         this.isAuthenticated = false;
         window.location.href = "admin-login.html";
     }
 
-    getCurrentUser() {
+    getUser() {
         return this.currentUser;
-    }
-
-    isLoggedIn() {
-        return this.isAuthenticated;
     }
 }
 
 const adminAuth = new AdminAuth();
 
 /* ===============================================================
-   UI Handling
+   UI SYSTEM
    =============================================================== */
-
 class AdminUI {
-    showLoginPage() {
-        window.location.href = "admin-login.html";
-    }
-
-    showDashboard() {
-        const main = document.querySelector(".main-content");
-        const sidebar = document.querySelector(".sidebar");
-
-        if (main) main.style.display = "block";
-        if (sidebar) sidebar.style.display = "block";
-
-        this.updateUserInfo();
-    }
-
-    updateUserInfo() {
-        const admin = adminAuth.getCurrentUser();
+    updateAdminEmail() {
         const el = document.getElementById("adminEmail");
-
-        if (el && admin) {
-            el.textContent = admin.email;
+        if (el && adminAuth.currentUser) {
+            el.textContent = adminAuth.currentUser.email;
         }
     }
 
-    showMessage(msg, type = "info") {
-        alert(msg);
-    }
-}
-
-const adminUI = new AdminUI();
-
-/* ===============================================================
-   Event System
-   =============================================================== */
-
-class AdminEvents {
-    init() {
-        const form = document.getElementById("admin-login-form");
-        if (form) form.addEventListener("submit", this.handleLogin.bind(this));
-
-        const logoutBtn = document.getElementById("logoutBtn");
-        if (logoutBtn) logoutBtn.addEventListener("click", this.handleLogout.bind(this));
-
-        const togglePass = document.getElementById("togglePassword");
-        if (togglePass) togglePass.addEventListener("click", this.togglePasswordVisibility);
-    }
-
-    async handleLogin(e) {
-        e.preventDefault();
-
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-
-        const result = await adminAuth.login(email, password);
-
-        if (result.success) {
-            this.showStatus("تم تسجيل الدخول بنجاح ✔", "success");
-            setTimeout(() => window.location.href = "admin.html", 800);
-        } else {
-            this.showStatus(result.message, "error");
-        }
-    }
-
-    handleLogout() {
-        adminAuth.logout();
-    }
-
-    togglePasswordVisibility() {
-        const pass = document.getElementById("password");
-        pass.type = pass.type === "password" ? "text" : "password";
-    }
-
-    showStatus(msg, type) {
+    showStatus(msg, type = "info") {
         const box = document.getElementById("status");
+        if (!box) return;
+
         box.textContent = msg;
         box.className = `status status-${type}`;
         box.style.display = "block";
     }
 }
 
-/* ===============================================================
-   Application Start
-   =============================================================== */
+const adminUI = new AdminUI();
 
+/* ===============================================================
+   EVENTS SYSTEM
+   =============================================================== */
+class AdminEvents {
+    init() {
+        const loginForm = document.getElementById("admin-login-form");
+        if (loginForm) {
+            loginForm.addEventListener("submit", this.handleLogin.bind(this));
+        }
+
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", adminAuth.logout);
+        }
+
+        const togglePass = document.getElementById("togglePassword");
+        if (togglePass) {
+            togglePass.addEventListener("click", () => {
+                const pass = document.getElementById("password");
+                pass.type = pass.type === "password" ? "text" : "password";
+            });
+        }
+    }
+
+    async handleLogin(e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const pass = document.getElementById("password").value.trim();
+
+        const result = await adminAuth.login(email, pass);
+
+        if (result.success) {
+            adminUI.showStatus("تم تسجيل الدخول بنجاح ✔", "success");
+
+            setTimeout(() => {
+                window.location.href = "admin.html";
+            }, 700);
+        } else {
+            adminUI.showStatus(result.message, "error");
+        }
+    }
+}
+
+/* ===============================================================
+   MAIN APP
+   =============================================================== */
 class AdminApp {
     async init() {
         const events = new AdminEvents();
         events.init();
 
-        // إذا كنا داخل admin.html → تحقق الجلسة
+        // إذا كان داخل admin.html
         if (window.location.pathname.includes("admin.html")) {
             const session = await adminAuth.checkSession();
-            if (session.success) {
-                adminUI.showDashboard();
-            } else {
-                adminUI.showLoginPage();
+
+            if (!session.success) {
+                window.location.href = "admin-login.html";
+                return;
             }
+
+            adminUI.updateAdminEmail();
         }
     }
 }
@@ -221,5 +172,3 @@ class AdminApp {
 document.addEventListener("DOMContentLoaded", () => {
     new AdminApp().init();
 });
-
-console.log("✅ Admin system patched and running correctly");
