@@ -5,7 +5,8 @@
 // =============================
 // إعداد عنوان API
 // =============================
-const API_BASE = "https://reviewqeem-backend.onrender.com/api";
+BASE_URL: "https://reviewqeem-backend-1.onrender.com/api",
+
 
 /* ===============================================================
    نظام المصادقة
@@ -214,3 +215,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("✅ Admin system loaded successfully");
+
