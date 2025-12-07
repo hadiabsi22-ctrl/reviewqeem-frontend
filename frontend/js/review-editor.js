@@ -1,5 +1,6 @@
 // frontend/js/review-editor.js
-const API = "https://reviewqeem-backend.onrender.com/api";
+BASE_URL: "https://reviewqeem-backend-1.onrender.com/api",
+
 
 
 /* ======================================================
@@ -99,4 +100,5 @@ document.getElementById("submit-review").addEventListener("click", async () => {
         alert("خطأ في الاتصال بالسيرفر");
     }
 });
+
 
