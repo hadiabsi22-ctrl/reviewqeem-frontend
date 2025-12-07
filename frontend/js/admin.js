@@ -3,10 +3,9 @@
    =============================================================== */
 
 // =============================
-// إعداد عنوان API
+// إعداد عنوان API الصحيح
 // =============================
-BASE_URL: "https://reviewqeem-backend-1.onrender.com/api",
-
+const API_BASE = "https://reviewqeem-backend-1.onrender.com/api";
 
 /* ===============================================================
    نظام المصادقة
@@ -41,7 +40,7 @@ class AdminAuth {
                     "admin_session_reviewqeem",
                     JSON.stringify({
                         data: data.admin,
-                        expires: Date.now() + (24 * 60 * 60 * 1000)
+                        expires: Date.now() + (24 * 60 * 60 * 1000)  // يوم كامل
                     })
                 );
 
@@ -62,6 +61,7 @@ class AdminAuth {
             if (!sessionRaw) return { success: false };
 
             const session = JSON.parse(sessionRaw);
+
             if (!session.data || Date.now() > session.expires) {
                 localStorage.removeItem("admin_session_reviewqeem");
                 return { success: false };
@@ -197,7 +197,7 @@ class AdminApp {
         const events = new AdminEvents();
         events.init();
 
-        // إذا كنت داخل admin.html → تحقق الجلسة
+        // إذا كنت داخل لوحة التحكم → تحقق الجلسة
         if (window.location.pathname.includes("admin.html")) {
             const check = await adminAuth.checkSession();
             if (check.success) {
@@ -215,4 +215,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("✅ Admin system loaded successfully");
-
