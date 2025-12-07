@@ -1063,7 +1063,8 @@
         // ==================== ADMIN AUTHENTICATION ====================
         async function checkAdminAuth() {
             try {
-                const response = await fetch('http://localhost:5000/api/admin/auth/verify', {
+                const response = await fetch('https://reviewqeem-backend-1.onrender.com/api/admin/auth/verify', {
+
                     method: 'GET',
                     credentials: 'include'
                 });
@@ -2077,4 +2078,5 @@
         console.log('✅ نظام الإحصائيات جاهز بالكامل');
     </script>
 </body>
+
 </html>
