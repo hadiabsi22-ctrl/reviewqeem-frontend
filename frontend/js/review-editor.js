@@ -1,5 +1,6 @@
 // frontend/js/review-editor.js
-const API = window.API_BASE || "http://localhost:5000/api";
+const API = "http://84.247.170.23:5000/api";
+
 
 /* ======================================================
    1) TinyMCE + رفع الصور إلى Firebase
@@ -111,3 +112,4 @@ document.getElementById("submit-review").addEventListener("click", async () => {
         alert("خطأ في الاتصال بالسيرفر");
     }
 });
+
