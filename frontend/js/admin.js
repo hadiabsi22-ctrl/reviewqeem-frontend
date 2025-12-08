@@ -8,7 +8,8 @@
 // =============================
 // إعداد عنوان الـ API
 // =============================
-const API_BASE = "https://reviewqeem-backend-1.onrender.com/api";
+const API_BASE = "http://84.247.170.23:5000/api";
+
 
 // اسم مسار صفحات لوحة التحكم
 const ADMIN_DASHBOARD_PAGE = "admin.html";
@@ -222,3 +223,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 console.log("✅ Admin JS (cookie-based) loaded");
+
