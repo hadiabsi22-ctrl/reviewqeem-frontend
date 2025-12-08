@@ -5,7 +5,8 @@
 
 console.log("📌 reviews-list.js Loaded");
 
-BASE_URL: "http://84.247.170.23:5000/api",
+const API_BASE = "http://84.247.170.23:5000/api";
+
 
 
  
@@ -145,6 +146,7 @@ function openReview(id) {
 // 📌 بدأ التشغيل
 // ============================================================
 document.addEventListener("DOMContentLoaded", loadAllReviews);
+
 
 
 
