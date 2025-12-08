@@ -5,7 +5,8 @@
 
 console.log("📌 reviews-list.js Loaded");
 
-const API_BASE = "http://84.247.170.23:5000/api";
+BASE_URL: "https://reviewqeem.online/api",
+
 
 
 
@@ -146,6 +147,7 @@ function openReview(id) {
 // 📌 بدأ التشغيل
 // ============================================================
 document.addEventListener("DOMContentLoaded", loadAllReviews);
+
 
 
 
