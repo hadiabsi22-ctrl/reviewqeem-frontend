@@ -1,5 +1,6 @@
 // frontend/js/review-editor.js
-const API = "http://84.247.170.23:5000/api";
+BASE_URL: "https://reviewqeem.online/api",
+
 
 
 /* ======================================================
@@ -112,4 +113,5 @@ document.getElementById("submit-review").addEventListener("click", async () => {
         alert("خطأ في الاتصال بالسيرفر");
     }
 });
+
 
