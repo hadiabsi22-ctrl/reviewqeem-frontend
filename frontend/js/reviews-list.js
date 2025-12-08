@@ -5,7 +5,8 @@
 
 console.log("📌 reviews-list.js Loaded");
 
-BASE_URL: "https://reviewqeem-backend-1.onrender.com/api",
+BASE_URL: "http://84.247.170.23:5000/api",
+
 
  
     ? 'http://localhost:5000' 
@@ -144,6 +145,7 @@ function openReview(id) {
 // 📌 بدأ التشغيل
 // ============================================================
 document.addEventListener("DOMContentLoaded", loadAllReviews);
+
 
 
 
