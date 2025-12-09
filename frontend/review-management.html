@@ -1497,7 +1497,8 @@
                 return;
             }
             
-            const fullUrl = url.startsWith('http') ? url : `https://reviewqeem-backend-1.onrender.com${url}`;
+            const fullUrl = url.startsWith('http') ? url : `${window.location.origin}${url}`;
+
 
             
             container.innerHTML = `
@@ -1516,7 +1517,8 @@
             if (!container) return;
             
             container.innerHTML = uploadedScreenshots.map((url, index) => {
-                const fullUrl = url.startsWith('http') ? url : `http://localhost:5000${url}`;
+                const fullUrl = url.startsWith('http') ? url : `${window.location.origin}${url}`;
+
                 return `
                     <div class="image-preview">
                         <img src="${fullUrl}" onerror="this.src='/uploads/images/default/default-game.jpg'">
@@ -1682,7 +1684,8 @@
         // ==================== إنشاء صف المراجعة ====================
         function createReviewRow(r) {
             const img = r.cover_image || getDefaultImage(r.title, r.genre);
-            const fullImgUrl = img.startsWith('http') ? img : `http://localhost:5000${img}`;
+            const fullUrl = url.startsWith('http') ? url : `${window.location.origin}${url}`;
+
             const statusClass = r.status === 'published' ? 'status-published' : 'status-draft';
             const statusText = r.status === 'published' ? 'منشور' : 'مسودة';
             const statusIcon = r.status === 'published' ? 'fa-check-circle' : 'fa-edit';
@@ -2033,6 +2036,7 @@
 </body>
 
 </html>
+
 
 
 
