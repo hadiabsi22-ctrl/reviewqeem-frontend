@@ -446,7 +446,7 @@
 
                 <ul class="nav-links" id="navLinks">
                     <li><a href="index.html">الرئيسية</a></li>
-                    <li><a href="reviews.html" class="active">المراجعات</a></li>
+                    <li><a href="reviews-list.html" class="active">المراجعات</a></li>
                     <li><a href="categories.html">التصنيفات</a></li>
                     <li><a href="search.html">البحث</a></li>
                     <li><a href="about.html">من نحن</a></li>
@@ -577,13 +577,10 @@
 
         async function loadReviews() {
             try {
-                const savedReviews = localStorage.getItem('gameReviews');
-                if (savedReviews) {
-                    const parsed = JSON.parse(savedReviews);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
-                        allReviews = parsed.filter(review => review.status !== 'draft');
-                    }
-                }
+                const response = await fetch("https://reviewqeem.online/api/reviews/published");
+const data = await response.json();
+allReviews = data.data || data.reviews || [];
+
 
                 if (allReviews.length === 0) {
                     allReviews = getSampleReviews();
@@ -721,9 +718,9 @@
             emptyState.style.display = 'none';
             
             reviewsGrid.innerHTML = reviews.map(review => {
-                const imageUrl = review.cover_image || getDefaultImage(review.title);
+                const imageUrl = review.coverImage || review.cover_image || getDefaultImage(review.title);
                 const summary = review.summary || 'لا يوجد وصف متوفر';
-                const reviewDate = new Date(review.review_date || review.release_date).toLocaleDateString('ar-EG');
+                const reviewDate = new Date(review.review_date || review.release_date || review.createdAt).toLocaleDateString('ar-EG');
                 
                 return `
                     <div class="review-card" onclick="viewReview('${review.id}')">
@@ -767,7 +764,8 @@
         }
 
         function viewReview(reviewId) {
-            window.location.href = `review-detail.html?id=${reviewId}`;
+           window.location.href = `review-view.html?id=${reviewId}`;
+
         }
 
         function updateURL(searchTerm) {
@@ -791,3 +789,4 @@
     </script>
 </body>
 </html>
+
