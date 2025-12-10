@@ -3,884 +3,1332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مراجعة لعبة - ReviewQeem</title>
+    <title>عرض المراجعة - ReviewQeem</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Almarai:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary: #6c5ce7; --primary-dark: #5b4cdb; --secondary: #00b894;
-            --accent: #fd79a8; --text: #fff; --text-light: #b0b7c3;
-            --dark: #0a0a0f; --darker: #050508; --card: #12121a;
-            --border: #1f2937; --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
-            --radius-lg: 16px; --radius-md: 12px; --font-head: 'Tajawal'; --font-body: 'Almarai';
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --dark-bg: #0d0d11;
+            --dark-light: #1a1a24;
+            --dark-lighter: #2a2a3a;
+            --text: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border: #3a3a4a;
+            --radius: 12px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); background: var(--darker); color: var(--text); line-height: 1.6; }
-        .container { max-width: 1320px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Header */
-        header {
-            position: fixed; top: 0; right: 0; left: 0;
-            background: rgba(10,10,15,0.95); backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border); z-index: 1000;
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
         }
-        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; }
-        .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
-        .logo-mark {
-            width: 48px; height: 48px; border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-head); font-weight: 800; color: white;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+
+        /* ==================== HEADER ==================== */
+        .site-header {
+            background: var(--dark-light);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
         .logo-text {
-            font-family: var(--font-head); font-size: 1.8rem; font-weight: 700;
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        /* Navigation - Dropdown Menu */
-        .nav-desktop { display: flex; gap: 32px; list-style: none; align-items: center; }
-        .nav-desktop a { color: var(--text-light); text-decoration: none; font-family: var(--font-head); font-weight: 500; padding: 8px 0; position: relative; transition: 0.3s; }
-        .nav-desktop a:hover, .nav-desktop a.active { color: white; }
-        .nav-desktop a::after { content: ''; position: absolute; bottom: 0; right: 0; width: 0; height: 2px; background: linear-gradient(135deg, #6c5ce7, #a29bfe); transition: 0.3s; }
-        .nav-desktop a:hover::after, .nav-desktop a.active::after { width: 100%; }
-        
-        .dropdown { position: relative; }
-        .dropdown-content {
-            position: absolute; top: 100%; right: 0; background: var(--card);
-            min-width: 200px; border-radius: var(--radius-md); padding: 12px 0;
-            box-shadow: var(--shadow-lg); border: 1px solid var(--border);
-            opacity: 0; visibility: hidden; transform: translateY(10px);
-            transition: 0.3s; z-index: 1001;
+
+        /* ===== القائمة المنسدلة ===== */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
         }
-        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-content a { display: block; padding: 10px 24px; color: var(--text-light); white-space: nowrap; }
-        .dropdown-content a:hover { background: rgba(108,92,231,0.1); color: white; }
-        
-        /* Mobile Menu */
-        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
-        .mobile-sidebar {
-            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
-            background: var(--card); z-index: 1002; transition: right 0.4s;
-            overflow-y: auto; padding: 20px; border-left: 1px solid var(--border);
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
         }
-        .mobile-sidebar.active { right: 0; }
-        .sidebar-nav { list-style: none; }
-        .sidebar-nav li { margin-bottom: 15px; }
-        .sidebar-nav a { color: var(--text-light); text-decoration: none; font-family: var(--font-head); font-size: 1.1rem; display: block; padding: 12px 16px; border-radius: 10px; transition: 0.3s; }
-        .sidebar-nav a:hover { background: rgba(108,92,231,0.1); color: white; padding-right: 24px; }
-        .sidebar-overlay { position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(0,0,0,0.7); z-index: 1001; opacity: 0; visibility: hidden; transition: 0.3s; }
-        .sidebar-overlay.active { opacity: 1; visibility: visible; }
-        
-        /* Breadcrumb */
-        .breadcrumb { margin: 100px 0 30px; padding: 20px; background: var(--card); border-radius: var(--radius-md); border: 1px solid var(--border); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .breadcrumb a { color: var(--text-light); text-decoration: none; font-family: var(--font-head); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
-        .breadcrumb a:hover { color: var(--primary); transform: translateY(-2px); }
-        
-        /* Review Hero */
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== BREADCRUMB ==================== */
+        .breadcrumb {
+            background: var(--dark-light);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* ==================== REVIEW HERO ==================== */
         .review-hero {
-            display: grid; grid-template-columns: 1fr 450px; gap: 40px;
-            background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(0,184,148,0.1));
-            border-radius: var(--radius-lg); padding: 40px; margin-bottom: 40px;
-            border: 1px solid var(--border); position: relative; overflow: hidden;
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
         }
-        .review-hero::before { content: ''; position: absolute; top: 0; right: 0; width: 100%; height: 100%; background: radial-gradient(circle at 70% 30%, rgba(108,92,231,0.05), transparent 50%); }
-        .review-title { font-family: var(--font-head); font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, #6c5ce7, #a29bfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .review-meta { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
-        .meta-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(255,255,255,0.05); border-radius: var(--radius-md); border: 1px solid var(--border); }
-        .review-image-container { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
-        .review-image { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .review-image:hover { transform: scale(1.05); }
-        
-        /* Rating */
-        .rating-section { display: flex; align-items: center; gap: 30px; background: var(--card); padding: 25px; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-bottom: 40px; }
-        .rating-number { font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, #6c5ce7, #a29bfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stars { display: flex; gap: 8px; font-size: 1.8rem; }
-        .stars i { color: #fbbf24; }
-        
-        /* Sections */
-        .content-section, .screenshots-section, .tags-section, .stats-section, .purchase-section { background: var(--card); padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-bottom: 40px; }
-        h2 { font-family: var(--font-head); font-size: 2rem; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; }
-        
-        /* Screenshots */
-        .screenshots-slider { display: flex; gap: 20px; overflow-x: auto; padding: 20px 10px; }
-        .screenshot-item { flex: 0 0 auto; width: 300px; height: 200px; border-radius: var(--radius-md); overflow: hidden; cursor: pointer; }
-        .screenshot-item img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Tags */
-        .tags-container { display: flex; flex-wrap: wrap; gap: 12px; }
-        .tag { background: linear-gradient(135deg, #6c5ce7, #a29bfe); color: white; padding: 10px 20px; border-radius: 25px; font-size: 0.95rem; font-weight: 600; }
-        
-        /* Stats */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .stat-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: var(--radius-md); text-align: center; }
-        .stat-value { font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; }
-        
-        /* Purchase */
-        .platforms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 25px; }
-        .platform-card { background: rgba(255,255,255,0.05); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 25px; text-align: center; }
-        .btn-buy { display: inline-block; background: linear-gradient(135deg, #6c5ce7, #a29bfe); color: white; text-decoration: none; padding: 14px 32px; border-radius: var(--radius-md); font-weight: 700; width: 100%; margin-top: 10px; }
-        
-        /* Related Reviews */
-        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin-top: 25px; }
-        .related-card { background: var(--card); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; text-decoration: none; color: var(--text); }
-        .related-image { width: 100%; height: 200px; object-fit: cover; }
-        
-        /* Comments */
-        .comments-section { background: var(--card); padding: 35px; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-bottom: 40px; }
-        .comment-form-section { background: rgba(255,255,255,0.05); padding: 30px; border-radius: var(--radius-lg); margin-bottom: 40px; border: 1px solid var(--border); }
-        .form-input, .form-textarea { width: 100%; padding: 14px 18px; background: var(--darker); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text); font-size: 1rem; }
-        .char-counter { text-align: left; color: var(--text-light); font-size: 0.9rem; margin-top: 8px; }
-        .char-counter.warning { color: #f59e0b; }
-        .char-counter.error { color: #ef4444; }
-        
-        /* Footer */
-        footer { background: #050508; border-top: 1px solid var(--border); padding: 50px 0 25px; margin-top: 60px; }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .review-hero { grid-template-columns: 1fr; }
-            .review-title { font-size: 2.2rem; }
-            .mobile-menu-btn { display: block; }
-            .nav-desktop { display: none; }
+
+        .review-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
+
+        .review-header {
+            padding: 25px;
+        }
+
+        .review-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .review-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        /* ==================== RATING SECTION ==================== */
+        .rating-section {
+            background: var(--dark-light);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .rating-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+            color: gold;
+        }
+
+        .rating-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* ==================== CONTENT SECTIONS ==================== */
+        .content-section {
+            background: var(--dark-light);
+            padding: 25px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .review-body {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .review-body p {
+            margin-bottom: 15px;
+        }
+
+        /* ==================== PROS & CONS ==================== */
+        .pros-cons-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .pros-box, .cons-box {
+            background: var(--dark-light);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .pros-list, .cons-list {
+            list-style: none;
+        }
+
+        .pros-list li, .cons-list li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pros-list li i {
+            color: var(--secondary);
+        }
+
+        .cons-list li i {
+            color: #ff6b6b;
+        }
+
+        /* ==================== PURCHASE SECTION ==================== */
+        .purchase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .purchase-card {
+            background: var(--dark-lighter);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .purchase-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .purchase-card h4 {
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .purchase-price {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .btn-buy {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .btn-buy:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-buy:disabled {
+            background: var(--border);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ==================== COMMENTS SECTION ==================== */
+        .comments-section {
+            margin-top: 40px;
+        }
+
+        .comment-form {
+            background: var(--dark-light);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--dark-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        .comments-list {
+            margin-top: 20px;
+        }
+
+        .comment-card {
+            background: var(--dark-light);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .comment-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .comment-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background: var(--dark-light);
+            padding: 30px 0 15px;
+            border-top: 2px solid var(--primary);
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ==================== LOADING & ERROR STATES ==================== */
+        .loading-state {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--text-secondary);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 768px) {
-            .rating-section { flex-direction: column; text-align: center; gap: 20px; }
-            .platforms-grid, .related-grid { grid-template-columns: 1fr; }
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--dark-light);
+                flex-direction: column;
+                gap: 0;
+                padding: 20px;
+                border-left: 2px solid var(--primary);
+                transition: right 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .pros-cons-section {
+                grid-template-columns: 1fr;
+            }
+
+            .review-title {
+                font-size: 1.5rem;
+            }
+
+            .review-image {
+                height: 200px;
+            }
+
+            .purchase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .rating-number {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Mobile Sidebar -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    <div class="mobile-sidebar" id="mobileSidebar">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border);">
-            <div class="logo">
-                <div class="logo-mark">RQ</div>
-                <div class="logo-text">ReviewQeem</div>
-            </div>
-            <button id="closeSidebar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <ul class="sidebar-nav">
-            <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
-            <li><a href="reviews-list.html"><i class="fas fa-list"></i> جميع المراجعات</a></li>
-            <li><a href="reviews-list.html?platform=ps5"><i class="fab fa-playstation"></i> PS5</a></li>
-            <li><a href="reviews-list.html?platform=xbox"><i class="fab fa-xbox"></i> Xbox</a></li>
-            <li><a href="reviews-list.html?platform=pc"><i class="fas fa-desktop"></i> PC</a></li>
-            <li><a href="reviews-list.html?platform=switch"><i class="fas fa-gamepad"></i> Switch</a></li>
-            <li><a href="about.html"><i class="fas fa-info-circle"></i> عن الموقع</a></li>
-            <li><a href="contact.html"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
-            <li><a href="admin.html" id="adminMobileLink" style="display:none"><i class="fas fa-cog"></i> لوحة التحكم</a></li>
-        </ul>
-    </div>
-
-    <!-- Header -->
-    <header>
+    <!-- الهيدر الموحد -->
+    <header class="site-header">
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
-                    <div class="logo-mark">RQ</div>
-                    <div class="logo-text">ReviewQeem</div>
+                    <div class="logo-icon">RQ</div>
+                    <div class="logo-text">ريفيو قيم</div>
                 </a>
 
-                <!-- Desktop Navigation -->
-                <nav>
-                    <ul class="nav-desktop">
-                        <li><a href="index.html">الرئيسية</a></li>
-                        <li class="dropdown">
-                            <a href="reviews-list.html" class="active">المراجعات <i class="fas fa-chevron-down"></i></a>
-                            <div class="dropdown-content">
-                                <a href="reviews-list.html"><i class="fas fa-list"></i> جميع المراجعات</a>
-                                <a href="reviews-list.html?platform=ps5"><i class="fab fa-playstation"></i> PS5</a>
-                                <a href="reviews-list.html?platform=xbox"><i class="fab fa-xbox"></i> Xbox</a>
-                                <a href="reviews-list.html?platform=pc"><i class="fas fa-desktop"></i> PC</a>
-                                <a href="reviews-list.html?platform=switch"><i class="fas fa-gamepad"></i> Switch</a>
-                                <a href="reviews-list.html?sort=latest"><i class="fas fa-fire"></i> الأحدث</a>
-                                <a href="reviews-list.html?sort=top"><i class="fas fa-star"></i> الأعلى تقييماً</a>
-                            </div>
-                        </li>
-                        <li><a href="about.html">عن الموقع</a></li>
-                        <li><a href="contact.html">اتصل بنا</a></li>
-                        <li><a href="admin.html" id="adminNavLink" style="display:none"><i class="fas fa-cog"></i> لوحة التحكم</a></li>
-                    </ul>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <button class="mobile-menu-btn" id="openSidebar">
+                <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
                 </button>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="reviews-list.html
+">المراجعات</a></li>
+                    <li><a href="categories.html">التصنيفات</a></li>
+                    <li><a href="search.html">البحث</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    <li><a href="privacy.html">الخصوصية</a></li>
+                    <li><a href="terms.html">الشروط</a></li>
+                    <li><a href="cookies.html">الكوكيز</a></li>
+                    <li><a href="admin.html" id="adminNavLink" style="display:none;">لوحة التحكم</a></li>
+
+                </ul>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container">
+    <!-- محتوى الصفحة -->
+    <div class="container">
+        <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-            <span>/</span>
-            <a href="reviews-list.html"><i class="fas fa-list"></i> المراجعات</a>
-            <span>/</span>
-            <span id="review-breadcrumb">جارٍ التحميل...</span>
+            <a href="index.html">
+                <i class="fas fa-home"></i>
+                الرئيسية
+            </a>
+            /
+            <a href="reviews.html">
+                المراجعات
+            </a>
+            /
+            <span id="breadcrumbTitle">جاري التحميل...</span>
         </div>
 
-        <!-- Loading -->
-        <div id="loading-state" style="text-align: center; padding: 80px 20px;">
-            <i class="fas fa-spinner fa-spin" style="font-size: 3.5rem; color: var(--primary); margin-bottom: 20px;"></i>
-            <h2>جاري تحميل المراجعة...</h2>
+        <!-- حالة التحميل -->
+        <div id="loadingState" class="loading-state">
+            <div class="spinner"></div>
+            <p style="color: var(--text-secondary); margin-top: 15px;">جاري تحميل المراجعة...</p>
         </div>
 
-        <!-- Error -->
-        <div id="error-state" style="display: none; text-align: center; padding: 80px 20px;">
-            <i class="fas fa-exclamation-triangle" style="font-size: 3.5rem; color: #ef4444; margin-bottom: 20px;"></i>
-            <h2>لم يتم العثور على المراجعة</h2>
-            <a href="reviews-list.html" style="background: var(--primary); color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block; margin-top: 20px;">
+        <!-- حالة الخطأ -->
+        <div id="errorState" class="error-state" style="display: none;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #ff6b6b; margin-bottom: 15px;"></i>
+            <h3 style="color: var(--text); margin-bottom: 10px;">لم يتم العثور على المراجعة</h3>
+            <p style="margin-bottom: 20px;">المراجعة التي تبحث عنها غير موجودة أو تم حذفها</p>
+            <a href="reviews.html" style="color: var(--primary); text-decoration: none;">
+                <i class="fas fa-arrow-left"></i>
                 العودة إلى جميع المراجعات
             </a>
         </div>
 
-        <!-- Review Content -->
-        <div id="review-content" style="display: none;">
-            <!-- Hero -->
+        <!-- محتوى المراجعة -->
+        <div id="reviewContent" style="display: none;">
+            <!-- صورة وعنوان المراجعة -->
             <div class="review-hero">
-                <div class="review-content">
-                    <h1 class="review-title" id="review-title">...</h1>
+                <img id="reviewImage" class="review-image" src="" alt="صورة الغلاف">
+                <div class="review-header">
+                    <h1 class="review-title" id="reviewTitle"></h1>
                     <div class="review-meta">
                         <div class="meta-item">
                             <i class="fas fa-user-tie"></i>
-                            <span id="review-developer">...</span>
+                            <span id="reviewDeveloper"></span>
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-tag"></i>
-                            <span id="review-genre">...</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span id="review-date">...</span>
+                            <span id="reviewGenre"></span>
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-gamepad"></i>
-                            <span id="review-platform">...</span>
+                            <span id="reviewPlatform"></span>
                         </div>
-                    </div>
-                    <div class="rating-section">
-                        <div>
-                            <div class="rating-number" id="review-rating">0.0</div>
-                            <div>من 10</div>
-                        </div>
-                        <div class="stars" id="review-stars"></div>
-                        <div style="background: rgba(253,203,110,0.1); padding: 15px 25px; border-radius: 12px;">
-                            <div style="font-size: 1.4rem; font-weight: 700; color: #f59e0b;" id="rating-description">...</div>
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span id="reviewDate"></span>
                         </div>
                     </div>
                 </div>
-                <div class="review-image-container">
-                    <img id="review-image" class="review-image" src="" alt="صورة الغلاف">
+            </div>
+
+            <!-- التقييم -->
+            <div class="rating-section">
+                <div class="rating-number" id="reviewRating">0.0</div>
+                <div class="stars" id="reviewStars"></div>
+                <div class="rating-description" id="ratingDescription"></div>
+            </div>
+
+            <!-- الملخص -->
+            <div class="content-section" id="summarySection">
+                <h2 class="section-title">
+                    <i class="fas fa-align-left"></i>
+                    ملخص المراجعة
+                </h2>
+                <div class="review-body" id="reviewSummary"></div>
+            </div>
+
+            <!-- الإيجابيات والسلبيات -->
+            <div class="pros-cons-section" id="prosConsSection" style="display: none;">
+                <div class="pros-box">
+                    <h2 class="section-title">
+                        <i class="fas fa-plus-circle"></i>
+                        الإيجابيات
+                    </h2>
+                    <ul id="prosList" class="pros-list"></ul>
+                </div>
+                <div class="cons-box">
+                    <h2 class="section-title">
+                        <i class="fas fa-minus-circle"></i>
+                        السلبيات
+                    </h2>
+                    <ul id="consList" class="cons-list"></ul>
                 </div>
             </div>
 
-            <!-- Summary -->
-            <div class="content-section">
-                <h2><i class="fas fa-file-alt"></i> الملخص</h2>
-                <p id="review-summary">...</p>
+            <!-- المحتوى الكامل -->
+            <div class="content-section" id="fullContentSection">
+                <h2 class="section-title">
+                    <i class="fas fa-file-alt"></i>
+                    المراجعة الكاملة
+                </h2>
+                <div class="review-body" id="fullContent"></div>
             </div>
 
-            <!-- Full Content -->
-            <div id="full-content" class="content-section" style="display: none;">
-                <h2><i class="fas fa-newspaper"></i> المراجعة الكاملة</h2>
-                <div id="review-content-text" style="line-height: 1.8; color: var(--text-light);"></div>
+            <!-- خيارات الشراء -->
+            <div class="content-section" id="purchaseSection" style="display: none;">
+                <h2 class="section-title">
+                    <i class="fas fa-shopping-cart"></i>
+                    شراء اللعبة
+                </h2>
+                <div class="purchase-grid" id="purchaseGrid"></div>
             </div>
 
-            <!-- Screenshots -->
-            <div id="screenshots-section" class="screenshots-section" style="display: none;">
-                <h2><i class="fas fa-images"></i> لقطات الشاشة</h2>
-                <div id="screenshots-slider" class="screenshots-slider"></div>
-            </div>
+            <!-- التعليقات -->
+            <div class="comments-section" id="commentsSection">
+                <h2 class="section-title">
+                    <i class="fas fa-comments"></i>
+                    التعليقات (<span id="commentsCount">0</span>)
+                </h2>
 
-            <!-- Tags -->
-            <div id="tags-section" class="tags-section" style="display: none;">
-                <h2><i class="fas fa-tags"></i> الوسوم</h2>
-                <div id="tags-container" class="tags-container"></div>
-            </div>
-
-            <!-- Stats -->
-            <div id="stats-section" class="stats-section" style="display: none;">
-                <h2><i class="fas fa-chart-line"></i> الإحصائيات</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-eye"></i>
-                        <div class="stat-value" id="views-count">0</div>
-                        <div>مشاهدة</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-heart"></i>
-                        <div class="stat-value" id="likes-count">0</div>
-                        <div>إعجاب</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-comments"></i>
-                        <div class="stat-value" id="comments-count">0</div>
-                        <div>تعليق</div>
-                    </div>
+                <!-- نموذج إضافة تعليق -->
+                <div class="comment-form">
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <label for="commentAuthor">اسمك (اختياري)</label>
+                            <input type="text" id="commentAuthor" class="form-control" placeholder="يمكنك تركها فارغة">
+                        </div>
+                        <div class="form-group">
+                            <label for="commentContent">تعليقك *</label>
+                            <textarea id="commentContent" class="form-control" placeholder="اكتب تعليقك هنا..." required maxlength="500"></textarea>
+                            <div style="text-align: left; margin-top: 5px; color: var(--text-secondary); font-size: 0.9rem;">
+                                <span id="charCount">500</span> حرف متبقي
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i>
+                            إرسال التعليق
+                        </button>
+                        <p style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i>
+                            التعليقات تحتاج موافقة المدير قبل الظهور
+                        </p>
+                    </form>
                 </div>
-            </div>
 
-            <!-- Purchase -->
-            <div id="purchase-section" class="purchase-section" style="display: none;">
-                <h2><i class="fas fa-shopping-cart"></i> شراء اللعبة</h2>
-                <div id="platforms-grid" class="platforms-grid"></div>
-            </div>
-
-            <!-- Related Reviews -->
-            <div id="related-section" class="content-section" style="display: none;">
-                <h2><i class="fas fa-gamepad"></i> مراجعات مشابهة</h2>
-                <div id="related-grid" class="related-grid"></div>
-            </div>
-
-            <!-- Comments Form -->
-            <div class="comment-form-section">
-                <h2><i class="fas fa-comment-medical"></i> أضف تعليقك</h2>
-                <form id="comment-form">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                        <div>
-                            <label style="display: block; margin-bottom: 8px; color: var(--text-light);">اسمك (اختياري)</label>
-                            <input type="text" id="comment-author" class="form-input" placeholder="يمكنك تركها فارغة" maxlength="50">
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 8px; color: var(--text-light);">بريدك الإلكتروني (اختياري)</label>
-                            <input type="email" id="comment-email" class="form-input" placeholder="لن يتم نشر بريدك">
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; color: var(--text-light);">تعليقك (500 حرف كحد أقصى)</label>
-                        <textarea id="comment-text" class="form-textarea" placeholder="اكتب تعليقك هنا..." rows="4" required maxlength="500"></textarea>
-                        <div id="char-counter" class="char-counter">
-                            <span id="chars-remaining">500</span> حرف متبقي
-                        </div>
-                    </div>
-                    <button type="submit" style="background: var(--primary); color: white; padding: 14px 32px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer;">
-                        <i class="fas fa-paper-plane"></i> إرسال التعليق
-                    </button>
-                </form>
-            </div>
-
-            <!-- Comments -->
-            <div class="comments-section">
-                <h2><i class="fas fa-comments"></i> التعليقات (<span id="comments-total-count">0</span>)</h2>
-                <div id="comments-list" style="margin-top: 30px;"></div>
-                <div id="no-comments" style="display: none; text-align: center; padding: 60px 20px;">
-                    <i class="far fa-comment-dots" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-                    <h3>لا توجد تعليقات بعد</h3>
-                    <p>كن أول من يعلق على هذه المراجعة!</p>
+                <!-- قائمة التعليقات -->
+                <div id="commentsList" class="comments-list"></div>
+                <div id="noComments" class="error-state" style="display: none;">
+                    <i class="far fa-comment-dots" style="font-size: 2rem; color: var(--text-secondary); margin-bottom: 15px;"></i>
+                    <p>لا توجد تعليقات بعد. كن أول من يعلق!</p>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container" style="text-align: center;">
-            <div class="logo-text" style="font-size: 2rem; margin-bottom: 20px;">ReviewQeem</div>
-            <p style="color: var(--text-light); margin-bottom: 20px;">المنصة العربية الأولى لمراجعات الألعاب</p>
-            <div style="color: var(--text-light); font-size: 0.9rem;">© 2024 ReviewQeem — جميع الحقوق محفوظة</div>
+    <!-- الفوتر الموحد -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن ReviewQeem</h3>
+                    <p>منصة عربية متخصصة في مراجعات وتقييمات الألعاب.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>روابط مهمة</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> الخصوصية</a></li>
+                        <li><a href="terms.html"><i class="fas fa-file-contract"></i> الشروط</a></li>
+                        <li><a href="cookies.html"><i class="fas fa-cookie-bite"></i> الكوكيز</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@reviewqeem.com"><i class="fas fa-envelope"></i> البريد</a></li>
+                        <li><a href="contact.html"><i class="fas fa-headset"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 ريفيو قيم. جميع الحقوق محفوظة</p>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Config
+        // ===== إدارة القائمة المنسدلة =====
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // إغلاق القائمة عند تغيير حجم النافذة
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // ===== إعدادات عامة =====
         const API_BASE = "https://reviewqeem.online/api";
-        const DEFAULT_IMAGE = "https://reviewqeem.online/uploads/images/default-review.jpg";
-        
-        // Globals
         let currentReview = null;
-        let allReviews = [];
-        let currentReviewComments = [];
-        
-        // Init
-        document.addEventListener('DOMContentLoaded', function() {
+
+        // ===== تحميل المراجعة =====
+        document.addEventListener('DOMContentLoaded', async () => {
+            // إعداد عداد الأحرف
+            setupCharCounter();
+            
+            // التحقق من حالة الأدمن
+            checkAdminStatus();
+            
+            // جلب ID المراجعة
             const urlParams = new URLSearchParams(window.location.search);
             const reviewId = urlParams.get('id');
-        
+            
             if (!reviewId) {
                 showError();
                 return;
             }
-        
-            setupMobileMenu();
-            setupCommentForm();
-            loadReviewData(reviewId);
-            checkAdmin();
+            
+            await loadReview(reviewId);
         });
-        
-        // Mobile Menu Setup
-        function setupMobileMenu() {
-            const openBtn = document.getElementById('openSidebar');
-            const closeBtn = document.getElementById('closeSidebar');
-            const sidebar = document.getElementById('mobileSidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            
-            openBtn?.addEventListener('click', () => {
-                sidebar.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            closeBtn?.addEventListener('click', closeMenu);
-            overlay?.addEventListener('click', closeMenu);
-            
-            function closeMenu() {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-            
-            // Close on ESC
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeMenu();
-            });
-        }
-        
-        // Admin Check
-        function checkAdmin() {
-            try {
-                const session = JSON.parse(localStorage.getItem('admin_session_reviewqeem'));
-                const isAdmin = session?.data && Date.now() < (session.expires || 0);
-                if (isAdmin) {
-                    document.getElementById('adminNavLink').style.display = 'inline-block';
-                    document.getElementById('adminMobileLink').style.display = 'block';
-                }
-            } catch (e) {}
-        }
-        
-        // Setup Comment Form
-        function setupCommentForm() {
-            const commentText = document.getElementById('comment-text');
-            const charCounter = document.getElementById('char-counter');
-            const charsRemaining = document.getElementById('chars-remaining');
-        
-            commentText.addEventListener('input', function() {
-                const remaining = 500 - this.value.length;
-                charsRemaining.textContent = remaining;
-                charCounter.classList.toggle('warning', remaining <= 50 && remaining > 0);
-                charCounter.classList.toggle('error', remaining <= 0);
-            });
-        
-            document.getElementById('comment-form').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                await submitComment();
-            });
-        }
-        
-        // Load Review Data
-        async function loadReviewData(reviewId) {
+
+        async function loadReview(reviewId) {
             try {
                 const response = await fetch(`${API_BASE}/reviews/${reviewId}`);
                 const data = await response.json();
-        
-                if (!data.success || !data.review) throw new Error('لم يتم العثور على المراجعة');
-        
-                currentReview = data.review;
-                await loadAllReviews();
-                await loadComments(reviewId);
-                hideLoading();
-                displayReview();
-        
+                
+                if (data.success && data.review) {
+                    currentReview = data.review;
+                    displayReview();
+                    await loadComments(reviewId);
+                } else {
+                    throw new Error('لم يتم العثور على المراجعة');
+                }
             } catch (error) {
-                console.error('خطأ في تحميل البيانات:', error);
+                console.error('❌ خطأ في تحميل المراجعة:', error);
                 showError();
             }
         }
-        
-        // Load All Reviews
-        async function loadAllReviews() {
-            try {
-                const response = await fetch(`${API_BASE}/reviews`);
-                const data = await response.json();
-                if (data.success && Array.isArray(data.reviews || data.data)) {
-                    allReviews = data.reviews || data.data;
-                }
-            } catch (error) {
-                console.error('خطأ في تحميل جميع المراجعات:', error);
+
+        function displayReview() {
+            // إخفاء حالة التحميل وعرض المحتوى
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('reviewContent').style.display = 'block';
+            
+            // 🔧 الإصلاح: جميع الحقول مع التعامل الآمن
+            document.getElementById('breadcrumbTitle').textContent = currentReview.title;
+            document.getElementById('reviewTitle').textContent = currentReview.title;
+            document.getElementById('reviewDeveloper').textContent = currentReview.developer || 'غير معروف';
+            document.getElementById('reviewGenre').textContent = getGenreName(currentReview.genre);
+            document.getElementById('reviewDate').textContent = formatDate(currentReview.releaseDate || currentReview.createdAt);
+            
+            // 🔧 الإصلاح: المنصات - الحالة الصحيحة ✅
+            const platformText = Array.isArray(currentReview.platforms)
+                ? currentReview.platforms.join("، ")
+                : currentReview.platform || "غير محدد";
+            document.getElementById('reviewPlatform').textContent = platformText;
+            
+            // 🔧 الإصلاح: الصورة مع جميع الاحتمالات ✅
+            const cover = currentReview.coverImage 
+                || currentReview.cover_image 
+                || currentReview.image 
+                || "https://reviewqeem.online/uploads/images/default-game.jpg";
+            
+            const reviewImage = document.getElementById('reviewImage');
+            reviewImage.src = cover;
+            reviewImage.alt = currentReview.title;
+            
+            // إضافة fallback للصورة
+            reviewImage.onerror = function() {
+                this.src = "https://reviewqeem.online/uploads/images/default-game.jpg";
+            };
+            
+            // 🔧 الإصلاح: التقييم
+            const rating = currentReview.rating || 0;
+            document.getElementById('reviewRating').textContent = rating.toFixed(1);
+            
+            // النجوم
+            const starsContainer = document.getElementById('reviewStars');
+            const starCount = Math.round(rating / 2);
+            starsContainer.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('i');
+                star.className = i < starCount ? 'fas fa-star' : 'far fa-star';
+                starsContainer.appendChild(star);
+            }
+            
+            document.getElementById('ratingDescription').textContent = getRatingDescription(rating);
+            
+            // 🔧 الإصلاح: الملخص
+            const summary = currentReview.summary || 'لا يوجد ملخص متوفر';
+            document.getElementById('reviewSummary').textContent = summary;
+            
+            // 🔧 الإصلاح: المحتوى الكامل مع التعامل مع الأسطر ✅
+            const fullContent = document.getElementById('fullContent');
+            if (currentReview.content) {
+                const paragraphs = currentReview.content.split('\n').filter(p => p.trim());
+                fullContent.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+            } else {
+                fullContent.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">لا يوجد محتوى مفصل متوفر</p>';
+            }
+            
+            // 🔧 الإصلاح: الإيجابيات والسلبيات ✅
+            const prosList = document.getElementById('prosList');
+            const consList = document.getElementById('consList');
+            
+            let hasProsOrCons = false;
+            
+            // تنظيف القوائم أولاً
+            prosList.innerHTML = '';
+            consList.innerHTML = '';
+            
+            if (Array.isArray(currentReview.pros) && currentReview.pros.length > 0) {
+                currentReview.pros.forEach(pro => {
+                    if (pro && pro.trim()) {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<i class="fas fa-check"></i> ${pro}`;
+                        prosList.appendChild(li);
+                        hasProsOrCons = true;
+                    }
+                });
+            }
+            
+            if (Array.isArray(currentReview.cons) && currentReview.cons.length > 0) {
+                currentReview.cons.forEach(con => {
+                    if (con && con.trim()) {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<i class="fas fa-times"></i> ${con}`;
+                        consList.appendChild(li);
+                        hasProsOrCons = true;
+                    }
+                });
+            }
+            
+            // 🔧 الإصلاح: إظهار قسم الإيجابيات والسلبيات إذا كان هناك بيانات
+            if (hasProsOrCons) {
+                document.getElementById('prosConsSection').style.display = 'grid';
+            }
+            
+            // 🔧 الإصلاح: خيارات الشراء ✅
+            const purchaseGrid = document.getElementById('purchaseGrid');
+            purchaseGrid.innerHTML = '';
+            
+            let hasPurchaseOptions = false;
+            
+            // الحالة 1: platforms كـ array (الصيغة الجديدة)
+            if (Array.isArray(currentReview.platforms) && currentReview.platforms.length > 0) {
+                currentReview.platforms.forEach(platform => {
+                    if (platform && typeof platform === 'object') {
+                        // إذا كان platform كـ object (مثل: {name: "PS5", price: "299", url: "..."})
+                        const platformName = platform.name || platform;
+                        const platformPrice = platform.price;
+                        const platformUrl = platform.url;
+                        
+                        if (platformUrl) {
+                            const card = document.createElement('div');
+                            card.className = 'purchase-card';
+                            card.innerHTML = `
+                                <h4>${platformName}</h4>
+                                ${platformPrice ? `<div class="purchase-price">${platformPrice} ريال</div>` : ''}
+                                <a href="${platformUrl}" target="_blank" class="btn-buy">
+                                    <i class="fas fa-shopping-cart"></i> شراء الآن
+                                </a>
+                            `;
+                            purchaseGrid.appendChild(card);
+                            hasPurchaseOptions = true;
+                        }
+                    } else if (platform && typeof platform === 'string') {
+                        // إذا كان platform كـ string فقط (مثل: "PS5")
+                        const card = document.createElement('div');
+                        card.className = 'purchase-card';
+                        card.innerHTML = `
+                            <h4>${platform}</h4>
+                            <button class="btn-buy" onclick="showPlatformAlert('${platform}')">
+                                <i class="fas fa-search"></i> بحث عن سعر
+                            </button>
+                        `;
+                        purchaseGrid.appendChild(card);
+                        hasPurchaseOptions = true;
+                    }
+                });
+            }
+            // الحالة 2: purchaseLinks كـ object (الصيغة القديمة)
+            else if (currentReview.purchaseLinks && Object.keys(currentReview.purchaseLinks).length > 0) {
+                Object.entries(currentReview.purchaseLinks).forEach(([platformName, data]) => {
+                    if (data && data.url && data.enabled !== false) {
+                        const card = document.createElement('div');
+                        card.className = 'purchase-card';
+                        card.innerHTML = `
+                            <h4>${platformName}</h4>
+                            ${data.price ? `<div class="purchase-price">${data.price} ريال</div>` : ''}
+                            <a href="${data.url}" target="_blank" class="btn-buy">
+                                <i class="fas fa-shopping-cart"></i> شراء الآن
+                            </a>
+                        `;
+                        purchaseGrid.appendChild(card);
+                        hasPurchaseOptions = true;
+                    }
+                });
+            }
+            
+            // إظهار/إخفاء قسم الشراء
+            if (hasPurchaseOptions) {
+                document.getElementById('purchaseSection').style.display = 'block';
             }
         }
-        
-        // Load Comments
+
+        // ===== نظام التعليقات =====
         async function loadComments(reviewId) {
             try {
                 const response = await fetch(`${API_BASE}/comments/${reviewId}`);
                 const data = await response.json();
-        
+                
                 if (data.success && Array.isArray(data.comments)) {
-                    currentReviewComments = data.comments;
-                    updateCommentsCount();
-                    displayComments(currentReviewComments.filter(c => c.status === 'approved'));
+                    displayComments(data.comments);
+                } else {
+                    displayComments([]);
                 }
             } catch (error) {
-                console.error('خطأ في تحميل التعليقات:', error);
+                console.error('❌ خطأ في تحميل التعليقات:', error);
+                displayComments([]);
             }
         }
-        
-        // Display Review
-        function displayReview() {
-            // Basic info
-            document.getElementById('review-breadcrumb').textContent = currentReview.title;
-            document.getElementById('review-title').textContent = currentReview.title;
-            document.getElementById('review-developer').textContent = currentReview.developer || 'غير معروف';
-            
-            // ✅ FIXED: getGenreName handles both string and array
-            document.getElementById('review-genre').textContent = getGenreName(currentReview.genre);
-            
-            document.getElementById('review-date').textContent = formatDate(currentReview.releaseDate || currentReview.reviewDate);
-            document.getElementById('review-platform').textContent = getPlatformNames(currentReview.platforms);
-            
-            // ✅ FIXED: Typo correction
-            document.getElementById('review-summary').textContent = currentReview.summary || 'لا يوجد ملخص متوفر';
-        
-            // ✅ FIXED: Image with safe fallback
-            const reviewImage = document.getElementById('review-image');
-            reviewImage.onerror = function() {
-                if (this.src !== DEFAULT_IMAGE) {
-                    this.src = DEFAULT_IMAGE;
-                }
-            };
-            reviewImage.src = currentReview.cover_image || currentReview.coverImage || DEFAULT_IMAGE;
-            reviewImage.alt = `غلاف ${currentReview.title}`;
-        
-            // Rating
-            const rating = currentReview.rating || 0;
-            document.getElementById('review-rating').textContent = rating.toFixed(1);
-            const starCount = Math.round(rating / 2);
-            const starsContainer = document.getElementById('review-stars');
-            starsContainer.innerHTML = '';
-            for (let i = 1; i <= 5; i++) {
-                const star = document.createElement('i');
-                star.className = i <= starCount ? 'fas fa-star' : 'far fa-star';
-                starsContainer.appendChild(star);
-            }
-            document.getElementById('rating-description').textContent = getRatingDescription(rating);
-        
-            // Other sections
-            displayFullContent();
-            displayScreenshots();
-            displayTags();
-            displayStats();
-            displayPurchaseOptions();
-            displayRelatedReviews();
-        
-            // Show content
-            document.getElementById('review-content').style.display = 'block';
-        }
-        
-        // Display Full Content
-        function displayFullContent() {
-            const contentContainer = document.getElementById('review-content-text');
-        
-            if (currentReview.content) {
-                const paragraphs = currentReview.content.split('\n');
-                contentContainer.innerHTML = '';
-                paragraphs.forEach(paragraph => {
-                    if (paragraph.trim()) {
-                        const p = document.createElement('p');
-                        p.textContent = paragraph;
-                        contentContainer.appendChild(p);
-                    }
-                });
-                document.getElementById('full-content').style.display = 'block';
-            }
-        }
-        
-        // Display Screenshots
-        function displayScreenshots() {
-            const screenshotsSlider = document.getElementById('screenshots-slider');
-            const screenshots = currentReview.screenshots || [];
-        
-            if (screenshots.length > 0) {
-                screenshotsSlider.innerHTML = '';
-                screenshots.forEach((screenshot) => {
-                    const item = document.createElement('div');
-                    item.className = 'screenshot-item';
-                    const img = document.createElement('img');
-                    img.onerror = () => img.src = 'https://placehold.co/300x200/1a1a24/6c5ce7?text=Screenshot';
-                    img.src = screenshot;
-                    item.appendChild(img);
-                    screenshotsSlider.appendChild(item);
-                });
-                document.getElementById('screenshots-section').style.display = 'block';
-            }
-        }
-        
-        // Display Tags
-        function displayTags() {
-            const tagsContainer = document.getElementById('tags-container');
-            let tags = currentReview.tags || [];
-        
-            if ((!tags || tags.length === 0) && currentReview.genre) {
-                tags = Array.isArray(currentReview.genre) 
-                    ? [...currentReview.genre]
-                    : currentReview.genre.split(',').map(g => g.trim());
-            }
-        
-            if (tags.length > 0) {
-                tagsContainer.innerHTML = '';
-                tags.forEach(tag => {
-                    const tagElement = document.createElement('div');
-                    tagElement.className = 'tag';
-                    tagElement.textContent = tag;
-                    tagsContainer.appendChild(tagElement);
-                });
-                document.getElementById('tags-section').style.display = 'block';
-            }
-        }
-        
-        // Display Stats
-        function displayStats() {
-            const views = currentReview.views || 0;
-            const likes = currentReview.likes || 0;
-            const approvedComments = currentReviewComments.filter(c => c.status === 'approved');
-        
-            document.getElementById('views-count').textContent = formatNumber(views);
-            document.getElementById('likes-count').textContent = formatNumber(likes);
-            document.getElementById('comments-count').textContent = formatNumber(approvedComments.length);
-            document.getElementById('stats-section').style.display = 'block';
-        }
-        
-        // Display Purchase Options
-        function displayPurchaseOptions() {
-            const platformsGrid = document.getElementById('platforms-grid');
-        
-            if (currentReview.platforms && Array.isArray(currentReview.platforms)) {
-                currentReview.platforms.forEach(platform => {
-                    const card = document.createElement('div');
-                    card.className = 'platform-card';
-                    card.innerHTML = `
-                        <div style="font-size: 1.4rem; font-weight: 700; margin-bottom: 15px;">${platform.name || platform}</div>
-                        ${platform.price ? `<div style="font-size: 1.8rem; font-weight: 900; color: #10b981; margin-bottom: 10px;">${platform.price} ريال</div>` : ''}
-                        ${platform.url ? `
-                            <a href="${platform.url}" target="_blank" class="btn-buy">
-                                <i class="fas fa-shopping-cart"></i> شراء الآن
-                            </a>
-                        ` : `
-                            <button class="btn-buy" disabled>
-                                <i class="fas fa-ban"></i> غير متاح للشراء
-                            </button>
-                        `}
-                    `;
-                    platformsGrid.appendChild(card);
-                });
-                document.getElementById('purchase-section').style.display = 'block';
-            }
-        }
-        
-        // Display Related Reviews
-        function displayRelatedReviews() {
-            const relatedGrid = document.getElementById('related-grid');
-        
-            if (allReviews.length <= 1) return;
-        
-            // Get related reviews by genre or random
-            const relatedReviews = allReviews.filter(review => {
-                if (review._id === currentReview._id) return false;
-                if (review.genre && currentReview.genre) {
-                    const currentGenres = Array.isArray(currentReview.genre) 
-                        ? currentReview.genre 
-                        : [currentReview.genre];
-                    const reviewGenres = Array.isArray(review.genre) ? review.genre : [review.genre];
-                    return reviewGenres.some(g => currentGenres.includes(g));
-                }
-                return false;
-            });
-        
-            let reviewsToShow = relatedReviews.slice(0, 3);
-        
-            if (reviewsToShow.length === 0) {
-                reviewsToShow = allReviews
-                    .filter(r => r._id !== currentReview._id)
-                    .slice(0, 3);
-            }
-        
-            if (reviewsToShow.length > 0) {
-                relatedGrid.innerHTML = '';
-                reviewsToShow.forEach(review => {
-                    const card = document.createElement('a');
-                    card.className = 'related-card';
-                    card.href = `review-view.html?id=${review._id}`;
-        
-                    const imageUrl = review.cover_image || review.coverImage || DEFAULT_IMAGE;
-                    const img = document.createElement('img');
-                    img.className = 'related-image';
-                    img.alt = review.title;
-                    img.onerror = () => img.src = DEFAULT_IMAGE;
-                    img.src = imageUrl;
-                    
-                    const starCount = Math.round((review.rating || 0) / 2);
-        
-                    let stars = '';
-                    for (let i = 1; i <= 5; i++) {
-                        stars += `<i class="${i <= starCount ? 'fas' : 'far'} fa-star"></i>`;
-                    }
-        
-                    card.innerHTML = `
-                        ${img.outerHTML}
-                        <div style="padding: 25px;">
-                            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px;">${review.title}</h3>
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                                <div style="display: flex; gap: 4px;">${stars}</div>
-                                <span>${(review.rating || 0).toFixed(1)}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; color: var(--text-light); font-size: 0.9rem;">
-                                <span><i class="fas fa-gamepad"></i> ${getPlatformNames(review.platforms) || 'متعددة'}</span>
-                                <span><i class="fas fa-calendar"></i> ${formatDate(review.releaseDate)}</span>
-                            </div>
-                        </div>
-                    `;
-                    relatedGrid.appendChild(card);
-                });
-                document.getElementById('related-section').style.display = 'block';
-            }
-        }
-        
-        // Display Comments
+
         function displayComments(comments) {
-            const commentsList = document.getElementById('comments-list');
-            const noCommentsDiv = document.getElementById('no-comments');
-        
-            if (comments.length === 0) {
+            const commentsList = document.getElementById('commentsList');
+            const noComments = document.getElementById('noComments');
+            
+            // فلترة التعليقات المقبولة فقط
+            const approvedComments = comments.filter(c => c.status === 'approved');
+            document.getElementById('commentsCount').textContent = approvedComments.length;
+            
+            if (approvedComments.length === 0) {
                 commentsList.innerHTML = '';
-                noCommentsDiv.style.display = 'block';
+                noComments.style.display = 'block';
                 return;
             }
-        
-            noCommentsDiv.style.display = 'none';
+            
+            noComments.style.display = 'none';
             commentsList.innerHTML = '';
-        
-            comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        
-            comments.forEach(comment => {
-                const card = document.createElement('div');
-                card.style.cssText = 'background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 15px;';
-        
-                const initials = comment.author 
-                    ? comment.author.split(' ').map(n => n[0]).join('').toUpperCase()
-                    : '?';
-        
-                card.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #6c5ce7, #a29bfe); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">${initials}</div>
-                        <div>
-                            <div style="font-weight: 700; font-size: 1.1rem;">${comment.author || 'مجهول'}</div>
-                            <div style="color: var(--text-light); font-size: 0.9rem;">${formatDate(comment.createdAt)}</div>
-                        </div>
-                    </div>
-                    <div style="color: var(--text-light); line-height: 1.8;">${comment.content}</div>
+            
+            approvedComments.forEach(comment => {
+                const commentCard = document.createElement('div');
+                commentCard.className = 'comment-card';
+                commentCard.innerHTML = `
+                    <div class="comment-author">${comment.author || 'مجهول'}</div>
+                    <div class="comment-date">${formatDate(comment.createdAt)}</div>
+                    <div class="comment-text">${comment.content}</div>
                 `;
-                commentsList.appendChild(card);
+                commentsList.appendChild(commentCard);
             });
         }
-        
-        // Submit Comment
-        async function submitComment() {
-            const author = document.getElementById('comment-author').value.trim();
-            const email = document.getElementById('comment-email').value.trim();
-            const content = document.getElementById('comment-text').value.trim();
-        
+
+        // 🔧 الإصلاح: إضافة تعليق جديد
+        document.getElementById('commentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const author = document.getElementById('commentAuthor').value.trim();
+            const content = document.getElementById('commentContent').value.trim();
+            
             if (!content) {
-                alert('يرجى كتابة تعليق قبل الإرسال');
+                showAlert('يرجى كتابة تعليق قبل الإرسال', 'warning');
                 return;
             }
-        
+            
+            if (content.length > 500) {
+                showAlert('التعليق طويل جداً (الحد الأقصى 500 حرف)', 'warning');
+                return;
+            }
+            
             try {
+                const reviewId = currentReview._id || currentReview.id;
+                
+                if (!reviewId) {
+                    showAlert('خطأ في تحديد المراجعة', 'error');
+                    return;
+                }
+                
                 const response = await fetch(`${API_BASE}/comments`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({
-                        reviewId: currentReview._id,
+                        reviewId: reviewId,
                         author: author || 'مجهول',
-                        email: email || null,
                         content: content
                     })
                 });
-        
+                
                 const data = await response.json();
-        
+                
                 if (data.success) {
-                    document.getElementById('comment-text').value = '';
-                    document.getElementById('comment-author').value = '';
-                    document.getElementById('comment-email').value = '';
-                    document.getElementById('chars-remaining').textContent = '500';
-                    alert('تم إرسال تعليقك بنجاح!');
-                    await loadComments(currentReview._id);
+                    showAlert('تم إرسال تعليقك بنجاح! سيظهر بعد مراجعة المدير.', 'success');
+                    document.getElementById('commentForm').reset();
+                    document.getElementById('charCount').textContent = '500';
+                    await loadComments(reviewId);
+                } else {
+                    showAlert('حدث خطأ أثناء إرسال التعليق', 'error');
                 }
             } catch (error) {
-                alert('حدث خطأ في الاتصال بالخادم');
+                console.error('❌ خطأ في إرسال التعليق:', error);
+                showAlert('حدث خطأ في الاتصال بالخادم', 'error');
             }
-        }
-        
-        // Update Comments Count
-        function updateCommentsCount() {
-            const approvedComments = currentReviewComments.filter(c => c.status === 'approved');
-            document.getElementById('comments-total-count').textContent = formatNumber(approvedComments.length);
-        }
-        
-        // Utility Functions
-        function hideLoading() {
-            document.getElementById('loading-state').style.display = 'none';
-        }
-        
-        function showError() {
-            hideLoading();
-            document.getElementById('error-state').style.display = 'block';
-        }
-        
-        function getPlatformNames(platforms) {
-            if (!platforms || !Array.isArray(platforms)) return 'متعددة المنصات';
-            return platforms.map(p => typeof p === 'object' ? p.name : p).join('، ');
-        }
-        
-        // ✅ FIXED: getGenreName handles both string and array
+        });
+
+        // ===== دوال مساعدة =====
         function getGenreName(genre) {
-            const genreMap = {
-                'action': 'أكشن', 'adventure': 'مغامرة', 'rpg': 'ألعاب الأدوار',
-                'strategy': 'إستراتيجية', 'sports': 'رياضة', 'racing': 'سباقات',
-                'horror': 'رعب', 'simulation': 'محاكاة', 'puzzle': 'ألغاز'
-            };
-        
+            // دعم كلاً من array و string
             if (Array.isArray(genre)) {
-                return genre.map(g => genreMap[g] || g).join('، ');
+                const genreMap = {
+                    'action': 'أكشن',
+                    'adventure': 'مغامرة',
+                    'rpg': 'ألعاب الأدوار',
+                    'strategy': 'إستراتيجية',
+                    'sports': 'رياضة',
+                    'racing': 'سباقات',
+                    'horror': 'رعب',
+                    'simulation': 'محاكاة',
+                    'puzzle': 'ألغاز'
+                };
+                
+                return genre.map(g => {
+                    const key = typeof g === 'string' ? g.toLowerCase() : g;
+                    return genreMap[key] || g;
+                }).join('، ');
             }
-        
-            return genreMap[genre] || genre || 'غير محدد';
+            
+            if (typeof genre === 'string') {
+                // إذا كان string يحتوي على فاصلات
+                if (genre.includes(',')) {
+                    return genre.split(',').map(g => g.trim()).join('، ');
+                }
+                
+                const genreMap = {
+                    'action': 'أكشن',
+                    'adventure': 'مغامرة',
+                    'rpg': 'ألعاب الأدوار',
+                    'strategy': 'إستراتيجية',
+                    'sports': 'رياضة',
+                    'racing': 'سباقات',
+                    'horror': 'رعب',
+                    'simulation': 'محاكاة',
+                    'puzzle': 'ألغاز'
+                };
+                
+                const key = genre.toLowerCase();
+                return genreMap[key] || genre;
+            }
+            
+            return 'غير محدد';
         }
-        
+
         function formatDate(dateString) {
             if (!dateString) return 'غير محدد';
+            
             try {
                 const date = new Date(dateString);
-                return date.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
-            } catch { return dateString; }
+                return date.toLocaleDateString('ar-EG', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } catch {
+                return dateString;
+            }
         }
-        
+
         function getRatingDescription(rating) {
             if (rating >= 9.5) return 'تحفة فنية 🎨';
             if (rating >= 9.0) return 'رائعة جداً ⭐⭐⭐⭐⭐';
             if (rating >= 8.0) return 'ممتازة ⭐⭐⭐⭐';
             if (rating >= 7.0) return 'جيدة جداً ⭐⭐⭐';
             if (rating >= 6.0) return 'جيدة ⭐⭐';
-            return 'مقبولة ⭐';
+            if (rating >= 5.0) return 'مقبولة ⭐';
+            return 'ضعيفة';
         }
-        
-        function formatNumber(num) {
-            if (!num) return '0';
-            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-            return num.toString();
+
+        function setupCharCounter() {
+            const commentContent = document.getElementById('commentContent');
+            const charCount = document.getElementById('charCount');
+            
+            commentContent.addEventListener('input', function() {
+                const remaining = 500 - this.value.length;
+                charCount.textContent = remaining;
+                
+                // تغيير اللون عند الاقتراب من النهاية
+                if (remaining <= 50) {
+                    charCount.style.color = '#ff6b6b';
+                } else if (remaining <= 100) {
+                    charCount.style.color = '#fdcb6e';
+                } else {
+                    charCount.style.color = 'var(--text-secondary)';
+                }
+            });
+        }
+
+        function showAlert(message, type = 'info') {
+            // إنشاء عنصر التنبيه
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                padding: 15px 25px;
+                border-radius: var(--radius);
+                background: ${type === 'success' ? '#00b894' : type === 'error' ? '#ff6b6b' : '#fdcb6e'};
+                color: white;
+                z-index: 9999;
+                box-shadow: var(--shadow);
+                animation: slideIn 0.3s ease-out;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                max-width: 400px;
+            `;
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 
+                        type === 'error' ? 'fa-exclamation-circle' : 
+                        'fa-info-circle';
+            
+            alertDiv.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // إزالة التنبيه بعد 5 ثواني
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.parentNode.removeChild(alertDiv);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        function showError() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+        }
+
+        function checkAdminStatus() {
+            const adminLink = document.getElementById('adminNavLink');
+            try {
+                const session = localStorage.getItem('admin_session_reviewqeem');
+                if (session) {
+                    const sessionData = JSON.parse(session);
+                    const isAdmin = sessionData && 
+                                   sessionData.expires && 
+                                   Date.now() < sessionData.expires;
+                    
+                    adminLink.style.display = isAdmin ? 'block' : 'none';
+                }
+            } catch (error) {
+                adminLink.style.display = 'none';
+            }
+        }
+
+        function showPlatformAlert(platform) {
+            showAlert(`سيتم البحث عن أسعار ${platform} على منصات التسوق`, 'info');
         }
     </script>
 </body>
 </html>
+

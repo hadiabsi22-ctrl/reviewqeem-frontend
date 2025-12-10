@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - ReviewQeem</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tajawal Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==================== VARIABLES (متوافقة مع النظام) ==================== */
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --accent: #fd79a8;
+            --dark: #0d0d11;
+            --dark-light: #1a1a24;
+            --dark-lighter: #2a2a3a;
+            --text: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border: #3a3a4a;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #ff7675;
+            --radius: 12px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(108, 92, 231, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 184, 148, 0.05) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================== HEADER (متوافق مع النظام) ==================== */
+        .admin-header {
+            background: var(--dark-light);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero-section {
+            text-align: center;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(108, 92, 231, 0.1) 0%, 
+                rgba(0, 184, 148, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        /* ==================== CONTACT LAYOUT ==================== */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        @media (max-width: 992px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* ==================== CONTACT INFO ==================== */
+        .contact-info-card {
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .section-title {
+            color: var(--text);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
+            background: var(--dark-lighter);
+            border-radius: var(--radius);
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .contact-method:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .method-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 2px solid var(--primary);
+        }
+
+        .method-icon i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .method-content h3 {
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .method-content p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .method-content a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .method-content a:hover {
+            color: var(--secondary);
+        }
+
+        /* ==================== CONTACT FORM ==================== */
+        .contact-form-card {
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-label i {
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            background: var(--dark-lighter);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 180px;
+        }
+
+        .form-help {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            display: block;
+        }
+
+        /* ==================== BUTTONS (متوافقة مع النظام) ==================== */
+        .btn {
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        /* ==================== STATUS MESSAGES ==================== */
+        .status-message {
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 25px 0;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-success {
+            background: rgba(0, 184, 148, 0.1);
+            color: var(--success);
+            border-color: rgba(0, 184, 148, 0.3);
+        }
+
+        .status-error {
+            background: rgba(255, 118, 117, 0.1);
+            color: var(--danger);
+            border-color: rgba(255, 118, 117, 0.3);
+        }
+
+        .status-info {
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--primary);
+            border-color: rgba(108, 92, 231, 0.3);
+        }
+
+        /* ==================== FAQ SECTION ==================== */
+        .faq-section {
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            padding: 50px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            margin-bottom: 80px;
+        }
+
+        .faq-section .section-title {
+            text-align: center;
+            justify-content: center;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            padding: 25px;
+            background: var(--dark-lighter);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: var(--primary);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .faq-item.active {
+            border-color: var(--primary);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 25px;
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* ==================== SOCIAL LINKS ==================== */
+        .social-section {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        .social-title {
+            color: var(--text);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: var(--dark-lighter);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: var(--dark-light);
+            padding: 40px 0;
+            border-top: 2px solid var(--primary);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .contact-info-card,
+            .contact-form-card,
+            .faq-section {
+                padding: 30px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hero-section {
+                padding: 60px 0 40px;
+            }
+            
+            .method-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .method-icon i {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-icon {
+                font-size: 4rem;
+            }
+            
+            .contact-info-card,
+            .contact-form-card,
+            .faq-section {
+                padding: 20px;
+            }
+            
+            .contact-method {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .method-icon {
+                margin: 0 auto;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- Hero Section -->
+    <div class="container">
+        <div class="hero-section">
+            <div class="hero-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h1 class="hero-title">تواصل معنا</h1>
+            <p class="hero-subtitle">
+                نحن هنا لمساعدتك! سواء كان لديك استفسار، ملاحظة، اقتراح، أو ترغب في التعاون معنا، 
+                فريق ريفيو قيم مستعد للاستماع إليك والرد على جميع استفساراتك.
+            </p>
+        </div>
+
+        <!-- Contact Layout -->
+        <div class="contact-layout">
+            <!-- Contact Info -->
+            <div class="contact-info-card">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    معلومات التواصل
+                </h2>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>البريد الإلكتروني العام</h3>
+                            <p>للاستفسارات العامة وطلبات المراجعات</p>
+                            <a href="mailto:info@reviewqeem.com">
+                                <i class="fas fa-external-link-alt"></i>
+                                info@reviewqeem.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>الدعم الفني</h3>
+                            <p>لمشاكل الموقع والأخطاء التقنية</p>
+                            <a href="mailto:support@reviewqeem.com">
+                                <i class="fas fa-external-link-alt"></i>
+                                support@reviewqeem.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>التعاون والشراكات</h3>
+                            <p>للعروض التجارية وفرص التعاون</p>
+                            <a href="mailto:partnership@reviewqeem.com">
+                                <i class="fas fa-external-link-alt"></i>
+                                partnership@reviewqeem.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>الخصوصية وحقوق النشر</h3>
+                            <p>لطلبات الخصوصية وإزالة المحتوى</p>
+                            <a href="mailto:privacy@reviewqeem.com">
+                                <i class="fas fa-external-link-alt"></i>
+                                privacy@reviewqeem.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-card">
+                <h2 class="section-title">
+                    <i class="fas fa-paper-plane"></i>
+                    أرسل رسالتك
+                </h2>
+                
+                <form id="contactForm">
+                    <!-- Status Message -->
+                    <div id="statusMessage" class="status-message">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="statusText"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="form-label">
+                            <i class="fas fa-user"></i>
+                            الاسم الكامل
+                        </label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            class="form-control" 
+                            placeholder="أدخل اسمك الكامل" 
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i>
+                            البريد الإلكتروني
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-control" 
+                            placeholder="example@email.com" 
+                            required
+                        >
+                        <span class="form-help">لن نشارك بريدك مع أي طرف ثالث</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" class="form-label">
+                            <i class="fas fa-tag"></i>
+                            نوع الرسالة
+                        </label>
+                        <select id="subject" class="form-control" required>
+                            <option value="">اختر نوع الرسالة</option>
+                            <option value="support">دعم فني</option>
+                            <option value="review">اقتراح مراجعة</option>
+                            <option value="partnership">تعاون وشراكة</option>
+                            <option value="suggestion">اقتراح أو فكرة</option>
+                            <option value="bug">تبليغ عن خطأ</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">
+                            <i class="fas fa-comment-dots"></i>
+                            الرسالة
+                        </label>
+                        <textarea 
+                            id="message" 
+                            class="form-control" 
+                            placeholder="اكتب رسالتك هنا بشكل مفصل..." 
+                            rows="6" 
+                            required
+                        ></textarea>
+                        <span class="form-help">يرجى وصف طلبك أو استفسارك بشكل واضح</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال الرسالة
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="section-title">
+                <i class="fas fa-question-circle"></i>
+                الأسئلة الشائعة
+            </h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>كم تستغرق مدة الرد على الرسائل؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نحن نرد على جميع الرسائل خلال 24-48 ساعة عمل في الأيام من الأحد إلى الخميس. قد تستغرق رسائل الدعم الفني وقتاً أطول قليلاً حسب تعقيد المشكلة، ولكننا نحرص على الرد بأسرع وقت ممكن.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل يمكنني اقتراح لعبة للمراجعة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم بالتأكيد! نحن نرحب باقتراحاتكم للألعاب التي ترغبون في رؤية مراجعات لها. يمكنكم إرسال اقتراحاتكم عبر نموذج الاتصال باختيار "اقتراح مراجعة" كموضوع الرسالة. سنقوم بدراسة الاقتراح وإضافته إلى قائمة المراجعات القادمة.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>كيف يمكنني التعاون مع ReviewQeem؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نرحب بالشراكات والتعاون مع مطوري الألعاب، الناشرين، والمواقع الإلكترونية الأخرى. يمكنكم التواصل عبر البريد المخصص للشراكات أو اختيار "تعاون وشراكة" في نموذج الاتصال. سنقوم بالرد عليكم لمناقشة تفاصيل التعاون.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل تقدمون خدمات كتابة مراجعات مدفوعة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>جميع مراجعاتنا تتم بشفافية وموضوعية تامة. نحن لا نقدم مراجعات مدفوعة أو متحيزة. نحن نرحب بتوفير نسخ من الألعاب للمراجعة مع الحفاظ على استقلاليتنا التحريرية وعدم التأثر بأي عوامل خارجية.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>كيف يمكنني الإبلاغ عن مشكلة في الموقع؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>يمكنكم الإبلاغ عن أي مشكلة تقنية أو خطأ في الموقع عبر اختيار "تبليغ عن خطأ" في نموذج الاتصال. يرجى وصف المشكلة بشكل مفصل مع ذكر المتصفح الذي تستخدمونه واسم الجهاز لمساعدتنا في حل المشكلة بسرعة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-section">
+            <h3 class="social-title">تابعنا على وسائل التواصل</h3>
+            <div class="social-links">
+                <a href="#" class="social-link" title="تويتر">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link" title="فيسبوك">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-link" title="يوتيوب">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="social-link" title="تلجرام">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="#" class="social-link" title="إنستغرام">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">ريفيو قيم</div>
+                
+                <div class="footer-links">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="reviews.html">المراجعات</a>
+                    <a href="about.html">عن الموقع</a>
+                    <a href="contact.html">اتصل بنا</a>
+                    <a href="privacy.html">الخصوصية</a>
+                    <a href="terms.html">شروط الاستخدام</a>
+                </div>
+                
+                <div class="copyright">
+                    © 2024 ريفيو قيم. جميع الحقوق محفوظة.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== SYSTEM INTEGRATION ====================
+        // حفظ الرسائل في localStorage للمتابعة من لوحة التحكم
+        const CONTACT_MESSAGES_KEY = 'reviewqeem_contact_messages';
+        
+        // ==================== FORM HANDLING ====================
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+            const statusElement = document.getElementById('statusMessage');
+            const statusText = document.getElementById('statusText');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // حفظ النص الأصلي للزر
+            const originalBtnText = submitBtn.innerHTML;
+            
+            // التحقق من الحقول
+            if (!name || !email || !subject || !message) {
+                showStatus('يرجى ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showStatus('يرجى إدخال بريد إلكتروني صحيح', 'error');
+                return;
+            }
+            
+            // عرض حالة الإرسال
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+            submitBtn.disabled = true;
+            
+            showStatus('جاري إرسال رسالتك...', 'info');
+            
+            // محاكاة إرسال الرسالة
+            setTimeout(() => {
+                try {
+                    // إنشاء كائن الرسالة
+                    const messageData = {
+                        id: 'msg_' + Date.now(),
+                        name: name,
+                        email: email,
+                        subject: subject,
+                        message: message,
+                        status: 'unread', // unread, read, replied
+                        date: new Date().toISOString(),
+                        ip: 'local'
+                    };
+                    
+                    // حفظ الرسالة في localStorage
+                    saveContactMessage(messageData);
+                    
+                    // عرض رسالة النجاح
+                    showStatus('✅ تم إرسال رسالتك بنجاح! سنقوم بالرد عليك خلال 24-48 ساعة عمل.', 'success');
+                    
+                    // إعادة تعيين النموذج
+                    document.getElementById('contactForm').reset();
+                    
+                    // تحديث عدد الرسائل غير المقروءة (للوحة التحكم)
+                    updateUnreadCount();
+                    
+                } catch (error) {
+                    console.error('Error saving message:', error);
+                    showStatus('حدث خطأ في حفظ رسالتك. يرجى المحاولة مرة أخرى.', 'error');
+                } finally {
+                    // استعادة حالة الزر
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                }
+            }, 2000);
+        });
+
+        // ==================== FAQ TOGGLE ====================
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // إغلاق جميع العناصر الأخرى
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                // فتح العنصر الحالي إذا لم يكن مفتوحاً
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('statusMessage');
+            const statusText = document.getElementById('statusText');
+            const icon = statusElement.querySelector('i');
+            
+            // تحديث النص
+            statusText.textContent = message;
+            
+            // تحديث النوع
+            statusElement.className = `status-message status-${type}`;
+            
+            // تحديث الأيقونة
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle',
+                info: 'fa-info-circle'
+            };
+            icon.className = `fas ${icons[type] || 'fa-info-circle'}`;
+            
+            // إظهار الرسالة
+            statusElement.style.display = 'flex';
+            statusElement.style.alignItems = 'center';
+            statusElement.style.justifyContent = 'center';
+            statusElement.style.gap = '10px';
+            
+            // إخفاء تلقائي للرسائل الناجحة
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusElement.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        function saveContactMessage(messageData) {
+            try {
+                // جلب الرسائل الحالية
+                let messages = JSON.parse(localStorage.getItem(CONTACT_MESSAGES_KEY) || '[]');
+                
+                // إضافة الرسالة الجديدة
+                messages.unshift(messageData);
+                
+                // حفظ في localStorage
+                localStorage.setItem(CONTACT_MESSAGES_KEY, JSON.stringify(messages));
+                
+                console.log('تم حفظ الرسالة:', messageData);
+                return true;
+            } catch (error) {
+                console.error('خطأ في حفظ الرسالة:', error);
+                return false;
+            }
+        }
+
+        function updateUnreadCount() {
+            try {
+                const messages = JSON.parse(localStorage.getItem(CONTACT_MESSAGES_KEY) || '[]');
+                const unreadCount = messages.filter(msg => msg.status === 'unread').length;
+                
+                // حفظ عدد الرسائل غير المقروءة للإحصائيات
+                localStorage.setItem('contact_unread_count', unreadCount.toString());
+                
+                // إشعار لوحة التحكم (إذا كانت مفتوحة)
+                if (window.opener) {
+                    window.opener.postMessage({
+                        type: 'contact_update',
+                        unreadCount: unreadCount
+                    }, '*');
+                }
+                
+                return unreadCount;
+            } catch (error) {
+                console.error('خطأ في تحديث عدد الرسائل:', error);
+                return 0;
+            }
+        }
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحميل عدد الرسائل غير المقروءة عند التحميل
+            const unreadCount = updateUnreadCount();
+            
+            // إضافة تأثير للروابط عند التمرير
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    link.style.transform = 'translateY(-2px)';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    link.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // تأثيرات لبطاقات التواصل
+            const contactMethods = document.querySelectorAll('.contact-method');
+            
+            contactMethods.forEach(method => {
+                method.addEventListener('mouseenter', () => {
+                    method.querySelector('.method-icon').style.transform = 'rotate(10deg) scale(1.1)';
+                });
+                
+                method.addEventListener('mouseleave', () => {
+                    method.querySelector('.method-icon').style.transform = 'rotate(0) scale(1)';
+                });
+            });
+            
+            // التركيز على حقل الاسم عند التحميل
+            document.getElementById('name').focus();
+        });
+    </script>
+</body>
+</html>
+

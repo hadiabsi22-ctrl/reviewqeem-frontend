@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>البحث - ReviewQeem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ابحث عن مراجعات الألعاب في ReviewQeem - منصة المراجعات العربية الاحترافية">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5a4acc;
+            --secondary: #00b894;
+            --dark-bg: #0d0d11;
+            --dark-light: #1a1a24;
+            --dark-lighter: #2a2a3a;
+            --text: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border: #3a3a4a;
+            --radius: 12px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        .site-header {
+            background: var(--dark-light);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== القائمة المنسدلة المحسنة ===== */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== SEARCH PAGE STYLES ==================== */
+        .search-hero {
+            text-align: center;
+            padding: 40px 0 30px;
+            margin-bottom: 40px;
+        }
+
+        .search-hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .search-hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        /* 🔥 SEARCH BOX FIXED */
+        .search-box {
+            display: flex;
+            gap: 8px;
+            max-width: 600px;
+            margin: 30px auto;
+            background: var(--dark-light);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 5px;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .search-box input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text);
+            padding: 12px 20px;
+            font-size: 1rem;
+            outline: none;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-box button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box button:hover {
+            transform: scale(1.1);
+        }
+
+        /* اقتراحات البحث */
+        .search-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .suggestion-tag {
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .suggestion-tag:hover {
+            background: rgba(108, 92, 231, 0.2);
+            border-color: var(--primary);
+        }
+
+        /* ==================== RESULTS SECTION ==================== */
+        .results-section {
+            margin-bottom: 60px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+
+        .results-count {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .result-card {
+            background: var(--dark-light);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .result-image {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .result-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s;
+        }
+
+        .result-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .result-info {
+            padding: 20px;
+        }
+
+        .result-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .result-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .result-platform {
+            background: var(--border);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .result-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .rating-stars {
+            color: #ffd700;
+        }
+
+        .rating-score {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .result-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ==================== LOADING & EMPTY STATES ==================== */
+        .loading-state {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .spinner {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 5px solid var(--border);
+            border-top-color: var(--primary);
+            animation: spin 0.8s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--border);
+            margin-bottom: 10px;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        /* ==================== SEARCH TIPS ==================== */
+        .search-tips {
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            padding: 30px;
+            border: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        .search-tips h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .tip-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .tip-content h4 {
+            color: var(--text);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .tip-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background: var(--dark-light);
+            padding: 30px 0 15px;
+            border-top: 2px solid var(--primary);
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 300px;
+                height: calc(100vh - 80px);
+                background: var(--dark-light);
+                flex-direction: column;
+                gap: 0;
+                padding: 20px;
+                border-left: 2px solid var(--primary);
+                transition: right 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .search-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+                border-radius: var(--radius);
+                padding: 10px;
+            }
+
+            .search-box input {
+                margin-bottom: 10px;
+            }
+
+            .search-box button {
+                width: 100%;
+                border-radius: var(--radius);
+                height: 50px;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                position: relative;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .search-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .search-hero p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- الهيدر الموحد مع القائمة المنسدلة -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">RQ</div>
+                    <div class="logo-text">ريفيو قيم</div>
+                </a>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="reviews.html">المراجعات</a></li>
+                    <li><a href="categories.html">التصنيفات</a></li>
+                    <li><a href="search.html" class="active">البحث</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- محتوى صفحة البحث -->
+    <div class="container">
+        <div class="search-hero">
+            <h1><i class="fas fa-search"></i> البحث المتقدم</h1>
+            <p>ابحث عن مراجعات الألعاب باستخدام الكلمات المفتاحية أو العناوين أو المنصات</p>
+            
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="اكتب اسم اللعبة، المنصة، النوع...">
+                <button class="btn btn-primary" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="search-suggestions">
+                <div class="suggestion-tag" data-search="PS5">PS5</div>
+                <div class="suggestion-tag" data-search="Xbox">Xbox</div>
+                <div class="suggestion-tag" data-search="أكشن">أكشن</div>
+                <div class="suggestion-tag" data-search="مغامرة">مغامرة</div>
+                <div class="suggestion-tag" data-search="ألعاب الأدوار">ألعاب الأدوار</div>
+            </div>
+        </div>
+
+        <!-- قسم النتائج -->
+        <div class="results-section">
+            <div class="results-header">
+                <h2 class="results-title">نتائج البحث</h2>
+                <div class="results-count" id="results-count">0 نتيجة</div>
+            </div>
+
+            <!-- حالة التحميل -->
+            <div id="search-loading" class="loading-state" style="display: none;">
+                <div class="spinner"></div>
+                <p style="margin-top:15px; color:var(--text-secondary);">جاري البحث في قاعدة البيانات...</p>
+            </div>
+
+            <!-- حالة عدم وجود نتائج -->
+            <div id="search-empty-state" class="empty-state" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>لم نعثر على نتائج</h3>
+                <p>جرب استخدام كلمات مفتاحية مختلفة أو استخدم الاقتراحات أعلاه.</p>
+            </div>
+
+            <!-- شبكة النتائج -->
+            <div id="search-results" class="results-grid"></div>
+        </div>
+
+        <!-- نصائح البحث -->
+        <div class="search-tips">
+            <h3><i class="fas fa-lightbulb"></i> نصائح للبحث الفعال</h3>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <i class="fas fa-keyboard"></i>
+                    <div class="tip-content">
+                        <h4>استخدم كلمات مفتاحية محددة</h4>
+                        <p>ابحث باسم اللعبة بدلاً من النوع العام للحصول على نتائج أفضل</p>
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <i class="fas fa-gamepad"></i>
+                    <div class="tip-content">
+                        <h4>ابحث حسب المنصة</h4>
+                        <p>استخدم اسم المنصة مثل PS5 أو Xbox للعثور على ألعاب محددة</p>
+                    </div>
+                </div>
+                <div class="tip-item">
+                    <i class="fas fa-tags"></i>
+                    <div class="tip-content">
+                        <h4>ابحث حسب النوع</h4>
+                        <p>استخدم أنواع الألعاب مثل أكشن، مغامرة، أو ألعاب الأدوار</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر الموحد -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن ReviewQeem</h3>
+                    <p>منصة عربية متخصصة في مراجعات وتقييمات الألعاب.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>روابط مهمة</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> الخصوصية</a></li>
+                        <li><a href="terms.html"><i class="fas fa-file-contract"></i> الشروط</a></li>
+                        <li><a href="cookies.html"><i class="fas fa-cookie-bite"></i> الكوكيز</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@reviewqeem.com"><i class="fas fa-envelope"></i> البريد</a></li>
+                        <li><a href="contact.html"><i class="fas fa-headset"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 ريفيو قيم. جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== إدارة القائمة المنسدلة =====
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // ===== البحث =====
+        let allReviews = [];
+        let searchResults = [];
+
+        // تحميل المراجعات
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadReviews();
+            setupEventListeners();
+            
+            // تحقق من وجود استعلام بحث في الرابط
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            if (query) {
+                document.getElementById('search-input').value = query;
+                performSearch(query);
+            }
+        });
+
+        async function loadReviews() {
+            try {
+                const savedReviews = localStorage.getItem('gameReviews');
+                if (savedReviews) {
+                    const parsed = JSON.parse(savedReviews);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        allReviews = parsed.filter(review => review.status !== 'draft');
+                    }
+                }
+
+                if (allReviews.length === 0) {
+                    allReviews = getSampleReviews();
+                }
+
+                console.log(`✅ تم تحميل ${allReviews.length} مراجعة للبحث`);
+            } catch (error) {
+                console.error('❌ خطأ في تحميل المراجعات:', error);
+                allReviews = getSampleReviews();
+            }
+        }
+
+        function getSampleReviews() {
+            return [
+                {
+                    id: '1',
+                    title: 'مراجعة Spider-Man 2',
+                    summary: 'تجربة رائعة مع تحسينات كبيرة في اللعب والقصص',
+                    content: 'مراجعة كاملة للعبة Spider-Man 2 مع تحليل مفصل للإضافات الجديدة',
+                    rating: 9.5,
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
+                    platform: 'PS5',
+                    release_date: '2023-10-20',
+                    review_date: '2023-11-01',
+                    genre: 'action',
+                    developer: 'Insomniac Games',
+                    status: 'published'
+                },
+                {
+                    id: '2',
+                    title: 'مراجعة God of War Ragnarök',
+                    summary: 'ملحمة أسطورية تستكمل قصة كريتوس وأتريوس',
+                    content: 'تحليل شامل للعبة God of War Ragnarök وتطور الشخصيات',
+                    rating: 9.8,
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
+                    platform: 'PS5',
+                    release_date: '2022-11-09',
+                    review_date: '2022-11-20',
+                    genre: 'action',
+                    developer: 'Santa Monica Studio',
+                    status: 'published'
+                },
+                {
+                    id: '3',
+                    title: 'مراجعة The Legend of Zelda',
+                    summary: 'مغامرة جديدة في عالم هايرول المفتوح',
+                    content: 'مراجعة شاملة للإضافات الجديدة وآليات اللعب',
+                    rating: 9.7,
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
+                    platform: 'Nintendo Switch',
+                    release_date: '2023-05-12',
+                    review_date: '2023-05-25',
+                    genre: 'adventure',
+                    developer: 'Nintendo',
+                    status: 'published'
+                },
+                {
+                    id: '4',
+                    title: 'مراجعة Elden Ring',
+                    summary: 'عالم مفتوح ضخم مليء بالتحديات والأسرار',
+                    content: 'رحلة ملحمية في عالم FromSoftware الأكثر طموحاً',
+                    rating: 9.6,
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
+                    platform: 'PC',
+                    release_date: '2022-02-25',
+                    review_date: '2022-03-10',
+                    genre: 'rpg',
+                    developer: 'FromSoftware',
+                    status: 'published'
+                },
+                {
+                    id: '5',
+                    title: 'مراجعة Horizon Forbidden West',
+                    summary: 'مغامرة استكشافية في عالم ما بعد الكارثة',
+                    content: 'توسعة رائعة لعالم Horizon مع جرافيك مذهل',
+                    rating: 9.3,
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
+                    platform: 'PS5',
+                    release_date: '2022-02-18',
+                    review_date: '2022-03-01',
+                    genre: 'adventure',
+                    developer: 'Guerrilla Games',
+                    status: 'published'
+                }
+            ];
+        }
+
+        function setupEventListeners() {
+            document.getElementById('search-btn').addEventListener('click', handleSearch);
+            
+            document.getElementById('search-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleSearch();
+            });
+            
+            document.querySelectorAll('.suggestion-tag').forEach(tag => {
+                tag.addEventListener('click', () => {
+                    const searchTerm = tag.getAttribute('data-search');
+                    document.getElementById('search-input').value = searchTerm;
+                    performSearch(searchTerm);
+                });
+            });
+        }
+
+        function handleSearch() {
+            const searchTerm = document.getElementById('search-input').value.trim();
+            if (searchTerm) {
+                performSearch(searchTerm);
+                const newUrl = new URL(window.location);
+                newUrl.searchParams.set('q', searchTerm);
+                window.history.pushState({}, '', newUrl);
+            }
+        }
+
+        function performSearch(query) {
+            showLoadingState();
+            
+            setTimeout(() => {
+                searchResults = allReviews.filter(review => 
+                    review.title.toLowerCase().includes(query.toLowerCase()) ||
+                    (review.summary && review.summary.toLowerCase().includes(query.toLowerCase())) ||
+                    (review.platform && review.platform.toLowerCase().includes(query.toLowerCase())) ||
+                    (review.genre && review.genre.toLowerCase().includes(query.toLowerCase()))
+                );
+                
+                displayResults();
+                updateResultsCount();
+                hideLoadingState();
+            }, 500);
+        }
+
+        function displayResults() {
+            const resultsContainer = document.getElementById('search-results');
+            const emptyState = document.getElementById('search-empty-state');
+            
+            if (!searchResults.length) {
+                emptyState.style.display = 'block';
+                resultsContainer.innerHTML = '';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            resultsContainer.innerHTML = searchResults.map(review => {
+                const imageUrl = review.cover_image || 'https://reviewqeem.online/uploads/images/default-game.jpg';
+                const summary = review.summary || 'لا يوجد وصف متوفر';
+                const reviewDate = new Date(review.review_date || review.release_date).toLocaleDateString('ar-EG');
+                
+                return `
+                    <div class="result-card" onclick="viewReview('${review.id}')">
+                        <div class="result-image">
+                            <img src="${imageUrl}" 
+                                 alt="${review.title}" 
+                                 onerror="this.src='https://reviewqeem.online/uploads/images/default-game.jpg'">
+                        </div>
+                        <div class="result-info">
+                            <h3 class="result-title">${review.title}</h3>
+                            <div class="result-meta">
+                                <span class="result-platform">${review.platform}</span>
+                                <span class="result-date">${reviewDate}</span>
+                            </div>
+                            <div class="result-rating">
+                                <div class="rating-stars">${generateStars(review.rating)}</div>
+                                <span class="rating-score">${review.rating.toFixed(1)}/10</span>
+                            </div>
+                            <p class="result-excerpt">${summary.substring(0, 120)}...</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating / 2);
+            const halfStar = rating % 2 >= 1;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
+            if (halfStar) stars += '<i class="fas fa-star-half-alt"></i>';
+            
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) stars += '<i class="far fa-star"></i>';
+            
+            return stars;
+        }
+
+        function updateResultsCount() {
+            const countElement = document.getElementById('results-count');
+            const searchTerm = document.getElementById('search-input').value.trim();
+            
+            if (searchResults.length === 0) {
+                countElement.textContent = '0 نتيجة';
+            } else {
+                countElement.textContent = `${searchResults.length} نتيجة`;
+            }
+        }
+
+        function showLoadingState() {
+            document.getElementById('search-loading').style.display = 'block';
+            document.getElementById('search-empty-state').style.display = 'none';
+            document.getElementById('search-results').innerHTML = '';
+        }
+
+        function hideLoadingState() {
+            document.getElementById('search-loading').style.display = 'none';
+        }
+
+        function viewReview(reviewId) {
+            window.location.href = `review-detail.html?id=${reviewId}`;
+        }
+
+        console.log('✅ Search Page loaded successfully');
+    </script>
+</body>
+</html>

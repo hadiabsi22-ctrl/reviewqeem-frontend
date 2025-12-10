@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - ريفيو قيم</title>
+    
+    <!-- الخطوط والأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== متغيرات التصميم (نفس النظام) ===== */
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --accent: #fd79a8;
+            --dark: #0d0d11;
+            --dark-light: #1a1a24;
+            --dark-lighter: #2a2a3a;
+            --text: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border: #3a3a4a;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #ff7675;
+            --radius: 12px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(108, 92, 231, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 184, 148, 0.1) 0%, transparent 50%);
+        }
+        
+        /* ===== الحاوية الرئيسية ===== */
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ===== صندوق تسجيل الدخول ===== */
+        .login-box {
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+        
+        /* ===== الشعار ===== */
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+        }
+        
+        .logo-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        
+        .logo p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        /* ===== النماذج ===== */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--text);
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-label i {
+            color: var(--primary);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            background: var(--dark-lighter);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+        
+        .toggle-password:hover {
+            color: var(--primary);
+        }
+        
+        /* ===== الأزرار ===== */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            margin-top: 10px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        /* ===== رسائل الحالة ===== */
+        .status-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .status-success {
+            background: rgba(0, 184, 148, 0.2);
+            color: var(--success);
+            border-color: rgba(0, 184, 148, 0.3);
+        }
+        
+        .status-error {
+            background: rgba(255, 118, 117, 0.2);
+            color: var(--danger);
+            border-color: rgba(255, 118, 117, 0.3);
+        }
+        
+        .status-warning {
+            background: rgba(253, 203, 110, 0.2);
+            color: var(--warning);
+            border-color: rgba(253, 203, 110, 0.3);
+        }
+        
+        /* ===== تذييل الصفحة ===== */
+        .login-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .back-home {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .back-home:hover {
+            color: var(--secondary);
+        }
+        
+        /* ===== مؤشر التحميل ===== */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ===== التجاوب ===== */
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 30px 20px;
+            }
+            
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .form-input {
+                padding: 14px;
+            }
+            
+            .btn {
+                padding: 14px;
+            }
+        }
+        
+        /* ===== تأثيرات إضافية ===== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(720deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- تأثيرات الجسيمات -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- الحاوية الرئيسية -->
+    <div class="login-container">
+        <div class="login-box">
+            
+            <!-- الشعار -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h1>ريفيو قيم</h1>
+                <p>لوحة التحكم الإدارية</p>
+            </div>
+            
+            <!-- رسالة الحالة -->
+            <div id="statusMessage" class="status-message">
+                <i class="fas fa-info-circle"></i>
+                <span id="statusText"></span>
+            </div>
+            
+            <!-- نموذج تسجيل الدخول -->
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        <i class="fas fa-envelope"></i>
+                        البريد الإلكتروني
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        class="form-input" 
+                        placeholder="admin@reviewqeem.com" 
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock"></i>
+                        كلمة المرور
+                    </label>
+                    <div class="password-container">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            class="form-input" 
+                            placeholder="••••••••" 
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" id="togglePassword" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" id="loginBtn" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    تسجيل الدخول
+                </button>
+            </form>
+            
+            <!-- تذييل الصفحة -->
+            <div class="login-footer">
+                <p>© 2024 ريفيو قيم. جميع الحقوق محفوظة</p>
+                <a href="index.html" class="back-home">
+                    <i class="fas fa-home"></i>
+                    العودة للصفحة الرئيسية
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== تهيئة الجسيمات =====
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // أحجام عشوائية
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // مواقع عشوائية
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // ألوان عشوائية من نظام الألوان
+                const colors = ['#6c5ce7', '#00b894', '#fd79a8', '#fdcb6e'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = color;
+                
+                // تأخيرات عشوائية للحركة
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // ===== عرض رسالة الحالة =====
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('statusMessage');
+            const statusText = document.getElementById('statusText');
+            const icon = statusEl.querySelector('i');
+            
+            // تحديث النص واللون
+            statusText.textContent = message;
+            statusEl.className = `status-message status-${type}`;
+            
+            // تحديث الأيقونة
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle',
+                info: 'fa-info-circle'
+            };
+            icon.className = `fas ${icons[type] || icons.info}`;
+            
+            // إظهار الرسالة
+            statusEl.style.display = 'block';
+            
+            // إخفاء تلقائي للرسائل الناجحة
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusEl.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // ===== تبديل رؤية كلمة المرور =====
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        });
+        
+        // ===== التحقق من جلسة سارية =====
+        function checkExistingSession() {
+            try {
+                const ADMIN_SESSION_KEY = 'admin_session_reviewqeem';
+                const raw = localStorage.getItem(ADMIN_SESSION_KEY);
+                
+                if (raw) {
+                    const session = JSON.parse(raw);
+                    const isValid = session && 
+                                   session.data && 
+                                   session.expires && 
+                                   Date.now() < session.expires;
+                    
+                    if (isValid) {
+                        // إذا كان هناك جلسة سارية، توجيه للوحة التحكم
+                        window.location.href = 'admin.html';
+                        return true;
+                    } else {
+                        // إذا انتهت الجلسة، إزالتها
+                        localStorage.removeItem(ADMIN_SESSION_KEY);
+                    }
+                }
+                return false;
+            } catch (e) {
+                console.error('خطأ في التحقق من الجلسة:', e);
+                return false;
+            }
+        }
+        
+        // ===== معالجة تسجيل الدخول =====
+        document.getElementById('adminLoginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const loginBtn = document.getElementById('loginBtn');
+            const originalBtnText = loginBtn.innerHTML;
+            
+            // التحقق من الحقول
+            if (!email || !password) {
+                showStatus('يرجى ملء جميع الحقول', 'error');
+                return;
+            }
+            
+            // عرض حالة التحميل
+            loginBtn.innerHTML = '<div class="loading"></div> جاري التحقق...';
+            loginBtn.disabled = true;
+            
+            try {
+                // تأخير لمحاكاة اتصال بالخادم
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // بيانات الأدمن الافتراضية (يمكن تغييرها من الإعدادات لاحقاً)
+                const ADMIN_CREDENTIALS = {
+                    email: 'admin@reviewqeem.com',
+                    password: 'Admin@123', // كلمة مرور قوية
+                    name: 'مدير النظام'
+                };
+                
+                // التحقق من بيانات الدخول
+                if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+                    // إنشاء جلسة جديدة
+                    const sessionData = {
+                        data: {
+                            email: ADMIN_CREDENTIALS.email,
+                            name: ADMIN_CREDENTIALS.name,
+                            loginTime: new Date().toISOString()
+                        },
+                        expires: Date.now() + (60 * 60 * 1000), // 60 دقيقة
+                        ip: 'local'
+                    };
+                    
+                    // حفظ الجلسة
+                    localStorage.setItem('admin_session_reviewqeem', JSON.stringify(sessionData));
+                    
+                    // حفظ بيانات الأدمن للإحصائيات
+                    const adminData = {
+                        email: ADMIN_CREDENTIALS.email,
+                        name: ADMIN_CREDENTIALS.name,
+                        lastLogin: new Date().toISOString()
+                    };
+                    localStorage.setItem('admin_data', JSON.stringify(adminData));
+                    
+                    // رسالة النجاح
+                    showStatus('تم تسجيل الدخول بنجاح! جاري التوجيه...', 'success');
+                    
+                    // التوجيه بعد تأخير
+                    setTimeout(() => {
+                        window.location.href = 'admin.html';
+                    }, 1500);
+                    
+                } else {
+                    // بيانات خاطئة
+                    showStatus('البريد الإلكتروني أو كلمة المرور غير صحيحة', 'error');
+                    
+                    // اهتزاز الحقول
+                    document.getElementById('email').style.animation = 'shake 0.5s';
+                    document.getElementById('password').style.animation = 'shake 0.5s';
+                    
+                    // إضافة أنيميشن الاهتزاز
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes shake {
+                            0%, 100% { transform: translateX(0); }
+                            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                            20%, 40%, 60%, 80% { transform: translateX(5px); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    
+                    setTimeout(() => {
+                        document.getElementById('email').style.animation = '';
+                        document.getElementById('password').style.animation = '';
+                    }, 500);
+                }
+                
+            } catch (error) {
+                console.error('خطأ في تسجيل الدخول:', error);
+                showStatus('حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى', 'error');
+            } finally {
+                // استعادة حالة الزر
+                loginBtn.innerHTML = originalBtnText;
+                loginBtn.disabled = false;
+            }
+        });
+        
+        // ===== إدخال سريع للاختبار (يمكن إزالته في الإنتاج) =====
+        document.addEventListener('keydown', (e) => {
+            // اختصار Ctrl+Shift+L لملء بيانات الاختبار
+            if (e.ctrlKey && e.shiftKey && e.key === 'L') {
+                e.preventDefault();
+                document.getElementById('email').value = 'admin@reviewqeem.com';
+                document.getElementById('password').value = 'Admin@123';
+                showStatus('تم ملء بيانات الاختبار بنجاح', 'success');
+            }
+        });
+        
+        // ===== تهيئة الصفحة =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // إنشاء الجسيمات
+            createParticles();
+            
+            // التحقق من جلسة سارية
+            checkExistingSession();
+            
+            // التركيز على حقل البريد
+            document.getElementById('email').focus();
+            
+            // إضافة بيانات افتراضية للاختبار (في بيئة التطوير فقط)
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('بيئة تطوير - بيانات الاختبار متاحة:');
+                console.log('البريد: admin@reviewqeem.com');
+                console.log('كلمة المرور: Admin@123');
+                console.log('اختصار: Ctrl+Shift+L لملء البيانات');
+            }
+        });
+    </script>
+</body>
+</html>

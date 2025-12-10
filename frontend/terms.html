@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شروط الاستخدام - ReviewQeem</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5f3dc4;
+            --secondary: #00b894;
+            --dark-bg: #0d0d11;
+            --dark-light: #1a1a24;
+            --dark-lighter: #2a2a3a;
+            --text: #ffffff;
+            --text-secondary: #b8b8cc;
+            --border: #3a3a4a;
+            --radius: 12px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        .site-header {
+            background: var(--dark-light);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== القائمة المنسدلة ===== */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* ==================== PAGE HEADER ==================== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-header-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* ==================== CONTENT STYLES ==================== */
+        .content-card {
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .terms-section {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terms-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .terms-section h2 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .terms-section h2 i {
+            color: var(--secondary);
+        }
+
+        .terms-section p {
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .terms-section ul {
+            margin: 15px 0 20px 25px;
+        }
+
+        .terms-section li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .terms-section li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+
+        .highlight-box {
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-info p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .contact-email:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background: var(--dark-light);
+            padding: 30px 0 15px;
+            border-top: 2px solid var(--primary);
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 300px;
+                height: calc(100vh - 80px);
+                background: var(--dark-light);
+                flex-direction: column;
+                gap: 0;
+                padding: 20px;
+                border-left: 2px solid var(--primary);
+                transition: right 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .page-header-icon {
+                font-size: 3rem;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+            .terms-section h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- الهيدر الموحد -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">RQ</div>
+                    <div class="logo-text">ريفيو قيم</div>
+                </a>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="reviews.html">المراجعات</a></li>
+                    <li><a href="categories.html">التصنيفات</a></li>
+                    <li><a href="search.html">البحث</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    <li><a href="privacy.html">الخصوصية</a></li>
+                    <li><a href="terms.html" class="active">الشروط</a></li>
+                    <li><a href="cookies.html">الكوكيز</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- محتوى الصفحة -->
+    <div class="container">
+        <div class="page-header">
+            <div class="page-header-icon">
+                <i class="fas fa-file-contract"></i>
+            </div>
+            <h1>شروط الاستخدام</h1>
+            <p>نرحب بك في منصة ReviewQeem. يرجى قراءة هذه الشروط بعناية قبل استخدام الموقع</p>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="content-card">
+            <div class="terms-section">
+                <h2><i class="fas fa-check-circle"></i> قبول الشروط</h2>
+                <p>باستخدامك للموقع فأنت توافق على الشروط المذكورة هنا. هدفنا هو تقديم تجربة ممتعة وواضحة لجميع المستخدمين.</p>
+                <p>إذا كنت لا توافق على أي من هذه الشروط، يرجى التوقف عن استخدام الموقع فوراً.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-copy"></i> استخدام المحتوى</h2>
+                <p>يُسمح لك بقراءة ومشاركة الروابط، لكن لا يُسمح بنسخ المراجعات أو إعادة نشرها بصفة كاملة دون إذن مسبق.</p>
+                <p>جميع المحتويات المنشورة على الموقع محمية بحقوق الطبع والنشر وتُعد ملكاً لـ <strong>ريفيو قيم</strong> ما لم يُذكر خلاف ذلك.</p>
+                
+                <div class="highlight-box">
+                    <p><i class="fas fa-info-circle"></i> يُسمح بمشاركة أجزاء محدودة من المحتوى مع الإشارة إلى المصدر.</p>
+                </div>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-comments"></i> التعليقات</h2>
+                <p>يُرحّب بالمستخدمين لكتابة آرائهم. نرجو فقط الالتزام بالآتي:</p>
+                <ul>
+                    <li>الاحترام وعدم الإساءة للمستخدمين الآخرين أو الفريق</li>
+                    <li>عدم نشر محتوى مخالف للشريعة أو الأنظمة</li>
+                    <li>عدم إرسال روابط ضارة أو محتوى غير مرغوب فيه</li>
+                    <li>تجنب نشر معلومات شخصية خاصة بك أو بالآخرين</li>
+                </ul>
+                <p>يحق لإدارة الموقع حذف أي تعليق يخالف هذه الشروط دون إشعار مسبق.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-gamepad"></i> مراجعات الألعاب</h2>
+                <p>جميع المراجعات المكتوبة على الموقع يتم إعدادها من قبل فريق <strong>ريفيو قيم</strong>. وقد تحتوي على رأي شخصي مبني على تجربة واقعية.</p>
+                <p>نحرص على تقديم مراجعات موضوعية قدر الإمكان، لكن وجهات النظر تظل شخصية وقد تختلف من مستخدم لآخر.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-external-link-alt"></i> الروابط الخارجية</h2>
+                <p>بعض صفحات المراجعات قد تحتوي على روابط شراء لمواقع خارجية. نحن غير مسؤولين عن محتوى أو سياسة تلك المواقع.</p>
+                <p>يجب عليك مراجعة شروط الاستخدام وسياسة الخصوصية لأي موقع تزوره من خلال روابطنا.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-edit"></i> التعديلات</h2>
+                <p>قد يتم تحديث الشروط من وقت لآخر وسيتم الإعلان عنها في هذه الصفحة.</p>
+                <p>ننصح بمراجعة هذه الصفحة بشكل دوري للاطلاع على أي تحديثات.</p>
+                <p>استمرار استخدامك للموقع بعد نشر التعديلات يعني موافقتك على هذه التغييرات.</p>
+            </div>
+
+            <div class="contact-info">
+                <p>للاستفسارات أو لتبليغنا عن أي مخالفات للشروط:</p>
+                <a href="mailto:revwqeem@outlook.sa" class="contact-email">
+                    <i class="fas fa-envelope"></i>
+                    revwqeem@outlook.sa
+                </a>
+            </div>
+
+            <div class="last-updated">
+                <p>آخر تحديث: 1 يناير 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر الموحد -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن ReviewQeem</h3>
+                    <p>منصة عربية متخصصة في مراجعات وتقييمات الألعاب.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>روابط مهمة</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> الخصوصية</a></li>
+                        <li><a href="terms.html"><i class="fas fa-file-contract"></i> الشروط</a></li>
+                        <li><a href="cookies.html"><i class="fas fa-cookie-bite"></i> الكوكيز</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@reviewqeem.com"><i class="fas fa-envelope"></i> البريد</a></li>
+                        <li><a href="contact.html"><i class="fas fa-headset"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 ريفيو قيم. جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== إدارة القائمة المنسدلة =====
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // التنقل السلس بين الأقسام
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') && href !== '#') {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

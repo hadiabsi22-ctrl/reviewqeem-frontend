@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قائمة المراجعات - ReviewQeem</title>
+
+  <!-- SEO -->
+  <meta name="description" content="استعرض أحدث المراجعات الاحترافية للألعاب بتقييمات دقيقة وصور وملخصات.">
+  <meta name="keywords" content="مراجعات العاب, تقييم العاب, review qeem, gaming reviews">
+  <meta name="robots" content="index, follow">
+
+  <!-- Fonts + Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==================== RESET & VARIABLES ==================== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --primary: #6c5ce7;
+        --primary-dark: #5f3dc4;
+        --secondary: #00b894;
+        --dark-bg: #0d0d11;
+        --dark-light: #1a1a24;
+        --dark-lighter: #2a2a3a;
+        --text: #ffffff;
+        --text-secondary: #b8b8cc;
+        --border: #3a3a4a;
+        --radius: 12px;
+        --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+        font-family: 'Tajawal', sans-serif;
+        background: var(--dark-bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* ==================== HEADER ==================== */
+    .site-header {
+        background: var(--dark-light);
+        padding: 15px 0;
+        border-bottom: 2px solid var(--primary);
+        margin-bottom: 30px;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+    }
+
+    .logo-icon {
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+
+    .logo-text {
+        font-size: 1.6rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* ===== القائمة المنسدلة ===== */
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 5px;
+        z-index: 1001;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+        align-items: center;
+    }
+
+    .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+        position: relative;
+        padding: 5px 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: var(--primary);
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+        width: 100%;
+    }
+
+    /* ==================== PAGE HEADER ==================== */
+    .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px 0;
+    }
+
+    .page-header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .page-header p {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    /* ==================== SEARCH & FILTERS ==================== */
+    .search-container {
+        background: var(--dark-light);
+        border-radius: var(--radius);
+        padding: 20px;
+        margin-bottom: 30px;
+        border: 1px solid var(--border);
+    }
+
+    .search-box {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 15px 50px 15px 20px;
+        border-radius: var(--radius);
+        border: 2px solid var(--border);
+        background: var(--dark-bg);
+        color: var(--text);
+        font-size: 1rem;
+        transition: all 0.3s;
+        font-family: 'Tajawal', sans-serif;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        font-size: 1.2rem;
+    }
+
+    /* ==================== REVIEWS GRID ==================== */
+    .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .review-card {
+        background: var(--dark-light);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: var(--shadow);
+    }
+
+    .review-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+    }
+
+    .card-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--text);
+    }
+
+    .card-excerpt {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        border-top: 1px solid var(--border);
+        padding-top: 15px;
+    }
+
+    /* ==================== LOADING & EMPTY STATES ==================== */
+    .loading-state {
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .spinner {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        border: 5px solid var(--border);
+        border-top-color: var(--primary);
+        animation: spin 0.8s linear infinite;
+        margin: auto;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        color: var(--text-secondary);
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        color: var(--border);
+        margin-bottom: 10px;
+    }
+
+    .empty-state h3 {
+        margin-bottom: 10px;
+        color: var(--text);
+    }
+
+    /* ==================== FOOTER ==================== */
+    .site-footer {
+        background: var(--dark-light);
+        padding: 30px 0 15px;
+        border-top: 2px solid var(--primary);
+        margin-top: 50px;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-bottom: 25px;
+    }
+
+    .footer-section h3 {
+        color: var(--primary);
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+
+    .footer-section p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    .footer-links {
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 8px;
+    }
+
+    .footer-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary);
+    }
+
+    .copyright {
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        padding-top: 15px;
+        border-top: 1px solid var(--border);
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+
+        .nav-links {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 300px;
+            height: calc(100vh - 80px);
+            background: var(--dark-light);
+            flex-direction: column;
+            gap: 0;
+            padding: 20px;
+            border-left: 2px solid var(--primary);
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .nav-links.active {
+            right: 0;
+        }
+
+        .nav-links li {
+            width: 100%;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links a::after {
+            display: none;
+        }
+
+        .page-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+        }
+
+        .reviews-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .logo-text {
+            font-size: 1.4rem;
+        }
+
+        .nav-links {
+            width: 100%;
+        }
+
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+    }
+  </style>
+</head>
+
+<body>
+    <!-- الهيدر الموحد -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">RQ</div>
+                    <div class="logo-text">ريفيو قيم</div>
+                </a>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="reviews-list.html" class="active">المراجعات</a></li>
+                    <li><a href="categories.html">التصنيفات</a></li>
+                    <li><a href="search.html">البحث</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    <li><a href="privacy.html">الخصوصية</a></li>
+                    <li><a href="terms.html">الشروط</a></li>
+                    <li><a href="cookies.html">الكوكيز</a></li>
+                    <li><a href="admin-login.html" id="adminNavLink" style="display:none;">لوحة التحكم</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- محتوى الصفحة -->
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-list"></i> جميع المراجعات</h1>
+            <p>استعرض أحدث وأفضل مراجعات الألعاب من فريق ReviewQeem</p>
+        </div>
+
+        <!-- صندوق البحث -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" 
+                       id="searchInput" 
+                       class="search-input"
+                       placeholder="ابحث عن مراجعة...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
+        <!-- حالة التحميل -->
+        <div id="loadingState" class="loading-state">
+            <div class="spinner"></div>
+            <p style="margin-top:15px; color:var(--text-secondary);">جاري تحميل المراجعات...</p>
+        </div>
+
+        <!-- حالة عدم وجود نتائج -->
+        <div id="emptyState" class="empty-state" style="display:none;">
+            <i class="fas fa-search"></i>
+            <h3>لا توجد مراجعات</h3>
+            <p>لم يتم العثور على مراجعات تطابق معايير البحث.</p>
+        </div>
+
+        <!-- شبكة المراجعات -->
+        <div id="reviewsGrid" class="reviews-grid"></div>
+    </div>
+
+    <!-- الفوتر الموحد -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن ReviewQeem</h3>
+                    <p>منصة عربية متخصصة في مراجعات وتقييمات الألعاب.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>روابط مهمة</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> الخصوصية</a></li>
+                        <li><a href="terms.html"><i class="fas fa-file-contract"></i> الشروط</a></li>
+                        <li><a href="cookies.html"><i class="fas fa-cookie-bite"></i> الكوكيز</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@reviewqeem.com"><i class="fas fa-envelope"></i> البريد</a></li>
+                        <li><a href="contact.html"><i class="fas fa-headset"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 ريفيو قيم. جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== إدارة القائمة المنسدلة =====
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // ===== نظام المراجعات =====
+        let allReviews = [];
+        let searchResults = [];
+
+        // تحميل المراجعات
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadReviews();
+            setupEventListeners();
+            
+            // تحقق من وجود بحث في الرابط
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            if (query) {
+                document.getElementById('searchInput').value = query;
+                performSearch(query);
+            }
+        });
+
+        async function loadReviews() {
+            try {
+                const response = await fetch("https://reviewqeem.online/api/reviews/published");
+const data = await response.json();
+allReviews = data.data || data.reviews || [];
+
+
+                if (allReviews.length === 0) {
+                    allReviews = getSampleReviews();
+                }
+
+                console.log(`✅ تم تحميل ${allReviews.length} مراجعة`);
+                displayAllReviews();
+                hideLoadingState();
+                
+            } catch (error) {
+                console.error('❌ خطأ في تحميل المراجعات:', error);
+                allReviews = getSampleReviews();
+                displayAllReviews();
+                hideLoadingState();
+            }
+        }
+
+        // 🔧 الإصلاح: دالة getSampleReviews منظمة
+        function getSampleReviews() {
+            return [
+                {
+                    id: '1',
+                    title: 'مراجعة Elden Ring',
+                    summary: 'عالم مفتوح ضخم مليء بالتحديات والأسرار من FromSoftware',
+                    content: 'رحلة ملحمية في عالم FromSoftware الأكثر طموحاً',
+                    rating: 9.6,
+                    cover_image: getDefaultImage('Elden Ring'),
+                    platform: 'PC',
+                    release_date: '2022-02-25',
+                    review_date: '2022-03-10',
+                    // 🔧 الإصلاح: genre يمكن أن يكون string أو array
+                    genre: ['action', 'rpg'],
+                    developer: 'FromSoftware',
+                    status: 'published',
+                    views: 2500,
+                    comments: 120
+                },
+                {
+                    id: '2',
+                    title: 'مراجعة God of War Ragnarök',
+                    summary: 'ملحمة أسطورية تستكمل قصة كريتوس وأتريوس',
+                    content: 'تحليل شامل للعبة God of War Ragnarök وتطور الشخصيات',
+                    rating: 9.8,
+                    cover_image: getDefaultImage('God of War'),
+                    platform: 'PS5',
+                    release_date: '2022-11-09',
+                    review_date: '2022-11-20',
+                    // 🔧 الإصلاح: مثال لـ genre كـ string
+                    genre: 'action',
+                    developer: 'Santa Monica Studio',
+                    status: 'published',
+                    views: 1800,
+                    comments: 85
+                },
+                {
+                    id: '3',
+                    title: 'مراجعة The Legend of Zelda',
+                    summary: 'مغامرة جديدة في عالم هايرول المفتوح',
+                    content: 'مراجعة شاملة للإضافات الجديدة وآليات اللعب',
+                    rating: 9.7,
+                    cover_image: getDefaultImage('Zelda'),
+                    platform: 'Nintendo Switch',
+                    release_date: '2023-05-12',
+                    review_date: '2023-05-25',
+                    genre: ['adventure'],
+                    developer: 'Nintendo',
+                    status: 'published',
+                    views: 2200,
+                    comments: 95
+                }
+            ];
+        }
+
+        function setupEventListeners() {
+            const searchInput = document.getElementById('searchInput');
+            
+            // البحث عند الكتابة
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.trim();
+                if (searchTerm) {
+                    performSearch(searchTerm);
+                } else {
+                    displayAllReviews();
+                }
+            });
+            
+            // البحث عند الضغط على Enter
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const searchTerm = e.target.value.trim();
+                    if (searchTerm) {
+                        performSearch(searchTerm);
+                        updateURL(searchTerm);
+                    }
+                }
+            });
+        }
+
+        function performSearch(query) {
+            searchResults = allReviews.filter(review => {
+                // 🔧 الإصلاح: البحث في جميع الحقول مع تحويل للـ lowercase
+                const searchTerm = query.toLowerCase();
+                const searchFields = [
+                    review.title || '',
+                    review.summary || '',
+                    review.platform || '',
+                    getGenreString(review.genre),
+                    review.developer || ''
+                ].map(field => field.toLowerCase());
+                
+                return searchFields.some(field => field.includes(searchTerm));
+            });
+            
+            displaySearchResults();
+        }
+
+        function displayAllReviews() {
+            displayReviews(allReviews);
+        }
+
+        function displaySearchResults() {
+            displayReviews(searchResults);
+        }
+
+        function displayReviews(reviews) {
+            const reviewsGrid = document.getElementById('reviewsGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (!reviews || reviews.length === 0) {
+                reviewsGrid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            reviewsGrid.innerHTML = reviews.map(review => {
+                const imageUrl = review.coverImage || review.cover_image || getDefaultImage(review.title);
+                const summary = review.summary || 'لا يوجد وصف متوفر';
+                const reviewDate = new Date(review.review_date || review.release_date || review.createdAt).toLocaleDateString('ar-EG');
+                
+                return `
+                    <div class="review-card" onclick="viewReview('${review.id}')">
+                        <img src="${imageUrl}" 
+                             alt="${review.title}" 
+                             class="card-image"
+                             onerror="this.src='${getDefaultImage(review.title)}'">
+                        <div class="card-content">
+                            <h3 class="card-title">${review.title}</h3>
+                            <p class="card-excerpt">${summary.substring(0, 120)}...</p>
+                            <div class="card-footer">
+                                <span>${review.platform}</span>
+                                <span>${reviewDate}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 🔧 الإصلاح: دالة تحويل genre إلى string موحد
+        function getGenreString(genre) {
+            if (!genre) return '';
+            
+            if (Array.isArray(genre)) {
+                return genre.map(g => g.toLowerCase()).join(' ');
+            }
+            
+            // إذا كان string، تحويله إلى lowercase
+            return genre.toLowerCase();
+        }
+
+        // 🔧 الإصلاح: دالة الصورة الافتراضية المتناسقة مع الموقع
+        function getDefaultImage(title) {
+            // استخدام نفس الصورة الافتراضية من باقي الموقع
+            return 'https://reviewqeem.online/uploads/images/default-game.jpg';
+        }
+
+        function hideLoadingState() {
+            document.getElementById('loadingState').style.display = 'none';
+        }
+
+        function viewReview(reviewId) {
+           window.location.href = `review-view.html?id=${reviewId}`;
+
+        }
+
+        function updateURL(searchTerm) {
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('q', searchTerm);
+            window.history.pushState({}, '', newUrl);
+        }
+
+        // التحقق من صلاحية الأدمن
+        const adminSession = localStorage.getItem('admin_session_reviewqeem');
+        if (adminSession) {
+            try {
+                const session = JSON.parse(adminSession);
+                if (session.expires > Date.now()) {
+                    document.getElementById('adminNavLink').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('خطأ في جلسة الأدمن:', error);
+            }
+        }
+    </script>
+</body>
+</html>
+
