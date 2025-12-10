@@ -1,4 +1,4 @@
-// frontend/js/review-editor.js
+// js/review-editor.js
 BASE_URL: "https://reviewqeem.online/api",
 
 
@@ -28,7 +28,7 @@ tinymce.init({
             formData.append('file', file, filename);
             
             // رفع الملف لـ Upload Server
-            const response = await fetch('http://84.247.170.23:3001/upload', {
+            const response = await fetch('http://84.247.170.23:3001/api/upload', {
                 method: 'POST',
                 body: formData
             });
@@ -36,7 +36,7 @@ tinymce.init({
             const result = await response.json();
             
             if (result.success && result.url) {
-                success(result.url); // http://84.247.170.23/uploads/filename.jpg
+                success(result.url); // http://84.247.170.23/api/uploads/filename.jpg
             } else {
                 failure(result.message || 'فشل رفع الصورة');
             }

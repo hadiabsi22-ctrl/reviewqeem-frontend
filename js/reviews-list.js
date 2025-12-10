@@ -72,7 +72,7 @@ function renderReviews(list) {
 
         let img = r.cover_image || r.coverImage || r.mainImage || "";
         if (!img || img.includes("undefined") || img.includes("null") || img === "") {
-            img = "https://reviewqeem.online/uploads/images/default-game.jpg"; // صورة افتراضية
+            img = "https://reviewqeem.online/api/uploads/images/default-game.jpg"; // صورة افتراضية
         }
         // Ensure full URL if relative path
         if (img && !img.startsWith("http") && !img.startsWith("/")) {

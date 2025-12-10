@@ -905,7 +905,7 @@
 
                 <nav>
                     <ul>
-                        <li><a href="/admin.html">لوحة التحكم</a></li>
+                        <li><a href="admin.html">لوحة التحكم</a></li>
                         <li><a href="review-management.html" class="active">المراجعات</a></li>
                         <li><a href="comments-admin.html">التعليقات</a></li>
                         <li><a href="stats.html">الإحصائيات</a></li>
