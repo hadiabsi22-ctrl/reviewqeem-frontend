@@ -7,9 +7,8 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts - Tajawal للعربية -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
         /* ==================== RESET & VARIABLES ==================== */
@@ -23,49 +22,36 @@
             --primary: #6c5ce7;
             --primary-dark: #5f3dc4;
             --secondary: #00b894;
-            --accent: #fd79a8;
             --dark-bg: #0d0d11;
-            --darker-bg: #05050a;
-            --card-bg: #1a1a24;
-            --text-primary: #ffffff;
+            --dark-light: #1a1a24;
+            --dark-lighter: #2a2a3a;
+            --text: #ffffff;
             --text-secondary: #b8b8cc;
-            --border-color: #2a2a3a;
-            --success: #00b894;
-            --warning: #fdcb6e;
-            --danger: #e74c3c;
+            --border: #3a3a4a;
+            --radius: 12px;
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
-            --ps-blue: #003087;
-            --xbox-green: #107c10;
-            --nintendo-red: #e60012;
-            --steam-blue: #1b2838;
         }
 
         body {
-            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
-            color: var(--text-primary);
+            font-family: 'Tajawal', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* ==================== HEADER ==================== */
-        header {
-            background: rgba(13, 13, 17, 0.98);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
+        .site-header {
+            background: var(--dark-light);
             padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            margin-bottom: 40px;
-            box-shadow: var(--shadow);
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 30px;
         }
 
         .header-content {
@@ -77,158 +63,155 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            text-decoration: none;
         }
 
-        .logo-mark {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: radial-gradient(circle at 30% 30%, #ffeaa7 0%, #fd79a8 30%, #6c5ce7 70%, #241b52 100%);
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 1rem;
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(108, 92, 231, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .logo-mark:hover {
-            transform: rotate(15deg);
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
         }
 
         .logo-text {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #ffffff 0%, #dfe6e9 40%, #a29bfe 70%, #81ecec 100%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-transform: uppercase;
         }
 
-        nav ul {
+        /* ===== القائمة المنسدلة ===== */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .nav-links {
             display: flex;
             gap: 30px;
             list-style: none;
             align-items: center;
         }
 
-        nav a {
+        .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             position: relative;
-            padding: 8px 0;
+            padding: 5px 0;
         }
 
-        nav a:hover,
-        nav a.active {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--primary);
         }
 
-        nav a::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
             bottom: 0;
             right: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.3s ease;
+            background: var(--primary);
+            transition: width 0.3s;
         }
 
-        nav a:hover::after,
-        nav a.active::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
-        /* ==================== MAIN CONTENT ==================== */
-        .management-header {
+        /* ==================== PAGE HEADER ==================== */
+        .page-header {
             text-align: center;
-            margin-bottom: 50px;
-            padding: 40px 0;
-            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(0, 184, 148, 0.05) 100%);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            padding: 30px 0;
         }
 
-        .management-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        .page-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 800;
         }
 
-        .management-header p {
+        .page-header p {
             color: var(--text-secondary);
-            font-size: 1.2rem;
-            max-width: 600px;
+            font-size: 1.1rem;
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        /* ==================== CONTROLS ==================== */
+        .page-header-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* ==================== SEARCH & CONTROLS ==================== */
         .management-controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
             gap: 20px;
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
+            background: var(--dark-light);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
         }
 
         .search-box {
-            position: relative;
-            width: 350px;
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            min-width: 300px;
         }
 
         .search-box input {
-            width: 100%;
-            padding: 14px 50px 14px 20px;
-            background: var(--darker-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            border: 2px solid var(--border);
+            background: var(--dark-bg);
+            color: var(--text);
             font-size: 1rem;
-            transition: all 0.3s ease;
             font-family: 'Tajawal', sans-serif;
         }
 
         .search-box input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
             outline: none;
-        }
-
-        .search-box i {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-            font-size: 1.1rem;
+            border-color: var(--primary);
         }
 
         .btn {
-            padding: 14px 28px;
-            border-radius: 12px;
+            padding: 12px 25px;
+            border-radius: var(--radius);
             border: none;
             cursor: pointer;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -237,42 +220,37 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(108, 92, 231, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
         }
 
         /* ==================== REVIEWS TABLE ==================== */
         .reviews-table-container {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            padding: 25px;
+            border: 1px solid var(--border);
             margin-bottom: 40px;
+            box-shadow: var(--shadow);
         }
 
         .table-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
         }
 
         .table-header h2 {
             color: var(--primary);
-            font-size: 1.6rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-size: 1.3rem;
         }
 
         .reviews-table {
@@ -281,82 +259,59 @@
         }
 
         .reviews-table th {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
-            padding: 18px;
+            background: var(--dark-lighter);
+            padding: 15px;
             text-align: right;
-            color: var(--text-primary);
+            color: var(--text);
             font-weight: 600;
-            border-bottom: 2px solid var(--border-color);
-            font-size: 0.95rem;
+            border-bottom: 2px solid var(--border);
         }
 
         .reviews-table td {
-            padding: 18px;
-            border-bottom: 1px solid var(--border-color);
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
             color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .reviews-table tr {
-            transition: all 0.3s ease;
         }
 
         .reviews-table tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(-5px);
-        }
-
-        .reviews-table tr:hover td {
-            color: var(--text-primary);
+            background: var(--dark-lighter);
         }
 
         .review-image {
-            width: 70px;
-            height: 70px;
-            border-radius: 12px;
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
             object-fit: cover;
-            border: 2px solid var(--border-color);
-            transition: all 0.3s ease;
-            background: var(--darker-bg);
-        }
-
-        .reviews-table tr:hover .review-image {
-            border-color: var(--primary);
-            transform: scale(1.05);
         }
 
         .rating-badge {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: var(--primary);
             color: white;
-            padding: 6px 12px;
-            border-radius: 8px;
+            padding: 5px 10px;
+            border-radius: 6px;
             font-size: 0.85rem;
-            font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
         }
 
         .status-badge {
-            padding: 8px 16px;
-            border-radius: 25px;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .status-published {
             background: rgba(0, 184, 148, 0.2);
-            color: var(--success);
-            border: 1px solid var(--success);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
         }
 
         .status-draft {
             background: rgba(253, 203, 110, 0.2);
-            color: var(--warning);
-            border: 1px solid var(--warning);
+            color: #fdcb6e;
+            border: 1px solid #fdcb6e;
         }
 
         .action-buttons {
@@ -366,8 +321,7 @@
 
         .btn-sm {
             padding: 8px 16px;
-            font-size: 0.85rem;
-            border-radius: 8px;
+            font-size: 0.9rem;
         }
 
         .btn-edit {
@@ -379,19 +333,17 @@
         .btn-edit:hover {
             background: var(--primary);
             color: white;
-            transform: translateY(-2px);
         }
 
         .btn-delete {
             background: rgba(231, 76, 60, 0.15);
-            color: var(--danger);
-            border: 1px solid var(--danger);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
         }
 
         .btn-delete:hover {
-            background: var(--danger);
+            background: #e74c3c;
             color: white;
-            transform: translateY(-2px);
         }
 
         /* ==================== MODAL ==================== */
@@ -402,39 +354,34 @@
             right: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 2000;
-            backdrop-filter: blur(10px);
         }
 
         .modal-content {
-            background: var(--card-bg);
+            background: var(--dark-light);
             margin: 20px auto;
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
             width: 95%;
-            max-width: 1000px;
-            max-height: 95vh;
+            max-width: 900px;
+            max-height: 90vh;
             overflow-y: auto;
-            box-shadow: var(--shadow-lg);
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             padding-bottom: 20px;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
         }
 
         .modal-header h2 {
             color: var(--primary);
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-size: 1.5rem;
         }
 
         .close-modal {
@@ -443,9 +390,8 @@
             color: var(--text-secondary);
             font-size: 1.8rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -453,44 +399,40 @@
         }
 
         .close-modal:hover {
-            color: var(--danger);
             background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 10px;
-            color: var(--text-primary);
+            margin-bottom: 8px;
+            color: var(--text);
             font-weight: 600;
-            font-size: 1rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 14px 18px;
-            background: var(--darker-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
+            padding: 12px 15px;
+            background: var(--dark-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
             font-size: 1rem;
-            transition: all 0.3s ease;
             font-family: 'Tajawal', sans-serif;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
         }
 
         textarea.form-control {
             resize: vertical;
-            min-height: 120px;
-            line-height: 1.6;
+            min-height: 100px;
         }
 
         .form-row {
@@ -501,47 +443,42 @@
 
         .form-actions {
             display: flex;
-            gap: 20px;
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 2px solid var(--border-color);
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
         }
 
         .btn-secondary {
             background: transparent;
             color: var(--text-secondary);
-            border: 2px solid var(--border-color);
+            border: 2px solid var(--border);
         }
 
         .btn-secondary:hover {
-            background: var(--border-color);
-            color: var(--text-primary);
+            background: var(--border);
+            color: var(--text);
         }
 
         /* ==================== IMAGE UPLOAD ==================== */
         .image-upload-container {
-            margin-top: 15px;
-            padding: 20px;
-            background: var(--darker-bg);
-            border-radius: 12px;
-            border: 2px dashed var(--border-color);
+            margin-top: 10px;
+            padding: 15px;
+            background: var(--dark-bg);
+            border-radius: var(--radius);
+            border: 2px dashed var(--border);
             text-align: center;
-        }
-
-        .image-upload-container.dragover {
-            border-color: var(--primary);
-            background: rgba(108, 92, 231, 0.1);
         }
 
         .upload-area {
             cursor: pointer;
-            padding: 20px;
+            padding: 15px;
         }
 
         .upload-area i {
-            font-size: 3rem;
+            font-size: 2rem;
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .upload-area p {
@@ -552,15 +489,11 @@
         .upload-btn {
             background: var(--primary);
             color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 8px 16px;
+            border-radius: var(--radius);
             display: inline-block;
             cursor: pointer;
             margin-top: 10px;
-        }
-
-        .upload-btn:hover {
-            background: var(--primary-dark);
         }
 
         #image-upload-input {
@@ -572,18 +505,17 @@
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-            min-height: 120px;
-            align-items: flex-start;
+            min-height: 100px;
         }
 
         .image-preview {
             position: relative;
-            width: 120px;
-            height: 120px;
-            border-radius: 12px;
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 2px solid var(--border-color);
-            background: var(--darker-bg);
+            border: 2px solid var(--border);
+            background: var(--dark-bg);
         }
 
         .image-preview img {
@@ -596,7 +528,7 @@
             position: absolute;
             top: 5px;
             left: 5px;
-            background: var(--danger);
+            background: #e74c3c;
             color: white;
             border: none;
             border-radius: 50%;
@@ -609,223 +541,41 @@
             font-size: 0.8rem;
         }
 
-        .upload-progress {
-            width: 100%;
-            height: 5px;
-            background: var(--border-color);
-            border-radius: 3px;
-            margin-top: 10px;
-            overflow: hidden;
-            display: none;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* ==================== PURCHASE LINKS ==================== */
-        .purchase-links-section {
-            background: var(--darker-bg);
-            border-radius: 16px;
-            padding: 30px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            color: var(--primary);
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .platform-item {
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 14px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .platform-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .platform-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .platform-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .platform-name {
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .platform-inputs {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .platform-input {
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .platform-input label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .platform-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .platform-checkbox input {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .platform-checkbox label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-        }
-
-        .ps5 { background: linear-gradient(135deg, #003087, #0072ce); color: white; }
-        .pc { background: linear-gradient(135deg, #1b2838, #2a475e); color: white; }
-        .xbox-series { background: linear-gradient(135deg, #107c10, #5dc21e); color: white; }
-        .switch-icon { background: linear-gradient(135deg, #e60012, #ff6b6b); color: white; }
-
-        /* ==================== COMMENTS CONTROL ==================== */
-        .comments-control {
-            background: var(--darker-bg);
-            border-radius: 14px;
-            padding: 25px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .toggle-switch {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--border-color);
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background: var(--success);
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
         /* ==================== ALERT ==================== */
         .alert {
-            padding: 18px 25px;
-            border-radius: 12px;
-            margin: 25px 0;
-            font-weight: 600;
+            padding: 15px 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
             text-align: center;
             display: none;
         }
 
         .alert-success {
             background: rgba(0, 184, 148, 0.15);
-            color: var(--success);
-            border: 2px solid var(--success);
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
         }
 
         .alert-error {
             background: rgba(231, 76, 60, 0.15);
-            color: var(--danger);
-            border: 2px solid var(--danger);
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
         }
 
         /* ==================== LOADING & EMPTY ==================== */
         .loading-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 0;
         }
 
         .spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid var(--border-color);
+            border: 4px solid var(--border);
             border-top: 4px solid var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 25px;
+            margin: 0 auto 20px;
         }
 
         @keyframes spin {
@@ -835,115 +585,246 @@
 
         .empty-state {
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
+            color: var(--text-secondary);
         }
 
         .empty-state i {
-            font-size: 4rem;
-            color: var(--border-color);
-            margin-bottom: 25px;
-        }
-
-        .empty-state h3 {
-            color: var(--text-primary);
+            font-size: 3rem;
+            color: var(--border);
             margin-bottom: 15px;
         }
 
-        .empty-state p {
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background: var(--dark-light);
+            padding: 30px 0 15px;
+            border-top: 2px solid var(--primary);
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
             color: var(--text-secondary);
-            margin-bottom: 30px;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
         }
 
         /* ==================== RESPONSIVE ==================== */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 300px;
+                height: calc(100vh - 80px);
+                background: var(--dark-light);
+                flex-direction: column;
+                gap: 0;
+                padding: 20px;
+                border-left: 2px solid var(--primary);
+                transition: right 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
             .management-controls {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .search-box { width: 100%; }
-            .form-row { grid-template-columns: 1fr; }
-            .platforms-grid { grid-template-columns: 1fr; }
-            .action-buttons { flex-direction: column; }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- نظام الجلسة الجديد -->
+    <!-- نظام الجلسة -->
     <script>
-        // نظام الجلسة الجديد
         document.addEventListener("DOMContentLoaded", () => {
             const session = JSON.parse(localStorage.getItem("admin_session_reviewqeem"));
-
-            // لا توجد جلسة → رجوع إلى تسجيل الدخول
-            if (!session || !session.data) {
-                window.location.href = "admin.html";
-                return;
-            }
-
-            // انتهت الجلسة → تنظيف ورجوع للدخول
-            if (Date.now() > session.expires) {
+            
+            if (!session || !session.data || Date.now() > session.expires) {
                 localStorage.removeItem("admin_session_reviewqeem");
-                window.location.href = "admin.html";
+                window.location.href = "admin-login.html";
                 return;
             }
-
+            
             // تحديث الجلسة
             session.expires = Date.now() + (60 * 60 * 1000);
             localStorage.setItem("admin_session_reviewqeem", JSON.stringify(session));
         });
     </script>
 
-    <!-- Header -->
-    <header>
+    <!-- الهيدر الموحد -->
+    <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">
-                    <div class="logo-mark">RQ</div>
-                    <div class="logo-text">Reviewqeem</div>
-                </div>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">RQ</div>
+                    <div class="logo-text">ريفيو قيم</div>
+                </a>
 
-                <nav>
-                    <ul>
-                        <li><a href="/admin.html">لوحة التحكم</a></li>
-                        <li><a href="review-management.html" class="active">المراجعات</a></li>
-                        <li><a href="comments-admin.html">التعليقات</a></li>
-                        <li><a href="stats.html">الإحصائيات</a></li>
-                        <li><a href="settings.html">الإعدادات</a></li>
-                    </ul>
-                </nav>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="admin.html">لوحة التحكم</a></li>
+                    <li><a href="review-management.html" class="active">المراجعات</a></li>
+                    <li><a href="comments-admin.html">التعليقات</a></li>
+                    <li><a href="stats.html">الإحصائيات</a></li>
+                    <li><a href="settings.html">الإعدادات</a></li>
+                    <li><a href="index.html">الموقع الرئيسي</a></li>
+                    <li><a href="#" onclick="logoutAdmin()">تسجيل خروج</a></li>
+                </ul>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <div class="management-header">
-            <h1><i class="fas fa-newspaper"></i> إدارة المراجعات</h1>
-            <p>إدارة وعرض جميع مراجعات الألعاب - مربوط بالسيرفر الحقيقي</p>
+    <!-- محتوى الصفحة -->
+    <div class="container">
+        <div class="page-header">
+            <div class="page-header-icon">
+                <i class="fas fa-newspaper"></i>
+            </div>
+            <h1>إدارة المراجعات</h1>
+            <p>إدارة وعرض جميع مراجعات الألعاب في منصتك</p>
         </div>
 
-        <!-- Controls -->
+        <!-- أدوات التحكم -->
         <div class="management-controls">
             <div class="search-box">
-                <input type="text" id="search-reviews" placeholder="ابحث في المراجعات...">
-                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="ابحث في المراجعات...">
+                <button class="btn btn-primary" onclick="handleSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
 
-            <button class="btn btn-primary" id="btn-add-review">
+            <button class="btn btn-primary" onclick="openAddModal()">
                 <i class="fas fa-plus"></i>
                 إضافة مراجعة جديدة
             </button>
         </div>
 
-        <!-- Alert -->
-        <div id="alert-message" class="alert"></div>
+        <!-- التنبيهات -->
+        <div id="alertMessage" class="alert"></div>
 
-        <!-- Reviews Table -->
+        <!-- جدول المراجعات -->
         <div class="reviews-table-container">
             <div class="table-header">
                 <h2><i class="fas fa-list"></i> قائمة المراجعات</h2>
-                <span id="reviews-count" style="color: var(--text-secondary); font-weight: 600;">0 مراجعة</span>
+                <span id="reviewsCount" style="color: var(--text-secondary);">0 مراجعة</span>
             </div>
 
             <table class="reviews-table">
@@ -954,77 +835,105 @@
                         <th>التقييم</th>
                         <th>المطور</th>
                         <th>الحالة</th>
-                        <th>تاريخ الإصدار</th>
                         <th>الإجراءات</th>
                     </tr>
                 </thead>
-                <tbody id="reviews-table-body"></tbody>
+                <tbody id="reviewsTableBody"></tbody>
             </table>
 
-            <div id="loading-state" class="loading-state">
+            <div id="loadingState" class="loading-state">
                 <div class="spinner"></div>
-                <p style="color: var(--text-secondary);">جاري تحميل المراجعات من السيرفر...</p>
+                <p style="color: var(--text-secondary);">جاري تحميل المراجعات...</p>
             </div>
 
-            <div id="empty-state" class="empty-state" style="display: none;">
+            <div id="emptyState" class="empty-state" style="display: none;">
                 <i class="fas fa-inbox"></i>
                 <h3>لا توجد مراجعات</h3>
                 <p>لم تقم بإضافة أي مراجعات حتى الآن.</p>
-                <button class="btn btn-primary" id="btn-add-first">
+                <button class="btn btn-primary" onclick="openAddModal()">
                     <i class="fas fa-plus"></i>
                     إضافة أول مراجعة
                 </button>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- Modal -->
-    <div id="review-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title"><i class="fas fa-plus-circle"></i> إضافة مراجعة جديدة</h2>
-                <button class="close-modal" id="btn-close-modal">&times;</button>
+    <!-- الفوتر الموحد -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن ReviewQeem</h3>
+                    <p>منصة عربية متخصصة في مراجعات وتقييمات الألعاب.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>لوحة التحكم</h3>
+                    <ul class="footer-links">
+                        <li><a href="admin.html"><i class="fas fa-tachometer-alt"></i> لوحة التحكم الرئيسية</a></li>
+                        <li><a href="review-management.html"><i class="fas fa-newspaper"></i> إدارة المراجعات</a></li>
+                        <li><a href="comments-admin.html"><i class="fas fa-comments"></i> إدارة التعليقات</a></li>
+                        <li><a href="stats.html"><i class="fas fa-chart-bar"></i> الإحصائيات</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@reviewqeem.com"><i class="fas fa-envelope"></i> البريد</a></li>
+                        <li><a href="contact.html"><i class="fas fa-headset"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <form id="review-form">
-                <input type="hidden" id="review-id">
+            <div class="copyright">
+                <p>© 2025 ريفيو قيم. جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- المودال -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-plus-circle"></i> إضافة مراجعة جديدة</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="reviewForm" onsubmit="handleFormSubmit(event)">
+                <input type="hidden" id="reviewId">
 
                 <div class="form-row">
                     <div class="form-group">
                         <label><i class="fas fa-heading"></i> عنوان المراجعة</label>
-                        <input type="text" id="review-title" class="form-control" placeholder="أدخل عنوان المراجعة" required>
+                        <input type="text" id="reviewTitle" class="form-control" placeholder="أدخل عنوان المراجعة" required>
                     </div>
 
                     <div class="form-group">
                         <label><i class="fas fa-code"></i> المطور</label>
-                        <input type="text" id="review-developer" class="form-control" placeholder="اسم الشركة المطورة" required>
+                        <input type="text" id="reviewDeveloper" class="form-control" placeholder="اسم الشركة المطورة" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label><i class="fas fa-calendar"></i> تاريخ الإصدار</label>
-                        <input type="date" id="review-release-date" class="form-control" required>
+                        <input type="date" id="reviewReleaseDate" class="form-control" required>
                     </div>
 
                     <div class="form-group">
                         <label><i class="fas fa-tags"></i> نوع اللعبة</label>
-                        <select id="review-genre" class="form-control" required>
+                        <select id="reviewGenre" class="form-control" required>
                             <option value="">اختر نوع اللعبة</option>
                             <option value="action">أكشن</option>
                             <option value="adventure">مغامرة</option>
-                            <option value="rpg">ألعاب أدوار (RPG)</option>
+                            <option value="rpg">ألعاب أدوار</option>
                             <option value="horror">رعب</option>
                             <option value="shooter">تصويب</option>
                             <option value="racing">سباقات</option>
                             <option value="sports">رياضة</option>
                             <option value="strategy">إستراتيجية</option>
                             <option value="simulation">محاكاة</option>
-                            <option value="fighting">قتال</option>
-                            <option value="puzzle">ألغاز</option>
-                            <option value="open-world">عالم مفتوح</option>
-                            <option value="indie">ألعاب مستقلة</option>
-                            <option value="survival">بقاء</option>
                         </select>
                     </div>
                 </div>
@@ -1032,194 +941,12 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label><i class="fas fa-star"></i> التقييم (من 10)</label>
-                        <input type="number" id="review-rating" class="form-control" min="0" max="10" step="0.1" placeholder="9.5" required>
+                        <input type="number" id="reviewRating" class="form-control" min="0" max="10" step="0.1" placeholder="9.5" required>
                     </div>
 
                     <div class="form-group">
-                        <label><i class="fas fa-tag"></i> السعر ($)</label>
-                        <input type="number" id="review-price" class="form-control" min="0" step="0.01" placeholder="59.99">
-                    </div>
-                </div>
-
-                <!-- حقل رفع الصورة المحلي -->
-                <div class="form-group">
-                    <label><i class="fas fa-image"></i> صورة الغلاف</label>
-                    <div class="image-upload-container" id="image-upload-container">
-                        <div class="upload-area" id="upload-area">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>اسحب وأفلت الصورة هنا أو</p>
-                            <div class="upload-btn">اختر صورة</div>
-                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;">
-                                يسمح بـ JPEG, PNG, GIF, WebP (10MB كحد أقصى)
-                            </p>
-                        </div>
-                        <input type="file" id="image-upload-input" accept="image/*">
-                        <div class="upload-progress" id="upload-progress">
-                            <div class="progress-bar" id="progress-bar"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- معاينة الصورة -->
-                    <div class="image-preview-container" id="cover-preview"></div>
-                    
-                    <!-- رابط الصورة المحفوظة -->
-                    <input type="hidden" id="review-image-url" value="">
-                    <div id="image-upload-info" style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem; display: none;">
-                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                        <span id="uploaded-filename"></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-align-left"></i> الملخص</label>
-                    <textarea id="review-summary" class="form-control" placeholder="ملخص قصير..." rows="3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-images"></i> لقطات الشاشة</label>
-                    <div class="image-upload-container" id="screenshots-upload-container">
-                        <div class="upload-area" id="screenshots-upload-area">
-                            <i class="fas fa-layer-group"></i>
-                            <p>اسحب وأفلت الصور هنا أو</p>
-                            <div class="upload-btn">اختر عدة صور</div>
-                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;">
-                                يسمح بـ 10 صور كحد أقصى (10MB لكل صورة)
-                            </p>
-                        </div>
-                        <input type="file" id="screenshots-upload-input" accept="image/*" multiple>
-                    </div>
-                    <div class="image-preview-container" id="screenshots-preview"></div>
-                    <input type="hidden" id="review-screenshots-urls" value="">
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-plus-circle" style="color: var(--success);"></i> الإيجابيات</label>
-                    <textarea id="review-pros" class="form-control" placeholder="كل نقطة في سطر جديد..." rows="3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-minus-circle" style="color: var(--danger);"></i> السلبيات</label>
-                    <textarea id="review-cons" class="form-control" placeholder="كل نقطة في سطر جديد..." rows="3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-file-alt"></i> المحتوى الكامل</label>
-                    <textarea id="review-content" class="form-control" placeholder="المحتوى الكامل للمراجعة..." rows="6"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-tags"></i> الوسوم</label>
-                    <input type="text" id="review-tags" class="form-control" placeholder="أكشن, مغامرة, RPG">
-                </div>
-
-                <!-- Purchase Links -->
-                <div class="purchase-links-section">
-                    <h3 class="section-title"><i class="fas fa-shopping-cart"></i> روابط الشراء</h3>
-                    
-                    <div class="platforms-grid">
-                        <div class="platform-item">
-                            <div class="platform-header">
-                                <div class="platform-icon ps5">PS5</div>
-                                <span class="platform-name">PlayStation 5</span>
-                            </div>
-                            <div class="platform-inputs">
-                                <div class="platform-input">
-                                    <label>السعر</label>
-                                    <input type="number" class="form-control platform-price" data-platform="ps5" step="0.01">
-                                </div>
-                                <div class="platform-input">
-                                    <label>الرابط</label>
-                                    <input type="url" class="form-control platform-url" data-platform="ps5">
-                                </div>
-                            </div>
-                            <div class="platform-checkbox">
-                                <input type="checkbox" class="platform-enabled" data-platform="ps5" id="enable-ps5">
-                                <label for="enable-ps5">تفعيل</label>
-                            </div>
-                        </div>
-
-                        <div class="platform-item">
-                            <div class="platform-header">
-                                <div class="platform-icon pc">PC</div>
-                                <span class="platform-name">كمبيوتر</span>
-                            </div>
-                            <div class="platform-inputs">
-                                <div class="platform-input">
-                                    <label>السعر</label>
-                                    <input type="number" class="form-control platform-price" data-platform="pc" step="0.01">
-                                </div>
-                                <div class="platform-input">
-                                    <label>الرابط</label>
-                                    <input type="url" class="form-control platform-url" data-platform="pc">
-                                </div>
-                            </div>
-                            <div class="platform-checkbox">
-                                <input type="checkbox" class="platform-enabled" data-platform="pc" id="enable-pc">
-                                <label for="enable-pc">تفعيل</label>
-                            </div>
-                        </div>
-
-                        <div class="platform-item">
-                            <div class="platform-header">
-                                <div class="platform-icon xbox-series">XSX</div>
-                                <span class="platform-name">Xbox Series X/S</span>
-                            </div>
-                            <div class="platform-inputs">
-                                <div class="platform-input">
-                                    <label>السعر</label>
-                                    <input type="number" class="form-control platform-price" data-platform="xbox-series" step="0.01">
-                                </div>
-                                <div class="platform-input">
-                                    <label>الرابط</label>
-                                    <input type="url" class="form-control platform-url" data-platform="xbox-series">
-                                </div>
-                            </div>
-                            <div class="platform-checkbox">
-                                <input type="checkbox" class="platform-enabled" data-platform="xbox-series" id="enable-xbox-series">
-                                <label for="enable-xbox-series">تفعيل</label>
-                            </div>
-                        </div>
-
-                        <div class="platform-item">
-                            <div class="platform-header">
-                                <div class="platform-icon switch-icon">NS</div>
-                                <span class="platform-name">Nintendo Switch</span>
-                            </div>
-                            <div class="platform-inputs">
-                                <div class="platform-input">
-                                    <label>السعر</label>
-                                    <input type="number" class="form-control platform-price" data-platform="switch" step="0.01">
-                                </div>
-                                <div class="platform-input">
-                                    <label>الرابط</label>
-                                    <input type="url" class="form-control platform-url" data-platform="switch">
-                                </div>
-                            </div>
-                            <div class="platform-checkbox">
-                                <input type="checkbox" class="platform-enabled" data-platform="switch" id="enable-switch">
-                                <label for="enable-switch">تفعيل</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comments -->
-                <div class="comments-control">
-                    <h3 class="section-title"><i class="fas fa-comments"></i> التعليقات</h3>
-                    <div class="toggle-switch">
-                        <label class="switch">
-                            <input type="checkbox" id="comments-enabled" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span>تفعيل التعليقات</span>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label><i class="fas fa-gamepad"></i> المنصة الرئيسية</label>
-                        <select id="review-platform" class="form-control" required>
-                            <option value="Multi Platform">متعدد المنصات</option>
+                        <label><i class="fas fa-gamepad"></i> المنصة</label>
+                        <select id="reviewPlatform" class="form-control" required>
                             <option value="PC">كمبيوتر</option>
                             <option value="PS5">PlayStation 5</option>
                             <option value="PS4">PlayStation 4</option>
@@ -1227,22 +954,53 @@
                             <option value="Switch">Nintendo Switch</option>
                         </select>
                     </div>
+                </div>
 
+                <!-- 🔧 الإصلاح: رفع الصورة -->
+                <div class="form-group">
+                    <label><i class="fas fa-image"></i> صورة الغلاف</label>
+                    <div class="image-upload-container" id="imageUploadContainer">
+                        <div class="upload-area" onclick="document.getElementById('imageUploadInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>انقر لاختيار صورة أو اسحبها هنا</p>
+                            <div class="upload-btn">اختر صورة</div>
+                        </div>
+                        <input type="file" id="imageUploadInput" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <!-- معاينة الصورة -->
+                    <div class="image-preview-container" id="coverPreview"></div>
+                    
+                    <!-- رابط الصورة المحملة -->
+                    <input type="hidden" id="reviewImageUrl">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> الملخص</label>
+                    <textarea id="reviewSummary" class="form-control" placeholder="ملخص قصير..." rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-file-alt"></i> المحتوى الكامل</label>
+                    <textarea id="reviewContent" class="form-control" placeholder="المحتوى الكامل للمراجعة..." rows="6"></textarea>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group">
                         <label><i class="fas fa-circle"></i> الحالة</label>
-                        <select id="review-status" class="form-control">
-                            <option value="published" selected>منشور ✅</option>
+                        <select id="reviewStatus" class="form-control">
+                            <option value="published" selected>منشور</option>
                             <option value="draft">مسودة</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="btn-cancel">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">
                         <i class="fas fa-times"></i> إلغاء
                     </button>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> حفظ ونشر المراجعة
+                        <i class="fas fa-save"></i> حفظ المراجعة
                     </button>
                 </div>
             </form>
@@ -1250,328 +1008,144 @@
     </div>
 
     <script>
-        // ==================== إعدادات السيرفر ====================
-        const API_BASE = "https://reviewqeem.online/api";
+        // ===== إدارة القائمة المنسدلة =====
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
 
-
-
-        const API_BASE_URL = API_BASE + "/reviews";
-        const UPLOAD_API_URL = API_BASE + "/upload/single";
-        const MULTI_UPLOAD_API_URL = API_BASE + "/upload/multiple";
-
-        // ==================== المتغيرات ====================
-        let allReviews = [];
-        let currentEditId = null;
-        let uploadedCoverImage = '';
-        let uploadedScreenshots = [];
-
-        // ==================== صور الألعاب ====================
-        const GAME_IMAGES = {
-            "silent hill": "https://reviewqeem.online/uploads/images/silent-hill.jpg",
-            "silent hill 2": "https://reviewqeem.online/uploads/images/silent-hill-2.jpg",
-            "سايلنت هيل": "https://reviewqeem.online/uploads/images/silent-hill.jpg",
-            "الكابوس": "https://reviewqeem.online/uploads/images/silent-hill.jpg",
-            "resident evil": "https://reviewqeem.online/uploads/images/resident-evil.jpg",
-            "god of war": "https://reviewqeem.online/uploads/images/god-of-war.jpg",
-            "elden ring": "https://reviewqeem.online/uploads/images/elden-ring.jpg",
-            "zelda": "https://reviewqeem.online/uploads/images/zelda.jpg",
-            "gta": "https://reviewqeem.online/uploads/images/gta.jpg",
-            "cyberpunk": "https://reviewqeem.online/uploads/images/cyberpunk.jpg",
-            "call of duty": "https://reviewqeem.online/uploads/images/cod.jpg",
-            "fifa": "https://reviewqeem.online/uploads/images/fifa.jpg",
-            "minecraft": "https://reviewqeem.online/uploads/images/minecraft.jpg",
-            "spider-man": "https://reviewqeem.online/uploads/images/spiderman.jpg",
-            "the last of us": "https://reviewqeem.online/uploads/images/last-of-us.jpg",
-            "ghost of tsushima": "https://reviewqeem.online/uploads/images/ghost-tsushima.jpg",
-            "final fantasy": "https://reviewqeem.online/uploads/images/final-fantasy.jpg",
-            "baldur": "https://reviewqeem.online/uploads/images/baldur.jpg"
-        };
-
-        const GENRE_IMAGES = {
-            "horror": "https://reviewqeem.online/uploads/images/horror.jpg",
-            "action": "https://reviewqeem.online/uploads/images/action.jpg",
-            "adventure": "https://reviewqeem.online/uploads/images/adventure.jpg",
-            "rpg": "https://reviewqeem.online/uploads/images/rpg.jpg",
-            "shooter": "https://reviewqeem.online/uploads/images/shooter.jpg",
-            "sports": "https://reviewqeem.online/uploads/images/sports.jpg"
-        };
-
-        // ==================== التهيئة ====================
-        document.addEventListener('DOMContentLoaded', async function() {
-            console.log('🚀 بدء تحميل إدارة المراجعات');
-            
-            // تحميل المراجعات وإعداد الصفحة
-            loadReviews();
-            setupEventListeners();
-            setupImageUpload();
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
         });
 
-        // ==================== إعداد رفع الصور ====================
-        function setupImageUpload() {
-            // صورة الغلاف
-            const uploadContainer = document.getElementById('image-upload-container');
-            const uploadArea = document.getElementById('upload-area');
-            const fileInput = document.getElementById('image-upload-input');
-            
-            // لقطات الشاشة
-            const screenshotsContainer = document.getElementById('screenshots-upload-container');
-            const screenshotsArea = document.getElementById('screenshots-upload-area');
-            const screenshotsInput = document.getElementById('screenshots-upload-input');
-            
-            // أحداث سحب وإفلات
-            [uploadContainer, screenshotsContainer].forEach(container => {
-                if (!container) return;
-                
-                container.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    this.classList.add('dragover');
-                });
-                
-                container.addEventListener('dragleave', function(e) {
-                    e.preventDefault();
-                    this.classList.remove('dragover');
-                });
-                
-                container.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    this.classList.remove('dragover');
-                    
-                    const files = e.dataTransfer.files;
-                    if (this.id === 'image-upload-container') {
-                        handleCoverImageUpload(files[0]);
-                    } else {
-                        handleScreenshotsUpload(Array.from(files));
-                    }
-                });
-            });
-            
-            // نقر على منطقة الرفع
-            if (uploadArea) uploadArea.addEventListener('click', () => fileInput.click());
-            if (screenshotsArea) screenshotsArea.addEventListener('click', () => screenshotsInput.click());
-            
-            // تغيير الملف
-            if (fileInput) {
-                fileInput.addEventListener('change', (e) => {
-                    if (e.target.files[0]) {
-                        handleCoverImageUpload(e.target.files[0]);
-                    }
-                });
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             }
-            
-            if (screenshotsInput) {
-                screenshotsInput.addEventListener('change', (e) => {
-                    if (e.target.files.length > 0) {
-                        handleScreenshotsUpload(Array.from(e.target.files));
-                    }
-                });
-            }
-        }
+        });
 
-        // ==================== رفع صورة الغلاف ====================
-        async function handleCoverImageUpload(file) {
-            if (!file) return;
-            
-            // التحقق من نوع وحجم الملف
-            if (!file.type.startsWith('image/')) {
-                showAlert('❌ الملف يجب أن يكون صورة', 'error');
-                return;
-            }
-            
-            if (file.size > 10 * 1024 * 1024) {
-                showAlert('❌ حجم الملف كبير جداً (الحد الأقصى 10MB)', 'error');
-                return;
-            }
-            
-            // إظهار شريط التقدم
-            const progressBar = document.getElementById('progress-bar');
-            const progressContainer = document.getElementById('upload-progress');
-            if (progressContainer) progressContainer.style.display = 'block';
-            if (progressBar) progressBar.style.width = '0%';
+        // ===== نظام إدارة المراجعات =====
+        const API_BASE = "https://reviewqeem.online/api";
+        const REVIEWS_API = `${API_BASE}/reviews`;
+        const UPLOAD_API = `${API_BASE}/upload/single`;
+
+        let allReviews = [];
+        let currentEditId = null;
+        let uploadedImage = '';
+
+        // تحميل المراجعات
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadReviews();
+            setupEventListeners();
+        });
+
+        async function loadReviews() {
+            showLoading();
             
             try {
-                const formData = new FormData();
-                formData.append('image', file);
-                
-                const response = await fetch(UPLOAD_API_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                // محاكاة شريط التقدم
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += 10;
-                    if (progressBar) progressBar.style.width = progress + '%';
-                    if (progress >= 90) clearInterval(interval);
-                }, 100);
-                
+                const response = await fetch(REVIEWS_API);
                 const data = await response.json();
-                clearInterval(interval);
-                if (progressBar) progressBar.style.width = '100%';
                 
                 if (data.success) {
-                    uploadedCoverImage = data.data.url;
-                    document.getElementById('review-image-url').value = uploadedCoverImage;
+                    // 🔧 الإصلاح: تحويل البيانات من السيرفر
+                    allReviews = (data.data || data.reviews || []).map(review => ({
+                        id: review._id || review.id,
+                        title: review.title || '',
+                        developer: review.developer || '',
+                        rating: review.rating || 0,
+                        genre: review.genre || '',
+                        platform: review.platform || 'PC',
+                        status: review.status || 'published',
+                        coverImage: review.coverImage || review.cover_image || getDefaultImage(review.title),
+                        releaseDate: review.releaseDate || review.release_date || '',
+                        summary: review.summary || '',
+                        content: review.content || ''
+                    }));
                     
-                    // إظهار المعلومات
-                    const uploadInfo = document.getElementById('image-upload-info');
-                    const filenameSpan = document.getElementById('uploaded-filename');
-                    if (uploadInfo) uploadInfo.style.display = 'block';
-                    if (filenameSpan) filenameSpan.textContent = `تم رفع: ${file.name}`;
-                    
-                    // معاينة الصورة
-                    updateImagePreview(uploadedCoverImage);
-                    
-                    setTimeout(() => {
-                        if (progressContainer) progressContainer.style.display = 'none';
-                        if (progressBar) progressBar.style.width = '0%';
-                    }, 1000);
-                    
-                    showAlert('✅ تم رفع الصورة بنجاح', 'success');
+                    console.log(`✅ تم تحميل ${allReviews.length} مراجعة`);
+                    displayReviews(allReviews);
                 } else {
                     throw new Error(data.message);
                 }
             } catch (error) {
-                console.error('❌ خطأ في رفع الصورة:', error);
-                showAlert('❌ فشل رفع الصورة: ' + error.message, 'error');
-                if (progressContainer) progressContainer.style.display = 'none';
-                if (progressBar) progressBar.style.width = '0%';
+                console.error('❌ خطأ في تحميل المراجعات:', error);
+                showAlert('تعذر تحميل المراجعات من السيرفر', 'error');
+                allReviews = [];
+                displayReviews([]);
             }
+            
+            hideLoading();
         }
 
-        // ==================== رفع لقطات الشاشة ====================
-        async function handleScreenshotsUpload(files) {
-            if (!files || files.length === 0) return;
+        function displayReviews(reviews) {
+            const tbody = document.getElementById('reviewsTableBody');
+            const emptyState = document.getElementById('emptyState');
+            const reviewsCount = document.getElementById('reviewsCount');
             
-            // التحقق من عدد الملفات
-            const maxFiles = 10;
-            if (files.length > maxFiles) {
-                showAlert(`❌ الحد الأقصى ${maxFiles} صور`, 'error');
-                files = files.slice(0, maxFiles);
-            }
-            
-            // التحقق من حجم الملفات
-            for (const file of files) {
-                if (file.size > 10 * 1024 * 1024) {
-                    showAlert('❌ حجم الملف كبير جداً (الحد الأقصى 10MB)', 'error');
-                    return;
-                }
-            }
-            
-            try {
-                const formData = new FormData();
-                files.forEach(file => formData.append('images', file));
-                
-                const response = await fetch(MULTI_UPLOAD_API_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    // إضافة الصور الجديدة للمصفوفة
-                    const newScreenshots = data.data.map(item => item.url);
-                    uploadedScreenshots = [...uploadedScreenshots, ...newScreenshots];
-                    
-                    // تحديث معاينة الصور
-                    updateScreenshotsPreview();
-                    
-                    showAlert(`✅ تم رفع ${newScreenshots.length} صورة بنجاح`, 'success');
-                } else {
-                    throw new Error(data.message);
-                }
-            } catch (error) {
-                console.error('❌ خطأ في رفع لقطات الشاشة:', error);
-                showAlert('❌ فشل رفع الصور: ' + error.message, 'error');
-            }
-        }
-
-        // ==================== معاينة صورة الغلاف ====================
-        function updateImagePreview(url) {
-            const container = document.getElementById('cover-preview');
-            if (!container) return;
-            
-            if (!url) {
-                container.innerHTML = '';
+            if (!reviews || reviews.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.style.display = 'block';
+                reviewsCount.textContent = '0 مراجعة';
                 return;
             }
             
-            const fullUrl = url.startsWith('http') ? url : `https://reviewqeem-backend-1.onrender.com${url}`;
-
+            emptyState.style.display = 'none';
             
-            container.innerHTML = `
-                <div class="image-preview">
-                    <img src="${fullUrl}" onerror="this.src='https://reviewqeem.online/uploads/images/default-game.jpg'">
-                    <button type="button" class="remove-image" onclick="removeCoverImage()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            `;
-        }
-
-        // ==================== معاينة لقطات الشاشة ====================
-        function updateScreenshotsPreview() {
-            const container = document.getElementById('screenshots-preview');
-            if (!container) return;
+            tbody.innerHTML = reviews.map(review => `
+                <tr>
+                    <td>
+                        <img src="${review.coverImage}" 
+                             alt="${review.title}" 
+                             class="review-image"
+                             onerror="this.src='${getDefaultImage(review.title)}'">
+                    </td>
+                    <td>
+                        <strong style="color: var(--text);">${review.title}</strong>
+                        <br>
+                        <small style="color: var(--text-secondary);">${review.platform}</small>
+                    </td>
+                    <td><span class="rating-badge"><i class="fas fa-star"></i> ${review.rating}/10</span></td>
+                    <td>${review.developer}</td>
+                    <td>
+                        <span class="status-badge ${review.status === 'published' ? 'status-published' : 'status-draft'}">
+                            ${review.status === 'published' ? 'منشور' : 'مسودة'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-edit btn-sm" onclick="editReview('${review.id}')">
+                                <i class="fas fa-edit"></i> تعديل
+                            </button>
+                            <button class="btn btn-delete btn-sm" onclick="deleteReview('${review.id}')">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
             
-            container.innerHTML = uploadedScreenshots.map((url, index) => {
-                const fullUrl = url.startsWith('http') ? url : `https://reviewqeem.online${url}`;
-                return `
-                    <div class="image-preview">
-                        <img src="${fullUrl}" onerror="this.src='https://reviewqeem.online/uploads/images/default-game.jpg'">
-                        <button type="button" class="remove-image" onclick="removeScreenshot(${index})">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                `;
-            }).join('');
-            
-            // تحديث الحقل المخفي
-            const hiddenInput = document.getElementById('review-screenshots-urls');
-            if (hiddenInput) hiddenInput.value = JSON.stringify(uploadedScreenshots);
+            reviewsCount.textContent = `${reviews.length} مراجعة`;
         }
 
-        // ==================== حذف صورة الغلاف ====================
-        function removeCoverImage() {
-            uploadedCoverImage = '';
-            const imageUrlInput = document.getElementById('review-image-url');
-            const uploadInfo = document.getElementById('image-upload-info');
-            if (imageUrlInput) imageUrlInput.value = '';
-            if (uploadInfo) uploadInfo.style.display = 'none';
-            updateImagePreview('');
-        }
-
-        // ==================== حذف لقطة شاشة ====================
-        function removeScreenshot(index) {
-            uploadedScreenshots.splice(index, 1);
-            updateScreenshotsPreview();
-        }
-
-        // ==================== ربط الأحداث ====================
         function setupEventListeners() {
-            // زر إضافة مراجعة
-            const addBtn = document.getElementById('btn-add-review');
-            const addFirstBtn = document.getElementById('btn-add-first');
-            if (addBtn) addBtn.addEventListener('click', openAddModal);
-            if (addFirstBtn) addFirstBtn.addEventListener('click', openAddModal);
-            
-            // إغلاق المودال
-            const closeBtn = document.getElementById('btn-close-modal');
-            const cancelBtn = document.getElementById('btn-cancel');
-            if (closeBtn) closeBtn.addEventListener('click', closeModal);
-            if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+            // رفع الصورة
+            const imageInput = document.getElementById('imageUploadInput');
+            if (imageInput) {
+                imageInput.addEventListener('change', handleImageUpload);
+            }
             
             // البحث
-            const searchInput = document.getElementById('search-reviews');
-            if (searchInput) searchInput.addEventListener('input', handleSearch);
-            
-            // النموذج
-            const form = document.getElementById('review-form');
-            if (form) form.addEventListener('submit', handleFormSubmit);
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    handleSearch();
+                });
+            }
             
             // إغلاق المودال بالنقر خارجها
-            const modal = document.getElementById('review-modal');
+            const modal = document.getElementById('reviewModal');
             if (modal) {
                 modal.addEventListener('click', function(e) {
                     if (e.target === this) closeModal();
@@ -1579,460 +1153,255 @@
             }
         }
 
-        // ==================== تحويل بيانات السيرفر ====================
-        function mapServerReview(r) {
-            if (!r) return null;
-            return {
-                id: r._id || r.id,
-                title: r.title || "",
-                developer: r.developer || "",
-                release_date: r.releaseDate || r.release_date || "",
-                genre: r.genre || "",
-                rating: typeof r.rating === "number" ? r.rating : 0,
-                price: r.price || 0,
-                cover_image: r.cover_image || r.mainImage || r.coverImage || "https://reviewqeem.online/uploads/images/default-game.jpg",
-                summary: r.summary || "",
-                screenshots: Array.isArray(r.screenshots) ? r.screenshots : [],
-                pros: Array.isArray(r.pros) ? r.pros : [],
-                cons: Array.isArray(r.cons) ? r.cons : [],
-                content: r.content || "",
-                tags: Array.isArray(r.tags) ? r.tags : [],
-                platform: r.platform || "Multi Platform",
-                status: (r.status || "published").toLowerCase(),
-                comments_enabled: r.comments_enabled !== false,
-                purchase_links: r.purchase_links || {}
-            };
-        }
-
-        // ==================== إزالة التكرارات ====================
-        function removeDuplicates(reviews) {
-            const seen = new Map();
-            return reviews.filter(r => {
-                const key = (r.title + '_' + r.developer).toLowerCase();
-                if (seen.has(key)) return false;
-                seen.set(key, true);
-                return true;
-            });
-        }
-
-        // ==================== تحميل المراجعات ====================
-        async function loadReviews() {
-            showLoading();
-
-            try {
-                console.log('📡 جلب المراجعات من:', API_BASE_URL);
-                const res = await fetch(API_BASE_URL);
-                
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                
-                const data = await res.json();
-                console.log('📦 البيانات المستلمة:', data);
-
-                if (data.success) {
-                    allReviews = removeDuplicates(
-                        (data.data || data.reviews || []).map(mapServerReview).filter(Boolean)
-                    );
-                    console.log('✅ تم تحميل', allReviews.length, 'مراجعة');
-                } else {
-                    throw new Error(data.message || 'فشل تحميل المراجعات');
-                }
-            } catch (err) {
-                console.error('❌ خطأ:', err);
-                allReviews = [];
-                showAlert('⚠️ تعذر الاتصال بالسيرفر: ' + err.message, 'error');
-            }
-
-            displayReviews();
-            hideLoading();
-        }
-
-        // ==================== عرض المراجعات ====================
-        function displayReviews() {
-            const tbody = document.getElementById('reviews-table-body');
-            const empty = document.getElementById('empty-state');
-
-            if (!allReviews.length) {
-                if (empty) empty.style.display = 'block';
-                if (tbody) tbody.innerHTML = '';
-                updateStats();
+        async function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            // التحقق من نوع الملف
+            if (!file.type.startsWith('image/')) {
+                showAlert('الملف يجب أن يكون صورة', 'error');
                 return;
             }
-
-            if (empty) empty.style.display = 'none';
-            if (tbody) tbody.innerHTML = allReviews.map(r => createReviewRow(r)).join('');
             
-            // ربط أحداث الأزرار
-            document.querySelectorAll('.btn-edit').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    editReview(this.dataset.id);
-                });
-            });
+            // التحقق من الحجم (10MB كحد أقصى)
+            if (file.size > 10 * 1024 * 1024) {
+                showAlert('حجم الصورة كبير جداً (الحد الأقصى 10MB)', 'error');
+                return;
+            }
             
-            document.querySelectorAll('.btn-delete').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    deleteReview(this.dataset.id);
+            try {
+                const formData = new FormData();
+                formData.append('image', file);
+                
+                const response = await fetch(UPLOAD_API, {
+                    method: 'POST',
+                    body: formData
                 });
-            });
-
-            updateStats();
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // 🔧 الإصلاح: استخدام المسار الصحيح
+                    uploadedImage = data.data.url;
+                    document.getElementById('reviewImageUrl').value = uploadedImage;
+                    
+                    // معاينة الصورة
+                    updateImagePreview(uploadedImage);
+                    showAlert('✅ تم رفع الصورة بنجاح', 'success');
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('❌ خطأ في رفع الصورة:', error);
+                showAlert('فشل رفع الصورة: ' + error.message, 'error');
+            }
         }
 
-        // ==================== إنشاء صف المراجعة ====================
-        function createReviewRow(r) {
-            const img = r.cover_image || getDefaultImage(r.title, r.genre);
-            const fullImgUrl = img.startsWith('http') ? img : `https://reviewqeem.online${img}`;
-            const statusClass = r.status === 'published' ? 'status-published' : 'status-draft';
-            const statusText = r.status === 'published' ? 'منشور' : 'مسودة';
-            const statusIcon = r.status === 'published' ? 'fa-check-circle' : 'fa-edit';
-
-            return `
-                <tr>
-                    <td><img src="${fullImgUrl}" alt="${r.title}" class="review-image" onerror="this.src='${getDefaultImage(r.title, r.genre)}'"></td>
-                    <td>
-                        <strong style="color: var(--text-primary);">${r.title}</strong>
-                        ${r.genre ? '<br><small style="color: var(--text-secondary);">' + getGenreText(r.genre) + '</small>' : ''}
-                    </td>
-                    <td><span class="rating-badge"><i class="fas fa-star"></i> ${r.rating}/10</span></td>
-                    <td>${r.developer || 'غير محدد'}</td>
-                    <td><span class="status-badge ${statusClass}"><i class="fas ${statusIcon}"></i> ${statusText}</span></td>
-                    <td style="direction: ltr; text-align: right;">${formatDate(r.release_date)}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="btn btn-edit btn-sm" data-id="${r.id}">
-                                <i class="fas fa-edit"></i> تعديل
-                            </button>
-                            <button class="btn btn-delete btn-sm" data-id="${r.id}">
-                                <i class="fas fa-trash"></i> حذف
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+        function updateImagePreview(url) {
+            const container = document.getElementById('coverPreview');
+            if (!url) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            // 🔧 الإصلاح: إصلاح المسار
+            const fullUrl = url.startsWith('http') ? url : `https://reviewqeem.online${url}`;
+            
+            container.innerHTML = `
+                <div class="image-preview">
+                    <img src="${fullUrl}" onerror="this.src='${getDefaultImage('')}'">
+                    <button type="button" class="remove-image" onclick="removeCoverImage()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
             `;
         }
 
-        // ==================== الصورة الافتراضية ====================
-        function getDefaultImage(title, genre) {
-            if (!title) return 'https://reviewqeem.online/uploads/images/default-game.jpg';
-            
-            const t = title.toLowerCase();
-            
-            for (const [key, url] of Object.entries(GAME_IMAGES)) {
-                if (t.includes(key)) return url;
-            }
-            
-            if (genre && GENRE_IMAGES[genre.toLowerCase()]) {
-                return GENRE_IMAGES[genre.toLowerCase()];
-            }
-            
-            return 'https://reviewqeem.online/uploads/images/default-game.jpg';
+        function removeCoverImage() {
+            uploadedImage = '';
+            document.getElementById('reviewImageUrl').value = '';
+            document.getElementById('coverPreview').innerHTML = '';
+            document.getElementById('imageUploadInput').value = '';
         }
 
-        // ==================== فتح المودال للإضافة ====================
         function openAddModal() {
             currentEditId = null;
-            uploadedCoverImage = '';
-            uploadedScreenshots = [];
+            uploadedImage = '';
             
-            const modalTitle = document.getElementById('modal-title');
-            if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-plus-circle"></i> إضافة مراجعة جديدة';
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> إضافة مراجعة جديدة';
+            document.getElementById('reviewForm').reset();
+            document.getElementById('reviewReleaseDate').valueAsDate = new Date();
+            document.getElementById('reviewStatus').value = 'published';
+            document.getElementById('coverPreview').innerHTML = '';
+            document.getElementById('imageUploadInput').value = '';
             
-            const form = document.getElementById('review-form');
-            if (form) form.reset();
-            
-            const dateInput = document.getElementById('review-release-date');
-            if (dateInput) dateInput.valueAsDate = new Date();
-            
-            const statusSelect = document.getElementById('review-status');
-            if (statusSelect) statusSelect.value = 'published';
-            
-            const commentsCheckbox = document.getElementById('comments-enabled');
-            if (commentsCheckbox) commentsCheckbox.checked = true;
-            
-            resetPlatformLinks();
-            updateImagePreview('');
-            updateScreenshotsPreview();
-            
-            const uploadInfo = document.getElementById('image-upload-info');
-            if (uploadInfo) uploadInfo.style.display = 'none';
-            
-            const modal = document.getElementById('review-modal');
-            if (modal) modal.style.display = 'block';
+            const modal = document.getElementById('reviewModal');
+            modal.style.display = 'block';
         }
 
-        // ==================== تعديل مراجعة ====================
         function editReview(id) {
-            const r = allReviews.find(x => x.id === id);
-            if (!r) return showAlert('لم يتم العثور على المراجعة', 'error');
-
+            const review = allReviews.find(r => r.id === id);
+            if (!review) return;
+            
             currentEditId = id;
-            uploadedCoverImage = r.cover_image;
-            uploadedScreenshots = [...(r.screenshots || [])];
+            uploadedImage = review.coverImage;
             
-            const modalTitle = document.getElementById('modal-title');
-            if (modalTitle) modalTitle.innerHTML = '<i class="fas fa-edit"></i> تعديل المراجعة';
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> تعديل المراجعة';
+            document.getElementById('reviewId').value = review.id;
+            document.getElementById('reviewTitle').value = review.title;
+            document.getElementById('reviewDeveloper').value = review.developer;
+            document.getElementById('reviewReleaseDate').value = review.releaseDate;
+            document.getElementById('reviewGenre').value = review.genre;
+            document.getElementById('reviewRating').value = review.rating;
+            document.getElementById('reviewPlatform').value = review.platform;
+            document.getElementById('reviewSummary').value = review.summary || '';
+            document.getElementById('reviewContent').value = review.content || '';
+            document.getElementById('reviewStatus').value = review.status;
+            document.getElementById('reviewImageUrl').value = uploadedImage;
             
-            document.getElementById('review-title').value = r.title;
-            document.getElementById('review-developer').value = r.developer;
-            document.getElementById('review-release-date').value = r.release_date;
-            document.getElementById('review-genre').value = r.genre;
-            document.getElementById('review-rating').value = r.rating;
-            document.getElementById('review-price').value = r.price || '';
-            document.getElementById('review-summary').value = r.summary || '';
-            document.getElementById('review-pros').value = (r.pros || []).join('\n');
-            document.getElementById('review-cons').value = (r.cons || []).join('\n');
-            document.getElementById('review-content').value = r.content || '';
-            document.getElementById('review-tags').value = (r.tags || []).join(', ');
-            document.getElementById('review-platform').value = r.platform;
-            document.getElementById('review-status').value = r.status;
-            document.getElementById('comments-enabled').checked = r.comments_enabled;
+            updateImagePreview(uploadedImage);
             
-            fillPlatformLinks(r.purchase_links || {});
-            updateImagePreview(r.cover_image);
-            updateScreenshotsPreview();
-            
-            const modal = document.getElementById('review-modal');
-            if (modal) modal.style.display = 'block';
+            const modal = document.getElementById('reviewModal');
+            modal.style.display = 'block';
         }
 
-        // ==================== إغلاق المودال ====================
         function closeModal() {
-            const modal = document.getElementById('review-modal');
-            if (modal) modal.style.display = 'none';
+            const modal = document.getElementById('reviewModal');
+            modal.style.display = 'none';
             currentEditId = null;
+            uploadedImage = '';
         }
 
-        // ==================== حفظ المراجعة ====================
         async function handleFormSubmit(e) {
             e.preventDefault();
             
-            // إذا لم يتم رفع صورة، استخدم الافتراضية
-            const coverImage = uploadedCoverImage || 'https://reviewqeem.online/uploads/images/default-game.jpg';
+            // 🔧 الإصلاح: استخدام الصورة المحملة أو الافتراضية
+            const coverImage = uploadedImage || getDefaultImage(document.getElementById('reviewTitle').value);
             
-            const body = {
-                title: document.getElementById('review-title').value,
-                game: document.getElementById('review-title').value,
-                content: document.getElementById('review-content').value,
-                summary: document.getElementById('review-summary').value,
-                rating: parseFloat(document.getElementById('review-rating').value),
-                developer: document.getElementById('review-developer').value,
-                releaseDate: document.getElementById('review-release-date').value,
-                genre: document.getElementById('review-genre').value,
-                platform: document.getElementById('review-platform').value,
-                price: parseFloat(document.getElementById('review-price').value) || 0,
-                pros: document.getElementById('review-pros').value.split('\n').filter(x => x.trim()),
-                cons: document.getElementById('review-cons').value.split('\n').filter(x => x.trim()),
-                tags: document.getElementById('review-tags').value.split(',').map(x => x.trim()).filter(x => x),
-                cover_image: coverImage,
-                screenshots: uploadedScreenshots,
-                status: document.getElementById('review-status').value,
-                comments_enabled: document.getElementById('comments-enabled').checked,
-                purchase_links: getPlatformLinks()
+            const reviewData = {
+                title: document.getElementById('reviewTitle').value,
+                developer: document.getElementById('reviewDeveloper').value,
+                releaseDate: document.getElementById('reviewReleaseDate').value,
+                genre: document.getElementById('reviewGenre').value,
+                rating: parseFloat(document.getElementById('reviewRating').value),
+                platform: document.getElementById('reviewPlatform').value,
+                coverImage: coverImage,
+                summary: document.getElementById('reviewSummary').value,
+                content: document.getElementById('reviewContent').value,
+                status: document.getElementById('reviewStatus').value
             };
-
-            if (!body.title || !body.developer || !body.genre) {
-                return showAlert('يرجى ملء الحقول الأساسية', 'error');
+            
+            // التحقق من البيانات
+            if (!reviewData.title || !reviewData.developer || !reviewData.genre) {
+                showAlert('يرجى ملء جميع الحقول المطلوبة', 'error');
+                return;
             }
-
+            
             const isEdit = !!currentEditId;
-            const url = isEdit ? API_BASE_URL + '/' + currentEditId : API_BASE_URL;
+            const url = isEdit ? `${REVIEWS_API}/${currentEditId}` : REVIEWS_API;
             const method = isEdit ? 'PUT' : 'POST';
-
+            
             try {
-                console.log('📤 إرسال البيانات:', body);
-                const res = await fetch(url, {
-                    method,
+                const response = await fetch(url, {
+                    method: method,
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(body)
+                    body: JSON.stringify(reviewData)
                 });
                 
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.message);
                 }
-
-                const data = await res.json();
-                console.log('📤 رد السيرفر:', data);
-
-                if (!data.success) throw new Error(data.message);
-
+                
                 closeModal();
                 await loadReviews();
+                showAlert(isEdit ? '✅ تم تحديث المراجعة بنجاح' : '✅ تم إضافة المراجعة بنجاح', 'success');
                 
-                const msg = body.status === 'published' ? 'ونُشرت' : 'كمسودة';
-                showAlert(isEdit ? '✅ تم تحديث المراجعة ' + msg : '✅ تم إضافة المراجعة ' + msg, 'success');
-
-            } catch (err) {
-                console.error('❌ خطأ:', err);
-                showAlert('❌ خطأ: ' + err.message, 'error');
+            } catch (error) {
+                console.error('❌ خطأ في حفظ المراجعة:', error);
+                showAlert('فشل حفظ المراجعة: ' + error.message, 'error');
             }
         }
 
-        // ==================== حذف مراجعة ====================
         async function deleteReview(id) {
-            if (!confirm('⚠️ هل أنت متأكد من الحذف؟')) return;
-
+            if (!confirm('⚠️ هل أنت متأكد من حذف هذه المراجعة؟')) return;
+            
             try {
-                const res = await fetch(API_BASE_URL + '/' + id, {
+                const response = await fetch(`${REVIEWS_API}/${id}`, {
                     method: 'DELETE'
                 });
                 
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.message);
                 }
-
-                const data = await res.json();
-                if (!data.success) throw new Error(data.message);
-
+                
                 await loadReviews();
-                showAlert('✅ تم الحذف بنجاح', 'success');
-
-            } catch (err) {
-                showAlert('❌ فشل الحذف: ' + err.message, 'error');
+                showAlert('✅ تم حذف المراجعة بنجاح', 'success');
+                
+            } catch (error) {
+                console.error('❌ خطأ في حذف المراجعة:', error);
+                showAlert('فشل حذف المراجعة: ' + error.message, 'error');
             }
         }
 
-        // ==================== روابط المنصات ====================
-        function resetPlatformLinks() {
-            ['ps5', 'pc', 'xbox-series', 'switch'].forEach(p => {
-                const price = document.querySelector('.platform-price[data-platform="' + p + '"]');
-                const url = document.querySelector('.platform-url[data-platform="' + p + '"]');
-                const enabled = document.querySelector('.platform-enabled[data-platform="' + p + '"]');
-                if (price) price.value = '';
-                if (url) url.value = '';
-                if (enabled) enabled.checked = false;
-            });
-        }
-
-        function fillPlatformLinks(links) {
-            ['ps5', 'pc', 'xbox-series', 'switch'].forEach(p => {
-                const price = document.querySelector('.platform-price[data-platform="' + p + '"]');
-                const url = document.querySelector('.platform-url[data-platform="' + p + '"]');
-                const enabled = document.querySelector('.platform-enabled[data-platform="' + p + '"]');
-                
-                if (links[p]) {
-                    if (price) price.value = links[p].price || '';
-                    if (url) url.value = links[p].url || '';
-                    if (enabled) enabled.checked = true;
-                }
-            });
-        }
-
-        function getPlatformLinks() {
-            const links = {};
-            ['ps5', 'pc', 'xbox-series', 'switch'].forEach(p => {
-                const enabled = document.querySelector('.platform-enabled[data-platform="' + p + '"]');
-                if (enabled && enabled.checked) {
-                    const price = document.querySelector('.platform-price[data-platform="' + p + '"]');
-                    const url = document.querySelector('.platform-url[data-platform="' + p + '"]');
-                    links[p] = {
-                        price: price ? parseFloat(price.value) || null : null,
-                        url: url ? url.value : '',
-                        enabled: true
-                    };
-                }
-            });
-            return links;
-        }
-
-        // ==================== البحث ====================
-        function handleSearch(e) {
-            const q = e.target.value.toLowerCase().trim();
+        function handleSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
             
-            if (!q) {
-                displayReviews();
+            if (!searchTerm) {
+                displayReviews(allReviews);
                 return;
             }
-
-            const filtered = allReviews.filter(r =>
-                r.title.toLowerCase().includes(q) ||
-                r.developer.toLowerCase().includes(q) ||
-                (r.genre && r.genre.toLowerCase().includes(q))
+            
+            const filtered = allReviews.filter(review => 
+                review.title.toLowerCase().includes(searchTerm) ||
+                review.developer.toLowerCase().includes(searchTerm) ||
+                review.genre.toLowerCase().includes(searchTerm)
             );
-
-            const tbody = document.getElementById('reviews-table-body');
-            const empty = document.getElementById('empty-state');
-
-            if (!filtered.length) {
-                if (empty) empty.style.display = 'block';
-                if (tbody) tbody.innerHTML = '';
-            } else {
-                if (empty) empty.style.display = 'none';
-                if (tbody) tbody.innerHTML = filtered.map(r => createReviewRow(r)).join('');
-                
-                document.querySelectorAll('.btn-edit').forEach(btn => {
-                    btn.addEventListener('click', function() { editReview(this.dataset.id); });
-                });
-                document.querySelectorAll('.btn-delete').forEach(btn => {
-                    btn.addEventListener('click', function() { deleteReview(this.dataset.id); });
-                });
-            }
+            
+            displayReviews(filtered);
         }
 
-        // ==================== دوال مساعدة ====================
-        function getGenreText(g) {
-            const map = {
-                'action': 'أكشن', 'adventure': 'مغامرة', 'rpg': 'ألعاب أدوار',
-                'horror': 'رعب', 'shooter': 'تصويب', 'racing': 'سباقات',
-                'sports': 'رياضة', 'strategy': 'إستراتيجية', 'simulation': 'محاكاة',
-                'fighting': 'قتال', 'puzzle': 'ألغاز', 'open-world': 'عالم مفتوح',
-                'indie': 'مستقلة', 'survival': 'بقاء'
-            };
-            return map[g] || g;
-        }
-
-        function formatDate(d) {
-            if (!d) return 'N/A';
-            return new Date(d).toLocaleDateString('ar-EG', {
-                year: 'numeric', month: 'short', day: 'numeric'
-            });
-        }
-
-        function updateStats() {
-            const pub = allReviews.filter(r => r.status === 'published').length;
-            const draft = allReviews.filter(r => r.status === 'draft').length;
-            const countEl = document.getElementById('reviews-count');
-            if (countEl) {
-                countEl.textContent = allReviews.length + ' مراجعة (' + pub + ' منشورة، ' + draft + ' مسودة)';
-            }
+        function getDefaultImage(title) {
+            return 'https://reviewqeem.online/uploads/images/default-game.jpg';
         }
 
         function showLoading() {
-            const loading = document.getElementById('loading-state');
-            const empty = document.getElementById('empty-state');
-            const tbody = document.getElementById('reviews-table-body');
-            if (loading) loading.style.display = 'block';
-            if (empty) empty.style.display = 'none';
-            if (tbody) tbody.innerHTML = '';
+            document.getElementById('loadingState').style.display = 'block';
         }
 
         function hideLoading() {
-            const loading = document.getElementById('loading-state');
-            if (loading) loading.style.display = 'none';
+            document.getElementById('loadingState').style.display = 'none';
         }
 
-        function showAlert(msg, type) {
-            const el = document.getElementById('alert-message');
-            if (!el) return;
-            el.textContent = msg;
-            el.className = 'alert alert-' + type;
-            el.style.display = 'block';
-            setTimeout(function() { el.style.display = 'none'; }, 5000);
+        function showAlert(message, type) {
+            const alertElement = document.getElementById('alertMessage');
+            alertElement.textContent = message;
+            alertElement.className = `alert alert-${type}`;
+            alertElement.style.display = 'block';
+            
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('admin_session_reviewqeem');
+            window.location.href = 'admin-login.html';
         }
 
         // جعل الدوال متاحة عالمياً
-        window.removeCoverImage = removeCoverImage;
-        window.removeScreenshot = removeScreenshot;
+        window.openAddModal = openAddModal;
         window.editReview = editReview;
         window.deleteReview = deleteReview;
-
-        console.log('✅ إدارة المراجعات جاهزة');
+        window.closeModal = closeModal;
+        window.removeCoverImage = removeCoverImage;
+        window.handleSearch = handleSearch;
+        window.logoutAdmin = logoutAdmin;
     </script>
 </body>
-
 </html>
-
-
-
