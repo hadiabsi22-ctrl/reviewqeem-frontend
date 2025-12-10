@@ -1284,12 +1284,13 @@
         async function attemptLogin(email, password) {
             // بيانات الأدمن الافتراضية
             const defaultAdmin = {
-                email: 'admin@reviewqeem.com',
-                password: 'Admin@123',
-                name: 'مدير النظام',
-                role: 'admin',
-                permissions: ['all']
-            };
+    email: 'admin@reviewqeem.com',
+    password: 'Admin@123',
+    name: 'مدير النظام',
+    role: 'admin',
+    permissions: ['all']
+};
+
             
             // محاكاة التأخير للاتصال بالخادم
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -1361,7 +1362,8 @@
             
             // الصورة الرمزية (الأحرف الأولى من الاسم)
             const avatar = document.getElementById('adminAvatar');
-            const initials = admin.avatar || (admin.name ? admin.name.charAt(0) : 'A');
+            const initials = admin.name ? admin.name.charAt(0).toUpperCase() : 'A';
+
             avatar.innerHTML = `<span>${initials}</span>`;
             avatar.title = admin.name;
             
@@ -1421,7 +1423,8 @@
         }
         
         function updateStatsDisplay(stats) {
-            document.getElementById('reviewsCount').textContent = stats.totalReviews || '0';
+           document.getElementById('reviewsCount').textContent = stats.totalReviews ?? '0';
+
             document.getElementById('commentsCount').textContent = stats.totalComments || '0';
             document.getElementById('pendingComments').textContent = stats.pendingComments || '0';
             document.getElementById('totalViews').textContent = stats.totalViews ? 
@@ -1615,7 +1618,8 @@
         function updateSessionTime() {
             const sessionTimeElement = document.getElementById('sessionTime');
             if (!sessionTimeElement) return;
-            
+            if (!adminSession.getSession()) return;
+
             const session = adminSession.getSession();
             if (!session) {
                 sessionTimeElement.textContent = 'انتهت الجلسة';
@@ -1690,3 +1694,4 @@
     
 </body>
 </html>
+
