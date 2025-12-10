@@ -9,7 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+   
+
     <style>
         :root {
             --sidebar-width: 250px;
@@ -515,6 +516,50 @@
             animation: fadeInUp 0.3s;
         }
         
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            padding: 15px 25px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideDown 0.3s ease-out;
+            border: 1px solid var(--border-color);
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .notification-success {
+            border-right: 4px solid var(--success);
+        }
+        
+        .notification-error {
+            border-right: 4px solid var(--danger);
+        }
+        
+        .notification-warning {
+            border-right: 4px solid var(--warning);
+        }
+        
+        @keyframes slideDown {
+            from {
+                top: -100px;
+                opacity: 0;
+            }
+            to {
+                top: 20px;
+                opacity: 1;
+            }
+        }
+        
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -574,6 +619,62 @@
                 margin: 20px;
                 padding: 30px;
             }
+            
+            .notification {
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+        
+        /* Banner Section */
+        .banner-section {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(0, 184, 148, 0.05) 100%);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .banner-section h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+        
+        .banner-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .platform-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .platform-badge {
+            background: var(--card-light);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 8px 20px;
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .platform-badge:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
     </style>
 </head>
@@ -654,6 +755,18 @@
                             <span>إضافة مراجعة</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="banners.html">
+                            <i class="fas fa-images"></i>
+                            <span>إدارة البنرات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="users.html">
+                            <i class="fas fa-users"></i>
+                            <span>إدارة المستخدمين</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </aside>
@@ -691,6 +804,19 @@
             
             <!-- Content -->
             <div class="content-wrapper">
+                
+                <!-- Banner Section -->
+                <div class="banner-section">
+                    <h1>مراجعات ألعاب عربية احترافية</h1>
+                    <p>اكتشف تقييمات دقيقة وتقييمات موضوعية لأحدث الألعاب على جميع المنصات. مقدمة بعربية فصيحة وسليمة.</p>
+                    <div class="platform-badges">
+                        <span class="platform-badge"><i class="fab fa-playstation me-1"></i> PlayStation</span>
+                        <span class="platform-badge"><i class="fab fa-xbox me-1"></i> Xbox</span>
+                        <span class="platform-badge"><i class="fas fa-desktop me-1"></i> PC</span>
+                        <span class="platform-badge"><i class="fas fa-mobile-alt me-1"></i> Mobile</span>
+                        <span class="platform-badge"><i class="fab fa-nintendo-switch me-1"></i> Nintendo</span>
+                    </div>
+                </div>
                 
                 <!-- Welcome Card -->
                 <div class="welcome-card">
@@ -731,6 +857,22 @@
                         <h4 id="pendingComments">0</h4>
                         <p>تعليقات قيد المراجعة</p>
                     </div>
+                    
+                    <div class="stat-card stat-1">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 id="activeUsers">0</h4>
+                        <p>مستخدمون نشطون</p>
+                    </div>
+                    
+                    <div class="stat-card stat-2">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4 id="avgRating">0.0</h4>
+                        <p>متوسط التقييم</p>
+                    </div>
                 </div>
                 
                 <!-- Quick Actions -->
@@ -752,6 +894,16 @@
                             <span>تعديل المراجعات</span>
                         </button>
                         
+                        <button class="action-btn" onclick="window.location.href='banners.html'">
+                            <i class="fas fa-images"></i>
+                            <span>إدارة البنرات</span>
+                        </button>
+                        
+                        <button class="action-btn" onclick="window.location.href='categories.html'">
+                            <i class="fas fa-tags"></i>
+                            <span>إدارة التصنيفات</span>
+                        </button>
+                        
                         <button class="action-btn" onclick="window.location.href='settings.html'">
                             <i class="fas fa-sliders-h"></i>
                             <span>تعديل الإعدادات</span>
@@ -761,10 +913,41 @@
                 
                 <!-- Recent Activity -->
                 <div class="mt-4">
-                    <h4 class="mb-3"><i class="fas fa-history me-2"></i> النشاط الأخير</h4>
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle me-2"></i>
-                        نظام النشاط قيد التطوير. سيتم عرض آخر العمليات هنا قريباً.
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-history me-2"></i> النشاط الأخير</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-list" id="activityList">
+                                <div class="activity-item d-flex align-items-center mb-3">
+                                    <div class="activity-icon me-3">
+                                        <i class="fas fa-plus-circle text-success"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <h6 class="mb-0">مراجعة جديدة تمت إضافتها</h6>
+                                        <small class="text-muted">قبل 2 ساعة - مراجعة لعبة "FIFA 25"</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item d-flex align-items-center mb-3">
+                                    <div class="activity-icon me-3">
+                                        <i class="fas fa-comment text-primary"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <h6 class="mb-0">تعليق جديد</h6>
+                                        <small class="text-muted">قبل 4 ساعات - من المستخدم "محمد أحمد"</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item d-flex align-items-center mb-3">
+                                    <div class="activity-icon me-3">
+                                        <i class="fas fa-user-plus text-info"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <h6 class="mb-0">مستخدم جديد مسجل</h6>
+                                        <small class="text-muted">قبل 6 ساعات - أحمد سعيد</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -806,6 +989,61 @@
                     </div>
                 </div>
 
+                <!-- Featured Reviews -->
+                <div class="mt-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-crown me-2"></i> المراجعات المميزة</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="featuredReviews">
+                                <div class="col-md-4 mb-3">
+                                    <div class="featured-review-card p-3 border rounded">
+                                        <h6>Cyberpunk 2077: Phantom Liberty</h6>
+                                        <div class="rating mb-2">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star-half-alt text-warning"></i>
+                                            <span class="ms-2">4.5/5</span>
+                                        </div>
+                                        <small class="text-muted">آخر تحديث: قبل 3 أيام</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="featured-review-card p-3 border rounded">
+                                        <h6>God of War Ragnarök</h6>
+                                        <div class="rating mb-2">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <span class="ms-2">5/5</span>
+                                        </div>
+                                        <small class="text-muted">آخر تحديث: قبل أسبوع</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="featured-review-card p-3 border rounded">
+                                        <h6>Elden Ring: Shadow of the Erdtree</h6>
+                                        <div class="rating mb-2">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                            <span class="ms-2">5/5</span>
+                                        </div>
+                                        <small class="text-muted">آخر تحديث: قبل يومين</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </main>
@@ -828,13 +1066,12 @@
         const ADMIN_SESSION_TIMEOUT = 60 * 60 * 1000; // 60 دقيقة
         const API_BASE = "https://reviewqeem.online/api";
 
-
-        
         // ==================== ADMIN SESSION MANAGEMENT ====================
         class AdminSession {
             constructor() {
                 this.sessionKey = 'admin_session_reviewqeem';
                 this.statsKey = 'admin_stats_cache';
+                this.activityKey = 'admin_activity_cache';
                 this.cacheDuration = 5 * 60 * 1000; // 5 دقائق
             }
             
@@ -864,6 +1101,7 @@
                 };
                 
                 localStorage.setItem(this.sessionKey, JSON.stringify(session));
+                this.logActivity('تسجيل دخول', `تم تسجيل دخول ${adminData.name}`);
                 return session;
             }
             
@@ -896,8 +1134,43 @@
             
             // حذف الجلسة
             clearSession() {
+                const adminData = this.getAdminData();
+                if (adminData) {
+                    this.logActivity('تسجيل خروج', `تم تسجيل خروج ${adminData.name}`);
+                }
                 localStorage.removeItem(this.sessionKey);
                 localStorage.removeItem(this.statsKey);
+            }
+            
+            // تسجيل النشاط
+            logActivity(action, details) {
+                try {
+                    const activities = this.getActivities();
+                    const activity = {
+                        action,
+                        details,
+                        timestamp: new Date().toISOString(),
+                        admin: this.getAdminData()?.name || 'غير معروف'
+                    };
+                    
+                    activities.unshift(activity);
+                    // حفظ آخر 50 نشاط فقط
+                    if (activities.length > 50) activities.pop();
+                    
+                    localStorage.setItem(this.activityKey, JSON.stringify(activities));
+                } catch (e) {
+                    console.warn('Failed to log activity:', e);
+                }
+            }
+            
+            // جلب النشاطات
+            getActivities() {
+                try {
+                    const activities = localStorage.getItem(this.activityKey);
+                    return activities ? JSON.parse(activities) : [];
+                } catch {
+                    return [];
+                }
             }
             
             // التحقق من صلاحية الإحصائيات المخزنة
@@ -949,13 +1222,15 @@
         
         // ==================== LOGIN/LOGOUT FUNCTIONS ====================
         function showLogin() {
-            document.getElementById('loginOverlay').style.display = 'flex';
-            document.querySelector('.admin-container').style.display = 'none';
+            document.getElementById('loginOverlay').classList.remove("hidden");
+            document.querySelector('.admin-container').classList.add("hidden");
+
         }
         
         function hideLogin() {
-            document.getElementById('loginOverlay').style.display = 'none';
-            document.querySelector('.admin-container').style.display = 'flex';
+            document.getElementById('loginOverlay').classList.add("hidden");
+            document.querySelector('.admin-container').classList.remove("hidden");
+
         }
         
         function setupLoginButton() {
@@ -1010,17 +1285,15 @@
         }
         
         async function attemptLogin(email, password) {
-            // في البيئة الحقيقية، سيتم الاتصال بالـ API
-            // للآن سنستخدم بيانات افتراضية للاختبار
-            
-            // بيانات الأدمن الافتراضية (يجب تغييرها في البيئة الحقيقية)
+            // بيانات الأدمن الافتراضية
             const defaultAdmin = {
-                email: 'admin@reviewqeem.com',
-                password: 'Admin@123', // كلمة مرور قوية
-                name: 'مدير النظام',
-                role: 'admin',
-                permissions: ['all']
-            };
+    email: 'admin@reviewqeem.com',
+    password: 'Admin@123',
+    name: 'مدير النظام',
+    role: 'admin',
+    permissions: ['all']
+};
+
             
             // محاكاة التأخير للاتصال بالخادم
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -1032,7 +1305,9 @@
                     email: defaultAdmin.email,
                     role: defaultAdmin.role,
                     permissions: defaultAdmin.permissions,
-                    loginTime: new Date().toISOString()
+                    loginTime: new Date().toISOString(),
+                    avatar: defaultAdmin.name.charAt(0).toUpperCase()
+
                 };
             }
             
@@ -1062,6 +1337,9 @@
                 // تحميل الإحصائيات
                 await loadDashboardStats();
                 
+                // تحميل النشاطات
+                loadRecentActivities();
+                
                 // إعداد زر تسجيل الخروج
                 setupLogoutButton();
                 
@@ -1088,7 +1366,8 @@
             
             // الصورة الرمزية (الأحرف الأولى من الاسم)
             const avatar = document.getElementById('adminAvatar');
-            const initials = admin.name ? admin.name.charAt(0) : 'A';
+            const initials = admin.name ? admin.name.charAt(0).toUpperCase() : 'A';
+
             avatar.innerHTML = `<span>${initials}</span>`;
             avatar.title = admin.name;
             
@@ -1110,17 +1389,18 @@
                 }
                 
                 // محاكاة جلب البيانات من الـ API
-                await new Promise(resolve => setTimeout(resolve, 800));
+               
                 
-                // بيانات افتراضية (يجب استبدالها ببيانات حقيقية من الـ API)
+                // بيانات افتراضية
                 const mockStats = {
-                    totalReviews: 42,
-                    totalComments: 156,
-                    pendingComments: 12,
-                    totalViews: 2847,
-                    activeUsers: 89,
-                    publishedReviews: 38,
-                    draftReviews: 4
+                    totalReviews: 156,
+                    totalComments: 842,
+                    pendingComments: 23,
+                    totalViews: 18427,
+                    activeUsers: 289,
+                    publishedReviews: 148,
+                    draftReviews: 8,
+                    avgRating: 4.3
                 };
                 
                 // تخزين البيانات مؤقتاً
@@ -1139,17 +1419,69 @@
                     totalReviews: '--',
                     totalComments: '--',
                     pendingComments: '--',
-                    totalViews: '--'
+                    totalViews: '--',
+                    activeUsers: '--',
+                    avgRating: '--'
                 });
             }
         }
         
         function updateStatsDisplay(stats) {
-            document.getElementById('reviewsCount').textContent = stats.totalReviews || '0';
+           document.getElementById('reviewsCount').textContent = stats.totalReviews ?? '0';
+
             document.getElementById('commentsCount').textContent = stats.totalComments || '0';
             document.getElementById('pendingComments').textContent = stats.pendingComments || '0';
             document.getElementById('totalViews').textContent = stats.totalViews ? 
                 stats.totalViews.toLocaleString() : '0';
+            document.getElementById('activeUsers').textContent = stats.activeUsers || '0';
+            document.getElementById('avgRating').textContent = stats.avgRating || '0.0';
+        }
+        
+        // تحميل النشاطات الأخيرة
+        function loadRecentActivities() {
+            const activities = adminSession.getActivities();
+            const activityList = document.getElementById('activityList');
+            
+            if (activityList && activities.length > 0) {
+                activityList.innerHTML = '';
+                
+                // عرض أول 3 نشاطات
+                activities.slice(0, 3).forEach(activity => {
+                    const activityItem = document.createElement('div');
+                    activityItem.className = 'activity-item d-flex align-items-center mb-3';
+                    
+                    let iconClass = 'fas fa-info-circle text-info';
+                    if (activity.action.includes('دخول')) iconClass = 'fas fa-sign-in-alt text-success';
+                    else if (activity.action.includes('خروج')) iconClass = 'fas fa-sign-out-alt text-danger';
+                    else if (activity.action.includes('مراجعة')) iconClass = 'fas fa-edit text-primary';
+                    else if (activity.action.includes('تعليق')) iconClass = 'fas fa-comment text-warning';
+                    
+                    activityItem.innerHTML = `
+                        <div class="activity-icon me-3">
+                            <i class="${iconClass}"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h6 class="mb-0">${activity.action}</h6>
+                            <small class="text-muted">${formatTimeAgo(activity.timestamp)} - ${activity.details}</small>
+                        </div>
+                    `;
+                    
+                    activityList.appendChild(activityItem);
+                });
+            }
+        }
+        
+        function formatTimeAgo(timestamp) {
+            const now = new Date();
+            const past = new Date(timestamp);
+            const diffMs = now - past;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 60) return `قبل ${diffMins} دقيقة`;
+            if (diffHours < 24) return `قبل ${diffHours} ساعة`;
+            return `قبل ${diffDays} يوم`;
         }
         
         // إعداد زر تسجيل الخروج
@@ -1229,11 +1561,8 @@
                         // محاكاة تغيير كلمة المرور
                         await new Promise(resolve => setTimeout(resolve, 1500));
                         
-                        // في البيئة الحقيقية، سيتم إرسال طلب إلى الـ API
-                        console.log('🔄 تغيير كلمة المرور:', {
-                            currentPassword: '***',
-                            newPassword: '***'
-                        });
+                        // تسجيل النشاط
+                        adminSession.logActivity('تغيير كلمة المرور', 'تم تغيير كلمة المرور بنجاح');
                         
                         // نجاح العملية
                         showNotification('✅ تم تغيير كلمة المرور بنجاح', 'success');
@@ -1293,7 +1622,8 @@
         function updateSessionTime() {
             const sessionTimeElement = document.getElementById('sessionTime');
             if (!sessionTimeElement) return;
-            
+            if (!adminSession.getSession()) return;
+
             const session = adminSession.getSession();
             if (!session) {
                 sessionTimeElement.textContent = 'انتهت الجلسة';
@@ -1322,11 +1652,11 @@
         
         // ==================== UTILITY FUNCTIONS ====================
         function showNotification(message, type = 'success') {
-            // إنصراف إشعار مؤقت
+            // إنشاء إشعار مؤقت
             const notification = document.createElement('div');
             notification.className = `notification notification-${type}`;
             notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
                 <span>${message}</span>
             `;
             
@@ -1342,10 +1672,31 @@
         window.toggleSidebar = toggleSidebar;
         window.loadDashboardStats = loadDashboardStats;
         
+        // إضافة event listener لمفاتيح الاختصار
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + L لتسجيل الخروج
+            if (e.ctrlKey && e.key === 'l') {
+                e.preventDefault();
+                document.getElementById('logoutBtn').click();
+            }
+            
+            // Ctrl + D للذهاب إلى لوحة التحكم
+            if (e.ctrlKey && e.key === 'd') {
+                e.preventDefault();
+                window.location.href = '#';
+            }
+            
+            // Ctrl + A لإضافة مراجعة جديدة
+            if (e.ctrlKey && e.key === 'a') {
+                e.preventDefault();
+                window.location.href = 'review-editor.html';
+            }
+        });
+        
         console.log('🎮 لوحة التحكم - Script loaded');
     </script>
     
 </body>
-
 </html>
+
 
