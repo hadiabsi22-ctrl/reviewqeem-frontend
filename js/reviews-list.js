@@ -11,7 +11,7 @@ BASE_URL: "https://reviewqeem.online/api",
 
 
  
-    ? 'http://localhost:5000' 
+    ? 'https://reviewqeem.online' 
     : window.location.origin);
 
 // عناصر الصفحة
@@ -72,7 +72,7 @@ function renderReviews(list) {
 
         let img = r.cover_image || r.coverImage || r.mainImage || "";
         if (!img || img.includes("undefined") || img.includes("null") || img === "") {
-            img = "/uploads/images/default/default-game.jpg"; // صورة افتراضية
+            img = "https://reviewqeem.online/uploads/images/default-game.jpg"; // صورة افتراضية
         }
         // Ensure full URL if relative path
         if (img && !img.startsWith("http") && !img.startsWith("/")) {

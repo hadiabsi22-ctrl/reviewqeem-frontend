@@ -799,7 +799,7 @@
                     summary: 'تجربة رائعة مع تحسينات كبيرة في اللعب والقصص',
                     content: 'مراجعة كاملة للعبة Spider-Man 2 مع تحليل مفصل للإضافات الجديدة',
                     rating: 9.5,
-                    cover_image: 'https://via.placeholder.com/300x400/1a1a24/6c5ce7?text=Spider-Man+2',
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
                     platform: 'PS5',
                     release_date: '2023-10-20',
                     review_date: '2023-11-01',
@@ -813,7 +813,7 @@
                     summary: 'ملحمة أسطورية تستكمل قصة كريتوس وأتريوس',
                     content: 'تحليل شامل للعبة God of War Ragnarök وتطور الشخصيات',
                     rating: 9.8,
-                    cover_image: 'https://via.placeholder.com/300x400/1a1a24/6c5ce7?text=God+of+War',
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
                     platform: 'PS5',
                     release_date: '2022-11-09',
                     review_date: '2022-11-20',
@@ -827,7 +827,7 @@
                     summary: 'مغامرة جديدة في عالم هايرول المفتوح',
                     content: 'مراجعة شاملة للإضافات الجديدة وآليات اللعب',
                     rating: 9.7,
-                    cover_image: 'https://via.placeholder.com/300x400/1a1a24/6c5ce7?text=Zelda',
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
                     platform: 'Nintendo Switch',
                     release_date: '2023-05-12',
                     review_date: '2023-05-25',
@@ -841,7 +841,7 @@
                     summary: 'عالم مفتوح ضخم مليء بالتحديات والأسرار',
                     content: 'رحلة ملحمية في عالم FromSoftware الأكثر طموحاً',
                     rating: 9.6,
-                    cover_image: 'https://via.placeholder.com/300x400/1a1a24/6c5ce7?text=Elden+Ring',
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
                     platform: 'PC',
                     release_date: '2022-02-25',
                     review_date: '2022-03-10',
@@ -855,7 +855,7 @@
                     summary: 'مغامرة استكشافية في عالم ما بعد الكارثة',
                     content: 'توسعة رائعة لعالم Horizon مع جرافيك مذهل',
                     rating: 9.3,
-                    cover_image: 'https://via.placeholder.com/300x400/1a1a24/6c5ce7?text=Horizon',
+                    cover_image: 'https://reviewqeem.online/uploads/images/default-game.jpg',
                     platform: 'PS5',
                     release_date: '2022-02-18',
                     review_date: '2022-03-01',
@@ -935,7 +935,7 @@
             emptyState.style.display = 'none';
             
             resultsContainer.innerHTML = searchResults.map(review => {
-                const imageUrl = review.cover_image || 'https://via.placeholder.com/300x400/1a1a24/6c5ce7?text=Game+Image';
+                const imageUrl = review.cover_image || 'https://reviewqeem.online/uploads/images/default-game.jpg';
                 const summary = review.summary || review.content || 'لا يوجد وصف متوفر';
                 const reviewDate = new Date(review.review_date || review.release_date).toLocaleDateString('ar-EG');
                 
@@ -944,7 +944,7 @@
                         <div class="result-image">
                             <img src="${imageUrl}" 
                                  alt="${review.title}" 
-                                 onerror="this.src='https://via.placeholder.com/300x400/1a1a24/6c5ce7?text=Game+Image'">
+                                 onerror="this.src='https://reviewqeem.online/uploads/images/default-game.jpg'">
                         </div>
                         <div class="result-info">
                             <h3 class="result-title">${review.title}</h3>
