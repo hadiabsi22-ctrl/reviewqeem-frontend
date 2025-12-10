@@ -9,8 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   
-
+    
     <style>
         :root {
             --sidebar-width: 250px;
@@ -80,6 +79,12 @@
             max-width: 400px;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-xl);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .login-box h3 {
@@ -90,7 +95,22 @@
         }
         
         .login-box .form-control {
+            background: var(--card-light);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: var(--radius-sm);
+            padding: 12px 15px;
             margin-bottom: 20px;
+        }
+        
+        .login-box .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+        }
+        
+        .login-box .form-label {
+            color: var(--text-secondary);
+            font-weight: 600;
         }
         
         /* Layout */
@@ -423,6 +443,7 @@
             transition: var(--transition);
             text-align: right;
             width: 100%;
+            border: none;
         }
         
         .action-btn:hover {
@@ -509,6 +530,7 @@
             display: none;
             border: 1px solid var(--border-color);
             color: var(--text-primary);
+            cursor: pointer;
         }
         
         .session-info.show {
@@ -680,29 +702,18 @@
 </head>
 <body>
     
-    <!-- Login Overlay (Initially hidden) -->
-    <div id="loginOverlay" class="login-overlay" style="display: none;">
-        <div class="login-box">
-            <h3><i class="fas fa-user-shield me-2"></i>تسجيل الدخول الإداري</h3>
-            <div class="mb-3">
-                <label for="loginEmail" class="form-label">البريد الإلكتروني</label>
-                <input type="email" class="form-control" id="loginEmail" placeholder="admin@reviewqeem.com">
-            </div>
-            <div class="mb-3">
-                <label for="loginPassword" class="form-label">كلمة المرور</label>
-                <input type="password" class="form-control" id="loginPassword" placeholder="********">
-            </div>
-            <div class="d-grid">
-                <button class="btn btn-primary" id="loginBtn">
-                    <i class="fas fa-sign-in-alt me-2"></i>تسجيل الدخول
-                </button>
-            </div>
-            <div class="alert alert-danger mt-3" id="loginError" style="display: none;"></div>
-        </div>
-    </div>
+    <!-- Login Overlay -->
+   <!-- لا توجد شاشة تسجيل دخول هنا، يتم التحقق فقط من الجلسة -->
+<script>
+    if (!localStorage.getItem('admin_session_reviewqeem')) {
+        window.location.href = "admin-login.html";
+    }
+</script>
+
     
     <!-- Admin Container -->
-    <div class="admin-container" style="display: none;">
+    <div class="admin-container">
+
         
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -998,43 +1009,43 @@
                         <div class="card-body">
                             <div class="row" id="featuredReviews">
                                 <div class="col-md-4 mb-3">
-                                    <div class="featured-review-card p-3 border rounded">
-                                        <h6>Cyberpunk 2077: Phantom Liberty</h6>
+                                    <div class="featured-review-card p-3 border rounded" style="background: var(--card-light); border-color: var(--border-color) !important;">
+                                        <h6 style="color: var(--text-primary);">Cyberpunk 2077: Phantom Liberty</h6>
                                         <div class="rating mb-2">
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star-half-alt text-warning"></i>
-                                            <span class="ms-2">4.5/5</span>
+                                            <span class="ms-2" style="color: var(--text-secondary);">4.5/5</span>
                                         </div>
                                         <small class="text-muted">آخر تحديث: قبل 3 أيام</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <div class="featured-review-card p-3 border rounded">
-                                        <h6>God of War Ragnarök</h6>
+                                    <div class="featured-review-card p-3 border rounded" style="background: var(--card-light); border-color: var(--border-color) !important;">
+                                        <h6 style="color: var(--text-primary);">God of War Ragnarök</h6>
                                         <div class="rating mb-2">
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
-                                            <span class="ms-2">5/5</span>
+                                            <span class="ms-2" style="color: var(--text-secondary);">5/5</span>
                                         </div>
                                         <small class="text-muted">آخر تحديث: قبل أسبوع</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <div class="featured-review-card p-3 border rounded">
-                                        <h6>Elden Ring: Shadow of the Erdtree</h6>
+                                    <div class="featured-review-card p-3 border rounded" style="background: var(--card-light); border-color: var(--border-color) !important;">
+                                        <h6 style="color: var(--text-primary);">Elden Ring: Shadow of the Erdtree</h6>
                                         <div class="rating mb-2">
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
                                             <i class="fas fa-star text-warning"></i>
-                                            <span class="ms-2">5/5</span>
+                                            <span class="ms-2" style="color: var(--text-secondary);">5/5</span>
                                         </div>
                                         <small class="text-muted">آخر تحديث: قبل يومين</small>
                                     </div>
@@ -1058,9 +1069,6 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script>
         // ==================== SYSTEM CONSTANTS ====================
         const ADMIN_SESSION_TIMEOUT = 60 * 60 * 1000; // 60 دقيقة
@@ -1140,6 +1148,7 @@
                 }
                 localStorage.removeItem(this.sessionKey);
                 localStorage.removeItem(this.statsKey);
+                localStorage.removeItem(this.activityKey);
             }
             
             // تسجيل النشاط
@@ -1222,15 +1231,13 @@
         
         // ==================== LOGIN/LOGOUT FUNCTIONS ====================
         function showLogin() {
-            document.getElementById('loginOverlay').classList.remove("hidden");
-            document.querySelector('.admin-container').classList.add("hidden");
-
+            document.getElementById('loginOverlay').style.display = 'flex';
+            document.querySelector('.admin-container').style.display = 'none';
         }
         
         function hideLogin() {
-            document.getElementById('loginOverlay').classList.add("hidden");
-            document.querySelector('.admin-container').classList.remove("hidden");
-
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.querySelector('.admin-container').style.display = 'flex';
         }
         
         function setupLoginButton() {
@@ -1258,17 +1265,17 @@
                         const adminData = await attemptLogin(email, password);
                         
                         if (adminData) {
-                            // إنشاء جلسة
+                            // ✅ إنشاء جلسة جديدة
                             adminSession.createSession(adminData);
                             
-                            // إخفاء نموذج الدخول
+                            // ✅ إخفاء نموذج الدخول وعرض لوحة التحكم
                             hideLogin();
                             
-                            // تهيئة لوحة التحكم
+                            // ✅ تهيئة لوحة التحكم
                             await initializeDashboard();
                             
-                            // إظهار رسالة نجاح
-                            showNotification('✅ تم تسجيل الدخول بنجاح', 'success');
+                            // ✅ إظهار رسالة نجاح
+                            showNotification('✅ تم تسجيل الدخول بنجاح!', 'success');
                         } else {
                             showError('البريد الإلكتروني أو كلمة المرور غير صحيحة');
                         }
@@ -1285,29 +1292,48 @@
         }
         
         async function attemptLogin(email, password) {
-            // بيانات الأدمن الافتراضية
-            const defaultAdmin = {
-    email: 'admin@reviewqeem.com',
-    password: 'Admin@123',
-    name: 'مدير النظام',
-    role: 'admin',
-    permissions: ['all']
-};
-
+            // بيانات الأدمن - يمكن إضافة مستخدمين متعددين
+            const adminUsers = [
+                {
+                    email: 'admin@reviewqeem.com',
+                    password: 'Admin@123',
+                    name: 'مدير النظام',
+                    role: 'admin',
+                    permissions: ['all'],
+                    avatar: 'A'
+                },
+                {
+                    email: 'editor@reviewqeem.com',
+                    password: 'Editor@123',
+                    name: 'محرر',
+                    role: 'editor',
+                    permissions: ['reviews', 'comments', 'categories'],
+                    avatar: 'E'
+                },
+                {
+                    email: 'moderator@reviewqeem.com',
+                    password: 'Moderator@123',
+                    name: 'مراقب',
+                    role: 'moderator',
+                    permissions: ['comments', 'users'],
+                    avatar: 'M'
+                }
+            ];
             
             // محاكاة التأخير للاتصال بالخادم
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 800));
             
-            // التحقق من بيانات الدخول
-            if (email === defaultAdmin.email && password === defaultAdmin.password) {
+            // البحث عن المستخدم
+            const user = adminUsers.find(u => u.email === email && u.password === password);
+            
+            if (user) {
                 return {
-                    name: defaultAdmin.name,
-                    email: defaultAdmin.email,
-                    role: defaultAdmin.role,
-                    permissions: defaultAdmin.permissions,
+                    name: user.name,
+                    email: user.email,
+                    role: user.role,
+                    permissions: user.permissions,
                     loginTime: new Date().toISOString(),
-                    avatar: defaultAdmin.name.charAt(0).toUpperCase()
-
+                    avatar: user.avatar
                 };
             }
             
@@ -1366,8 +1392,7 @@
             
             // الصورة الرمزية (الأحرف الأولى من الاسم)
             const avatar = document.getElementById('adminAvatar');
-            const initials = admin.name ? admin.name.charAt(0).toUpperCase() : 'A';
-
+            const initials = admin.avatar || (admin.name ? admin.name.charAt(0) : 'A');
             avatar.innerHTML = `<span>${initials}</span>`;
             avatar.title = admin.name;
             
@@ -1388,26 +1413,39 @@
                     return;
                 }
                 
-                // محاكاة جلب البيانات من الـ API
-               
+                // محاولة جلب البيانات من الـ API
+                let stats = null;
+                try {
+                    const response = await fetch(`${API_BASE}/admin/stats`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.success) {
+                            stats = data.data || data.stats;
+                        }
+                    }
+                } catch (apiError) {
+                    console.log('⚠️ لا يمكن الاتصال بـ API، استخدام بيانات افتراضية');
+                }
                 
-                // بيانات افتراضية
-                const mockStats = {
-                    totalReviews: 156,
-                    totalComments: 842,
-                    pendingComments: 23,
-                    totalViews: 18427,
-                    activeUsers: 289,
-                    publishedReviews: 148,
-                    draftReviews: 8,
-                    avgRating: 4.3
-                };
+                // إذا لم تكن هناك بيانات من API، استخدم بيانات افتراضية
+                if (!stats) {
+                    stats = {
+                        totalReviews: 156,
+                        totalComments: 842,
+                        pendingComments: 23,
+                        totalViews: 18427,
+                        activeUsers: 289,
+                        publishedReviews: 148,
+                        draftReviews: 8,
+                        avgRating: 4.3
+                    };
+                }
                 
                 // تخزين البيانات مؤقتاً
-                adminSession.cacheStats(mockStats);
+                adminSession.cacheStats(stats);
                 
                 // تحديث العرض
-                updateStatsDisplay(mockStats);
+                updateStatsDisplay(stats);
                 
                 console.log('✅ تم تحميل الإحصائيات');
                 
@@ -1427,8 +1465,7 @@
         }
         
         function updateStatsDisplay(stats) {
-           document.getElementById('reviewsCount').textContent = stats.totalReviews ?? '0';
-
+            document.getElementById('reviewsCount').textContent = stats.totalReviews || '0';
             document.getElementById('commentsCount').textContent = stats.totalComments || '0';
             document.getElementById('pendingComments').textContent = stats.pendingComments || '0';
             document.getElementById('totalViews').textContent = stats.totalViews ? 
@@ -1442,32 +1479,43 @@
             const activities = adminSession.getActivities();
             const activityList = document.getElementById('activityList');
             
-            if (activityList && activities.length > 0) {
+            if (activityList) {
+                // تنظيف النشاطات الحالية
                 activityList.innerHTML = '';
                 
-                // عرض أول 3 نشاطات
-                activities.slice(0, 3).forEach(activity => {
-                    const activityItem = document.createElement('div');
-                    activityItem.className = 'activity-item d-flex align-items-center mb-3';
-                    
-                    let iconClass = 'fas fa-info-circle text-info';
-                    if (activity.action.includes('دخول')) iconClass = 'fas fa-sign-in-alt text-success';
-                    else if (activity.action.includes('خروج')) iconClass = 'fas fa-sign-out-alt text-danger';
-                    else if (activity.action.includes('مراجعة')) iconClass = 'fas fa-edit text-primary';
-                    else if (activity.action.includes('تعليق')) iconClass = 'fas fa-comment text-warning';
-                    
-                    activityItem.innerHTML = `
-                        <div class="activity-icon me-3">
-                            <i class="${iconClass}"></i>
-                        </div>
-                        <div class="activity-details">
-                            <h6 class="mb-0">${activity.action}</h6>
-                            <small class="text-muted">${formatTimeAgo(activity.timestamp)} - ${activity.details}</small>
+                if (activities.length > 0) {
+                    // عرض أول 3 نشاطات
+                    activities.slice(0, 3).forEach(activity => {
+                        const activityItem = document.createElement('div');
+                        activityItem.className = 'activity-item d-flex align-items-center mb-3';
+                        
+                        let iconClass = 'fas fa-info-circle text-info';
+                        if (activity.action.includes('دخول')) iconClass = 'fas fa-sign-in-alt text-success';
+                        else if (activity.action.includes('خروج')) iconClass = 'fas fa-sign-out-alt text-danger';
+                        else if (activity.action.includes('مراجعة')) iconClass = 'fas fa-edit text-primary';
+                        else if (activity.action.includes('تعليق')) iconClass = 'fas fa-comment text-warning';
+                        
+                        activityItem.innerHTML = `
+                            <div class="activity-icon me-3">
+                                <i class="${iconClass}"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h6 class="mb-0" style="color: var(--text-primary);">${activity.action}</h6>
+                                <small class="text-muted">${formatTimeAgo(activity.timestamp)} - ${activity.details}</small>
+                            </div>
+                        `;
+                        
+                        activityList.appendChild(activityItem);
+                    });
+                } else {
+                    // إذا لم تكن هناك نشاطات
+                    activityList.innerHTML = `
+                        <div class="text-center py-3">
+                            <i class="fas fa-history fa-2x mb-2" style="color: var(--text-secondary);"></i>
+                            <p style="color: var(--text-secondary);">لا توجد نشاطات سابقة</p>
                         </div>
                     `;
-                    
-                    activityList.appendChild(activityItem);
-                });
+                }
             }
         }
         
@@ -1515,8 +1563,8 @@
             showLogin();
             
             // إعادة تعيين النموذج
-            document.getElementById('loginEmail').value = '';
-            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginEmail').value = 'admin@reviewqeem.com';
+            document.getElementById('loginPassword').value = 'Admin@123';
             
             // إظهار رسالة
             showNotification('✅ تم تسجيل الخروج بنجاح', 'success');
@@ -1622,8 +1670,7 @@
         function updateSessionTime() {
             const sessionTimeElement = document.getElementById('sessionTime');
             if (!sessionTimeElement) return;
-            if (!adminSession.getSession()) return;
-
+            
             const session = adminSession.getSession();
             if (!session) {
                 sessionTimeElement.textContent = 'انتهت الجلسة';
@@ -1650,13 +1697,31 @@
             document.querySelector('.sidebar').classList.toggle('show');
         }
         
+        // إغلاق القائمة عند النقر خارجها (للشاشات الصغيرة)
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 992 && 
+                sidebar.classList.contains('show') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('show');
+            }
+        });
+        
         // ==================== UTILITY FUNCTIONS ====================
         function showNotification(message, type = 'success') {
             // إنشاء إشعار مؤقت
             const notification = document.createElement('div');
             notification.className = `notification notification-${type}`;
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 
+                        type === 'error' ? 'fa-exclamation-triangle' : 
+                        'fa-info-circle';
+            
             notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                <i class="fas ${icon}"></i>
                 <span>${message}</span>
             `;
             
@@ -1691,12 +1756,24 @@
                 e.preventDefault();
                 window.location.href = 'review-editor.html';
             }
+            
+            // Esc لإخفاء القائمة (للجوال)
+            if (e.key === 'Escape') {
+                const sidebar = document.querySelector('.sidebar');
+                if (sidebar && sidebar.classList.contains('show')) {
+                    sidebar.classList.remove('show');
+                }
+            }
         });
+        
+        // تحديث الإحصائيات كل 5 دقائق
+        setInterval(loadDashboardStats, 5 * 60 * 1000);
+        
+        // تحديث وقت الجلسة كل 30 ثانية
+        setInterval(updateSessionTime, 30000);
         
         console.log('🎮 لوحة التحكم - Script loaded');
     </script>
     
 </body>
 </html>
-
-
