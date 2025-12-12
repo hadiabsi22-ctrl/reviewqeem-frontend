@@ -1,16 +1,152 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>الصفحة غير موجودة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 | الصفحة غير موجودة</title>
+
 <style>
-body { background: #0b0d10; color:white; font-family: sans-serif; text-align:center; padding-top:80px; }
-a { color:#4fa3ff; font-size:20px; }
+:root {
+  --bg: #0b0d10;
+  --card: #131722;
+  --primary: #6c63ff;
+  --secondary: #4fa3ff;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(108,99,255,0.15), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(79,163,255,0.12), transparent 45%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background: linear-gradient(180deg, #151a2b, var(--card));
+  border-radius: 18px;
+  padding: 50px 40px;
+  max-width: 520px;
+  width: 90%;
+  text-align: center;
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+  animation: fadeUp 0.8s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  box-shadow: 0 10px 30px rgba(108,99,255,0.4);
+}
+
+h1 {
+  font-size: 72px;
+  margin: 0;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  margin: 15px 0 10px;
+  font-weight: 600;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 35px;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+a.button {
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+a.primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  box-shadow: 0 8px 25px rgba(108,99,255,0.4);
+}
+
+a.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(108,99,255,0.55);
+}
+
+a.secondary {
+  color: var(--secondary);
+  border: 1px solid rgba(79,163,255,0.4);
+}
+
+a.secondary:hover {
+  background: rgba(79,163,255,0.1);
+}
+
+.footer {
+  margin-top: 35px;
+  font-size: 13px;
+  color: var(--muted);
+  opacity: 0.8;
+}
 </style>
 </head>
+
 <body>
-<h1>404</h1>
-<p>الصفحة التي تبحث عنها غير موجودة.</p>
-<a href="/">العودة للصفحة الرئيسية</a>
+  <div class="container">
+    <div class="logo">🎮</div>
+
+    <h1>404</h1>
+    <h2>الصفحة غير موجودة</h2>
+    <p>
+      يبدو أنك وصلت إلى صفحة غير متاحة أو تم نقلها.<br>
+      لا تقلق، يمكنك العودة بسهولة.
+    </p>
+
+    <div class="actions">
+      <a href="/" class="button primary">العودة للرئيسية</a>
+      <a href="/reviews-list.html" class="button secondary">تصفح المراجعات</a>
+    </div>
+
+    <div class="footer">
+      © 2025 ReviewQeem — تجربة مراجعات ألعاب احترافية
+    </div>
+  </div>
 </body>
 </html>
